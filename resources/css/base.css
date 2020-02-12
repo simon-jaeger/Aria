@@ -1,0 +1,303 @@
+/* fonts */
+/******************************************************************************/
+@font-face {
+  font-family: "Heebo";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/fonts/Heebo/Heebo-Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Heebo";
+  font-style: normal;
+  font-weight: 500;
+  src: url("/fonts/Heebo/Heebo-Medium.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Heebo";
+  font-style: normal;
+  font-weight: 700;
+  src: url("/fonts/Heebo/Heebo-Bold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url("/fonts/MaterialIcons-Regular.woff2") format("woff2");
+}
+
+/* global */
+/******************************************************************************/
+:root {
+  --font: "Heebo", sans-serif;
+
+  --black3: hsl(219, 19%, 24%);
+  --black4: hsl(223, 15%, 18%);
+  --black5: hsl(222, 17%, 15%);
+  --blackA: hsla(0, 0%, 0%, 0.8);
+
+  --white5: hsl(0, 0%, 95%);
+  --white6: hsla(0, 0%, 95%, 0.75);
+  --white7: hsla(0, 0%, 95%, 0.2);
+
+  --blue5: hsl(187, 68%, 69%);
+  --blue6: hsla(187, 68%, 69%, 0.35);
+  --blue7: hsla(187, 68%, 69%, 0.1);
+
+  --red5: hsl(0, 100%, 59%);
+  --red6: hsla(0, 100%, 59%, 0.25);
+
+  --pink5: hsl(339, 95%, 77%);
+
+  --shadow: 0 3px 3px rgba(0, 0, 0, 0.25);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-y: scroll; /* always show scrollbar to avoid jumps */
+  overflow-x: hidden;
+  font-family: var(--font);
+  font-size: 1rem;
+  line-height: 1.5;
+  background-color: var(--black4);
+  color: var(--white5);
+}
+
+/* blocks */
+/******************************************************************************/
+:not([class]):last-child {
+  margin-bottom: 0;
+}
+
+h1:not([class]),
+h2:not([class]),
+h3:not([class]),
+h4:not([class]),
+h5:not([class]),
+h6:not([class]) {
+  margin-bottom: 1rem;
+  font-family: var(--font);
+  font-weight: 700;
+  line-height: 1;
+}
+
+h1:not([class]) {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+h2:not([class]) {
+  font-size: 1.5rem;
+}
+
+h3:not([class]) {
+  font-size: 1.25rem;
+}
+
+h4:not([class]) {
+  font-size: 1rem;
+}
+
+h5:not([class]) {
+  font-size: 1rem;
+}
+
+h6:not([class]) {
+  font-size: 1rem;
+}
+
+p:not([class]) {
+  margin-bottom: 1.5rem;
+}
+
+blockquote:not([class]) {
+  padding-left: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+pre:not([class]) {
+  font-family: monospace;
+  margin-bottom: 1.5rem;
+}
+
+ul:not([class]),
+ol:not([class]) {
+  padding-left: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+ul:not([class]) {
+  list-style: disc;
+}
+
+ol:not([class]) {
+  list-style: decimal;
+}
+
+table:not([class]) {
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+th:not([class]),
+td:not([class]) {
+  border: 1px solid var(--white7);
+  padding: 0.75rem;
+}
+
+th:not([class]) {
+  font-weight: bold;
+}
+
+img:not([class]) {
+  margin-bottom: 1.5rem;
+}
+
+figure:not([class]) {
+  margin-bottom: 1.5rem;
+}
+
+hr:not([class]) {
+  height: 1.5rem;
+  border-top: 1px solid var(--white7);
+}
+
+/* inlines */
+/******************************************************************************/
+a:link:not([class]),
+a:visited:not([class]) {
+  text-decoration: underline;
+}
+
+a:hover:not([class]),
+a:focus:not([class]),
+a:active:not([class]) {
+  text-decoration: none;
+}
+
+b:not([class]),
+strong:not([class]) {
+  font-weight: 500;
+}
+
+i:not([class]),
+em:not([class]) {
+  font-style: italic;
+}
+
+s:not([class]),
+del:not([class]) {
+  text-decoration: line-through;
+}
+
+/* forms */
+/*******************************************************************************
+simple fallbacks for prototyping
+use components to build actual, complex form and ui elements
+*******************************************************************************/
+form:not([class]) {
+  display: grid;
+  grid-gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+label:not([class]) {
+  margin-bottom: 0.5rem;
+}
+
+small:not([class]) {
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+input:not([class]),
+select:not([class]),
+textarea:not([class]),
+button:not([class]),
+fieldset:not([class]) {
+  border: 1px solid var(--white7);
+  border-radius: 0.25rem;
+  padding: 0.75rem;
+}
+
+input:not([class])[type="text"],
+input:not([class])[type="password"],
+input:not([class])[type="number"],
+input:not([class])[type="email"],
+input:not([class])[type="tel"],
+input:not([class])[type="date"],
+input:not([class])[type="month"],
+input:not([class])[type="week"],
+input:not([class])[type="time"],
+input:not([class])[type="url"],
+input:not([class])[type="search"],
+input:not([class])[type="range"],
+input:not([class])[type="file"],
+input:not([class])[type="image"],
+button:not([class]),
+textarea:not([class]) {
+  width: 100%;
+  flex-basis: 0;
+}
+
+button:not([class]) {
+  text-align: center;
+}
+
+input:not([class]):focus,
+select:not([class]):focus,
+textarea:not([class]):focus,
+button:not([class]):hover,
+button:not([class]):active,
+button:not([class]):focus {
+  border-color: var(--blue5);
+}
+
+option:not([class]) {
+  background-color: var(--black5);
+}
+
+input:not([class])[type="checkbox"],
+input:not([class])[type="radio"] {
+  height: 1.5rem;
+  margin-right: 1ch;
+  float: left;
+}
+
+input:not([class])[type="checkbox"]:focus,
+input:not([class])[type="radio"]:focus {
+  outline: 1px solid var(--blue5);
+}
+
+input:not([class]) + small:not([class]) {
+  margin-top: 0.5rem;
+}
+
+/* ie10/11 notice */
+/******************************************************************************/
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  body {
+    overflow: hidden;
+  }
+
+  body::before {
+    content: "Sorry, your browser is not supported. Please revisit this site with Microsoft Edge or a modern third-party browser like Chrome or Firefox. Thank you very much and see you soon!";
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 999999999999999999999999999999999999999999999999999999999999999999;
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    padding: 25vh 25vw;
+    color: #d0d0d0;
+    background-color: #1E1E1E;
+  }
+}

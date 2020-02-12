@@ -1,0 +1,8 @@
+/* site */
+/******************************************************************************/
+.site {
+  padding: 2rem;
+  max-width: 800px;
+  margin: 3rem auto 0;
+  background-color: var(--black5);
+}
