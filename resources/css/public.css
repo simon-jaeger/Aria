@@ -1,0 +1,77 @@
+/*css for public pages (sign up, log in, about)*/
+.site {
+  max-width: 800px;
+  margin: 4rem auto;
+  padding: 2rem;
+  background-color: var(--black5);
+  border-radius: 2px;
+  box-shadow: var(--shadow1);
+}
+
+.logo {
+  height: 5rem;
+  margin-right: auto;
+  margin-bottom: 2rem;
+  margin-left: auto;
+}
+
+.subtitle {
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.nav {
+  display: flex;
+  margin-right: -2rem;
+  margin-bottom: 2rem;
+  margin-left: -2rem;
+  border-bottom: 2px solid var(--white7);
+}
+
+.nav_link {
+  display: flex;
+  height: 4rem;
+  margin-bottom: -2px;
+  justify-content: center;
+  align-items: center;
+  flex: 1 0 0;
+  border-bottom: 4px solid transparent;
+  color: var(--white6);
+}
+.nav_link:hover {
+  color: var(--white5);
+  background-color: var(--blue7);
+}
+
+.nav_link.is-active {
+  color: var(--white5);
+  background-color: var(--blue7);
+  border-bottom-color: var(--blue5);
+  text-align: center;
+}
+
+@media screen and (max-width: 991px) {
+  body {
+    background-color: var(--black5);
+  }
+  .site {
+    max-width: none;
+    margin: 0;
+    box-shadow: none;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .site {
+    padding: 1.5rem;
+  }
+  .logo {
+    height: 3rem;
+    margin-bottom: 1rem;
+  }
+  .subtitle {
+    font-size: 1rem;
+  }
+}

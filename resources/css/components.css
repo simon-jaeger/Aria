@@ -1,0 +1,217 @@
+/* site */
+/******************************************************************************/
+.site {
+  padding: 2rem;
+  max-width: 800px;
+  margin: 3rem auto 0;
+  background-color: var(--black5);
+}
+
+/* screen reader only */
+/******************************************************************************/
+.sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  border: 0;
+  margin: -1px;
+  clip: rect(0, 0, 0, 0);
+  overflow: hidden;
+}
+
+/* form */
+/******************************************************************************/
+.form {
+  display: grid;
+  grid-gap: 1.5rem;
+}
+
+/* input */
+/******************************************************************************/
+.input.is-search {
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+  margin-bottom: 0.5rem;
+  margin-left: 1rem;
+}
+
+.input_label {
+  margin-bottom: 0.25rem;
+  color: var(--white6);
+}
+
+.input_field {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-style: solid;
+  border-width: 1px;
+  border-color: var(--white7);
+  border-radius: 2px;
+  background-color: var(--black4);
+}
+.input_field.is-search {
+  padding-left: 3rem;
+  border-radius: 999px;
+}
+.input_field:focus {
+  border-color: var(--blue5);
+}
+
+.input_searchicon {
+  position: absolute;
+  margin: 0 1rem;
+  opacity: 0.5;
+  font-family: 'Material Icons', sans-serif;
+  color: var(--white5);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* prevent wrong colors of autocompleted inputs on chrome */
+.input_field:-webkit-autofill {
+  -webkit-animation-name: autofill;
+  -webkit-animation-fill-mode: both;
+}
+@-webkit-keyframes autofill {
+  to {
+    background-color: var(--black4);
+    color: var(--white5);
+  }
+}
+
+@media screen and (max-width: 1224px) {
+  .input.is-search {
+    margin-left: 1.5rem;
+    margin-right: 0;
+    margin-bottom: 0;
+  }
+
+  .input_field.is-search {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+}
+
+/* checks, check */
+/******************************************************************************/
+.checks {
+  display: grid;
+  grid-gap: 0.5rem;
+}
+
+.check {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  overflow: hidden;
+}
+
+/* hide native checkbox visually but not for screen readers */
+.check > input[type="checkbox"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  border: 0;
+  margin: -1px;
+  clip: rect(0, 0, 0, 0);
+  overflow: hidden;
+}
+
+.check_label {
+  position: relative;
+  padding-left: 2rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.check_label::before {
+  content: 'check_box_outline_blank';
+  position: absolute;
+  left: 0;
+  font-family: 'Material Icons', sans-serif;
+  overflow-wrap: normal;
+  color: var(--white6);
+}
+/* sync state of native checkbox with custom checkbox */
+input[type="checkbox"]:checked + .check_label::before {
+  content: 'check_box';
+  color: var(--blue5);
+}
+
+/* button */
+/******************************************************************************/
+.button {
+  display: flex;
+  padding: 0.75rem 1.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  background-color: var(--blue6);
+  font-weight: 500;
+  text-transform: uppercase;
+}
+.button.is-secondary {
+  background-color: var(--black3);
+}
+.button.is-icon {
+  padding-right: 0.75rem;
+  padding-left: 0.75rem;
+}
+.button:hover,
+.button:focus {
+  filter: brightness(115%);
+}
+
+.button_icon {
+  margin-right: 0.5rem;
+  font-family: 'Material Icons', sans-serif;
+  overflow-wrap: normal;
+  font-weight: 400;
+  text-transform: none;
+}
+.button_icon.is-alone {
+  width: 1.5rem;
+  margin-right: 0;
+  text-align: center;
+}
+
+/* alert */
+/******************************************************************************/
+.alert {
+  position: relative;
+  padding: 1rem 3.5rem 1rem 1rem;
+  background-color: var(--white7);
+}
+.alert::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translate(0px, -50%);
+  font-family: 'Material Icons', sans-serif;
+  overflow-wrap: normal;
+  color: var(--white6);
+  font-size: 1.5rem;
+  line-height: 1;
+}
+.alert.is-error {
+  background-color: var(--red6);
+}
+.alert.is-error::before {
+  content: 'error_outline';
+}
+
+@media screen and (max-width: 480px) {
+  .alert {
+    padding-right: 1rem;
+  }
+  .alert::before {
+    position: static;
+    margin-bottom: 1rem;
+    transform: none;
+    text-align: center;
+  }
+}
