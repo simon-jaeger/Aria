@@ -1,11 +1,11 @@
 <template>
   <div class="main_inner is-box">
     <div class="set">
-      <img src="/storage/covers/ar-tonelico.jpg"
-           alt="Ar Tonelico"
+      <img :src="'/storage/covers/'+series.cover"
+           :alt="series.title"
            class="set_cover">
       <div class="set_info">
-        <h1 class="set_title">Ar Tonelico</h1>
+        <h1 class="set_title">{{ series.title }}</h1>
         <!-- TODO: number of tracks dynamic -->
         <small class="set_sub">32 Tracks • 01:47:14</small>
         <div class="set_actions">
@@ -27,28 +27,10 @@
         <div class="track_cell is-m3 is-m20">access_time</div>
         <div class="track_cell is-m4"></div>
       </div>
-      <div class="track">
-        <div class="track_cell is-m1">01</div>
-        <div class="track_cell is-m2">Playing the Moon...</div>
-        <div class="track_cell is-m3">02:46</div>
-        <button class="track_cell is-m4">more_vert</button>
-      </div>
-      <div class="track is-active">
-        <div class="track_cell is-m1 is-m30">equalizer</div>
-        <div class="track_cell is-m2">Playing the Moon...</div>
-        <div class="track_cell is-m3">02:46</div>
-        <button class="track_cell is-m4">more_vert</button>
-      </div>
-      <div class="track">
-        <div class="track_cell is-m1">03</div>
-        <div class="track_cell is-m2">Playing the Moon...</div>
-        <div class="track_cell is-m3">02:46</div>
-        <button class="track_cell is-m4">more_vert</button>
-      </div>
-      <div class="track">
-        <div class="track_cell is-m1">03</div>
-        <div class="track_cell is-m2">Playing the Moon...</div>
-        <div class="track_cell is-m3">02:46</div>
+      <div class="track" v-for="track in series.tracks" :key="track.id">
+        <div class="track_cell is-m1">{{ track.order }}</div>
+        <div class="track_cell is-m2">{{ track.title }}</div>
+        <div class="track_cell is-m3">{{ track.duration }}</div>
         <button class="track_cell is-m4">more_vert</button>
       </div>
     </div>
@@ -57,7 +39,17 @@
 
 <script>
   export default {
-    name: "SeriesSingle"
+    name: "SeriesSingle",
+    data() {
+      return {
+        series: {}
+      }
+    },
+    created() {
+      axios.get("/api/series/" + this.$route.params.id)
+        .then(({data}) => this.series = data)
+      // TODO: 404 page if not found
+    }
   }
 </script>
 
@@ -88,7 +80,7 @@
   }
 
   .set_sub {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     color: var(--white6);
   }
 
@@ -133,10 +125,12 @@
   .track.is-header:hover,
   .track.is-header:focus {
     background-color: transparent;
+    cursor: default;
   }
   .track:hover,
   .track:focus {
     background-color: var(--blue7);
+    cursor: pointer;
   }
 
   .track_cell {

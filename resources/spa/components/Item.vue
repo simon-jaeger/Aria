@@ -1,5 +1,5 @@
 <template>
-  <RouterLink class="item" to="/player/series/ar-tonelico">
+  <RouterLink class="item" :to="'/player/series/'+data.id">
     <div class="item_cover" :style="{backgroundImage: `url(/storage/covers/${data.cover}`}"></div>
     <div class="item_body">
       <h2 class="item_title">{{ data.title }}</h2>

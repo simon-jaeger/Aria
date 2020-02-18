@@ -20,7 +20,7 @@ new Vue({
     routes: [
       {path: "/player", redirect: "/player/series"},
       {path: "/player/series", component: Series},
-      {path: "/player/series/ar-tonelico", component: SeriesSingle},
+      {path: "/player/series/:id", component: SeriesSingle},
       {path: "/player/playlists", component: Playlists},
       {path: "/player/history", component: History},
       {path: "/player/settings", component: Settings},

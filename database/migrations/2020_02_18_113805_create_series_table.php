@@ -16,7 +16,6 @@ class CreateSeriesTable extends Migration {
       $table->string('title');
       $table->string('title_short', 16);
       $table->string('cover');
-      $table->timestamps();
     });
   }
 

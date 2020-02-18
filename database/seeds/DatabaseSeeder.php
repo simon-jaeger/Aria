@@ -46,5 +46,28 @@ class DatabaseSeeder extends Seeder {
       'title_short' => 'Ar Tonelico',
       'cover' => 'ar-tonelico.jpg',
     ]);
+
+    // TODO: test tracks, remove later
+    \App\Track::create([
+      'order' => 1,
+      'title' => 'foo',
+      'duration' => '01:42',
+      'file' => 'demo.mp3',
+      'series_id' => '1',
+    ]);
+    \App\Track::create([
+      'order' => 3,
+      'title' => 'baz',
+      'duration' => '03:42',
+      'file' => 'demo.mp3',
+      'series_id' => '1',
+    ]);
+    \App\Track::create([
+      'order' => 2,
+      'title' => 'bar',
+      'duration' => '02:42',
+      'file' => 'demo.mp3',
+      'series_id' => '1',
+    ]);
   }
 }
