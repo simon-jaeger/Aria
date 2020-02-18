@@ -1,13 +1,15 @@
 <template>
-  <div class="main_inner is-box">
+  <div class="main_inner is-box" v-if="loaded">
     <div class="set">
-      <img :src="'/storage/covers/'+series.cover"
+      <img :src="'/storage/covers/' + series.cover"
            :alt="series.title"
            class="set_cover">
       <div class="set_info">
         <h1 class="set_title">{{ series.title }}</h1>
-        <!-- TODO: number of tracks dynamic -->
-        <small class="set_sub">32 Tracks • 01:47:14</small>
+        <small class="set_sub">
+          {{ series.tracks.length }} Tracks &nbsp;•&nbsp;
+          {{ totalDuration | duration }}
+        </small>
         <div class="set_actions">
           <button class="button">
             <span class="button_icon">play_arrow<br></span>
@@ -28,9 +30,9 @@
         <div class="track_cell is-m4"></div>
       </div>
       <div class="track" v-for="track in series.tracks" :key="track.id">
-        <div class="track_cell is-m1">{{ track.order }}</div>
+        <div class="track_cell is-m1">{{ track.order | zeroPad }}</div>
         <div class="track_cell is-m2">{{ track.title }}</div>
-        <div class="track_cell is-m3">{{ track.duration }}</div>
+        <div class="track_cell is-m3">{{ track.duration | duration }}</div>
         <button class="track_cell is-m4">more_vert</button>
       </div>
     </div>
@@ -42,12 +44,23 @@
     name: "SeriesSingle",
     data() {
       return {
+        loaded: false,
         series: {}
+      }
+    },
+    computed: {
+      totalDuration() {
+        return this.series.tracks.reduce((total, track) => {
+          return total + track.duration
+        }, 0)
       }
     },
     created() {
       axios.get("/api/series/" + this.$route.params.id)
-        .then(({data}) => this.series = data)
+        .then(({data}) => {
+          this.series = data
+          this.loaded = true
+        })
       // TODO: 404 page if not found
     }
   }
@@ -74,7 +87,7 @@
 
   .set_title {
     margin-bottom: 0.5rem;
-    font-size: 2rem;
+    font-size: 1.5rem;
     line-height: 1;
     font-weight: 700;
   }
@@ -147,7 +160,7 @@
     text-align: left;
   }
   .track_cell.is-m3 {
-    width: 4rem;
+    width: 5rem;
   }
   .track_cell.is-m4 {
     width: 2.5rem;

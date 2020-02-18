@@ -3,8 +3,8 @@
     <div class="item_cover" :style="{backgroundImage: `url(/storage/covers/${data.cover}`}"></div>
     <div class="item_body">
       <h2 class="item_title">{{ data.title }}</h2>
-      <!-- TODO: number of tracks dynamic -->
-      <small class="item_sub">32 Tracks</small>
+      <small class="item_sub">{{ data.tracks_count }} Tracks</small>
+      <!-- TODO: fav dynamic and toggable. also, order favs first. -->
       <button @click.prevent="foo" class="item_action is-hearted">favorite</button>
     </div>
   </RouterLink>

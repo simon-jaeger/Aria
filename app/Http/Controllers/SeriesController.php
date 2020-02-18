@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class SeriesController extends Controller {
   public function index() {
-    return Series::orderBy('title')->get();
+    return Series::withCount('tracks')->orderBy('title')->get();
   }
 
   public function show($id) {

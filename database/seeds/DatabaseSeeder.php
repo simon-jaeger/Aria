@@ -9,6 +9,8 @@ class DatabaseSeeder extends Seeder {
    * @return void
    */
   public function run() {
+    $faker = Faker\Factory::create();
+
     // TODO: test user, remove later
     \App\User::create([
       'email' => 'a@b',
@@ -37,7 +39,7 @@ class DatabaseSeeder extends Seeder {
       'cover' => 'hypderdimension-neptunia.jpg',
     ]);
     \App\Series::create([
-      'title' => 'Zelda, The legend of',
+      'title' => 'Zelda, The Legend of',
       'title_short' => 'Zelda',
       'cover' => 'zelda-the-legend-of.jpg',
     ]);
@@ -48,26 +50,17 @@ class DatabaseSeeder extends Seeder {
     ]);
 
     // TODO: test tracks, remove later
-    \App\Track::create([
-      'order' => 1,
-      'title' => 'foo',
-      'duration' => '01:42',
-      'file' => 'demo.mp3',
-      'series_id' => '1',
-    ]);
-    \App\Track::create([
-      'order' => 3,
-      'title' => 'baz',
-      'duration' => '03:42',
-      'file' => 'demo.mp3',
-      'series_id' => '1',
-    ]);
-    \App\Track::create([
-      'order' => 2,
-      'title' => 'bar',
-      'duration' => '02:42',
-      'file' => 'demo.mp3',
-      'series_id' => '1',
-    ]);
+    for ($i = 1; $i < 7; $i++) {
+      $ammount = rand(6, 12);
+      for ($j = 1; $j <= $ammount; $j++) {
+        \App\Track::create([
+          'order' => $j,
+          'title' => $faker->words(2, true),
+          'duration' => $faker->numberBetween(1, 600) * 1000, // 00:01 - 10:00
+          'file' => 'demo.mp3',
+          'series_id' => $i,
+        ]);
+      }
+    }
   }
 }

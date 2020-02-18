@@ -2,7 +2,10 @@
   <div class="app">
     <AppHeader/>
     <main class="main">
-      <RouterView/>
+      <!-- TODO: update KeepAlive views on changes (new playlist etc.) -->
+      <KeepAlive include="Series, Playlists">
+        <RouterView/>
+      </KeepAlive>
     </main>
     <AppPlayer/>
 
@@ -97,7 +100,8 @@
 
   /* input */
   /******************************************************************************/
-  .input {}
+  .input {
+  }
   .input.is-search {
     display: flex;
     align-items: center;
@@ -181,7 +185,7 @@
     overflow: hidden;
   }
 
-  .check_label{
+  .check_label {
     position: relative;
     padding-left: 2rem;
   }
@@ -231,7 +235,7 @@
   }
   .button_icon.is-alone {
     width: 1.5rem;
-    margin-right:0;
+    margin-right: 0;
     text-align: center;
   }
 

@@ -1,6 +1,5 @@
 <template>
   <header class="header">
-    <!-- TODO: add logo -->
     <img class="header_logo" src="/logo-aria.svg" alt="Aria logo">
 
     <AppNav/>
@@ -45,6 +44,7 @@
 
   .header_logo {
     width: 100%;
+    height: 6rem;
     padding: 2rem 6rem;
   }
 

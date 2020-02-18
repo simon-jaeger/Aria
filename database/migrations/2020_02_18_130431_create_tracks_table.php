@@ -15,7 +15,7 @@ class CreateTracksTable extends Migration {
       $table->bigIncrements('id');
       $table->integer('order');
       $table->string('title');
-      $table->string('duration');
+      $table->integer('duration');
       $table->string('file');
       $table->boolean('is_hidden')->default(false);
 

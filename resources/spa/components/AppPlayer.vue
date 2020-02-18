@@ -1,6 +1,6 @@
 <template>
   <aside class="player">
-    <!-- TODO: make cover image dynamic -->
+    <!-- TODO: make dynamic -->
     <div class="player_track">
       <div class="player_info">
         <div class="player_title">Bolero of Fire</div>
