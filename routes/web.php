@@ -25,14 +25,5 @@ Route::prefix('api')->middleware('auth')->group(function () {
     return Auth::user();
   });
 
-  Route::get('/series', function () {
-    return [
-      'Ar Tonelico',
-      'Celeste',
-      'Doki Doki Literature Club',
-      'Final Fantasy',
-      'Hypderdimension Neptunia',
-      'Zelda, The legend of',
-    ];
-  });
+  Route::get('series', 'SeriesController@index');
 });

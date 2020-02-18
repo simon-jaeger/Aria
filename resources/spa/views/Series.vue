@@ -29,7 +29,7 @@
     display: grid;
     grid-column-gap: 1rem;
     grid-row-gap: 1.5rem;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   }
 
   @media screen and (max-width: 479px) {
