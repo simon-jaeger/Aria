@@ -6,6 +6,7 @@
            class="set_cover">
       <div class="set_info">
         <h1 class="set_title">Ar Tonelico</h1>
+        <!-- TODO: number of tracks dynamic -->
         <small class="set_sub">32 Tracks • 01:47:14</small>
         <div class="set_actions">
           <button class="button">

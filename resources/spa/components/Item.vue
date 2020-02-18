@@ -3,6 +3,7 @@
     <div class="item_cover" :style="{backgroundImage: `url(/storage/covers/${data.cover}`}"></div>
     <div class="item_body">
       <h2 class="item_title">{{ data.title }}</h2>
+      <!-- TODO: number of tracks dynamic -->
       <small class="item_sub">32 Tracks</small>
       <button @click.prevent="foo" class="item_action is-hearted">favorite</button>
     </div>
