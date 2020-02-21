@@ -20,12 +20,7 @@
         series: []
       }
     },
-    beforeRouteEnter(to, from, next) {
-      axios.get("/api/series")
-        .then(({data}) => next(vm => vm.series = data))
-    },
     created() {
-      // TODO: hmr hack, rm later
       axios.get("/api/series")
         .then(({data}) => this.series = data)
     },

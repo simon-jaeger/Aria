@@ -54,13 +54,7 @@
         }, 0)
       }
     },
-    beforeRouteEnter(to, from, next) {
-      axios.get("/api/series/" + to.params.slug)
-        .then(({data}) => next(vm => vm.series = data))
-        .catch(() => next("/player/not-found"))
-    },
     created() {
-      // TODO: hmr hack, rm later
       axios.get("/api/series/" + this.$route.params.slug)
         .then(({data}) => this.series = data)
     }
