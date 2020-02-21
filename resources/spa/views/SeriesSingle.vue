@@ -155,7 +155,10 @@
     width: 2.5rem;
   }
   .track_cell.is-m2 {
-    flex: 1;
+    flex: 1 0 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     color: var(--white5);
     text-align: left;
   }

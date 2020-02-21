@@ -8,7 +8,8 @@
 
       <div class="input">
         <label for="email" class="input_label">Email</label>
-        <input id="email"
+        <input type="text"
+               id="email"
                class="input_field"
                value="simon.pascal.jaeger@gmail.com">
       </div>
@@ -16,7 +17,7 @@
       <div class="input">
         <label for="newPassword" class="input_label">New password</label>
         <div style="display: grid; grid-template-columns: 1fr auto;">
-          <input id="newPassword" class="input_field" type="password">
+          <input type="password" id="newPassword" class="input_field">
           <button class="button is-secondary is-icon">
             <span class="button_icon is-alone">visibility</span>
           </button>

@@ -56,7 +56,7 @@
     }
 
     .main {
-      padding: 1.5rem;
+      padding: 1.5rem 1.5rem 5.5rem;
     }
   }
 

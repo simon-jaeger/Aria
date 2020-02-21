@@ -7,7 +7,8 @@
     <div class="input is-search">
       <span class="input_searchicon">search</span>
       <label for="search" class="sr">Search</label>
-      <input id="search"
+      <input type="text"
+             id="search"
              class="input_field is-search"
              placeholder="Search...">
     </div>

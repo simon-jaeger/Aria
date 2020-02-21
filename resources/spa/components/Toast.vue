@@ -25,7 +25,6 @@
   }
 
   .toast_text {
-    margin-right: 2rem;
     padding: 1rem;
   }
 
@@ -44,6 +43,12 @@
     .toast {
       left: 1rem;
       bottom: 5rem;
+    }
+  }
+
+  @media screen and (max-width: 479px) {
+    .toast {
+      max-width: calc(100vw - 7.5rem);
     }
   }
 </style>

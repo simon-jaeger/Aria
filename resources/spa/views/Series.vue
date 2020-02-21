@@ -1,5 +1,6 @@
 <template>
   <div class="main_inner">
+    <h1 class="sr">Series</h1>
     <div class="items">
       <Item v-for="(aSeries, i) in series" :key="i" :data="aSeries"/>
     </div>

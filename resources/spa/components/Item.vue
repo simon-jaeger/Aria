@@ -39,12 +39,15 @@
   .item_body {
     position: relative;
     padding: 1rem 3rem 1rem 1rem;
-    flex: 1;
   }
 
   .item_title {
     margin-bottom: 0.25rem;
     font-weight: 700;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100%;
   }
 
   .item_sub {
@@ -58,7 +61,8 @@
     right: 0;
     padding: 1rem;
     font-family: 'Material Icons', sans-serif;
-    word-wrap: normal;
+    overflow-wrap: normal;
+    word-break: normal;
     color: var(--white6);
     font-weight: 400;
   }
@@ -75,9 +79,12 @@
       display: flex;
     }
     .item_cover {
-      width: 5rem;
+      flex: 0 0 5rem;
       padding-bottom: 0;
-      object-fit: cover;
+    }
+    .item_body {
+      flex: 1 0 0;
+      overflow: hidden;
     }
   }
 </style>
