@@ -46,10 +46,9 @@ class RegisterController extends Controller {
    * @return \Illuminate\Contracts\Validation\Validator
    */
   protected function validator(array $data) {
-    // TODO: change password requirements back to min:6
     return Validator::make($data, [
       'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-      'password' => ['required', 'string', 'min:1'],
+      'password' => ['required', 'string', 'min:6'],
     ]);
   }
 

@@ -17,7 +17,6 @@ class CreateTracksTable extends Migration {
       $table->string('title');
       $table->integer('duration');
       $table->string('file');
-      $table->boolean('is_hidden')->default(false);
 
       $table->unsignedBigInteger('series_id');
       $table->foreign('series_id')->references('id')->on('series');

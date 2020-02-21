@@ -54,10 +54,6 @@
   --shadow: 0 3px 3px rgba(0, 0, 0, 0.25);
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
   overflow-y: scroll; /* always show scrollbar to avoid jumps */
   overflow-x: hidden;

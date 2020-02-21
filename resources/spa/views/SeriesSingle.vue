@@ -1,5 +1,5 @@
 <template>
-  <div class="main_inner is-box" v-if="loaded">
+  <div class="main_inner is-box" v-if="series">
     <div class="set">
       <img :src="'/storage/covers/' + series.cover"
            :alt="series.title"
@@ -44,8 +44,7 @@
     name: "SeriesSingle",
     data() {
       return {
-        loaded: false,
-        series: {}
+        series: null
       }
     },
     computed: {
@@ -55,13 +54,15 @@
         }, 0)
       }
     },
+    beforeRouteEnter(to, from, next) {
+      axios.get("/api/series/" + to.params.slug)
+        .then(({data}) => next(vm => vm.series = data))
+        .catch(() => next("/player/not-found"))
+    },
     created() {
-      axios.get("/api/series/" + this.$route.params.id)
-        .then(({data}) => {
-          this.series = data
-          this.loaded = true
-        })
-      // TODO: 404 page if not found
+      // TODO: hmr hack, rm later
+      axios.get("/api/series/" + this.$route.params.slug)
+        .then(({data}) => this.series = data)
     }
   }
 </script>
@@ -131,6 +132,11 @@
     padding-left: 4px;
     border-bottom: 1px solid var(--white7);
   }
+  .track:hover,
+  .track:focus {
+    background-color: var(--blue7);
+    cursor: pointer;
+  }
   .track.is-active {
     background-color: var(--blue7);
     box-shadow: inset 4px 0 0 0 var(--blue5);
@@ -139,11 +145,6 @@
   .track.is-header:focus {
     background-color: transparent;
     cursor: default;
-  }
-  .track:hover,
-  .track:focus {
-    background-color: var(--blue7);
-    cursor: pointer;
   }
 
   .track_cell {

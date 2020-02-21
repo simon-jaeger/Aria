@@ -1,32 +1,39 @@
 <template>
   <div class="main_inner">
     <h1 class="sr">Series</h1>
-    <div class="items">
-      <Item v-for="(aSeries, i) in series" :key="i" :data="aSeries"/>
+    <div class="seriesItems">
+      <SeriesItem v-for="aSeries in series"
+                  :key="aSeries.id"
+                  :series="aSeries"/>
     </div>
   </div>
 </template>
 
 <script>
-  import Item from "../components/Item"
+  import SeriesItem from "../components/SeriesItem"
 
   export default {
     name: "Series",
-    components: {Item},
+    components: {SeriesItem},
     data() {
       return {
         series: []
       }
     },
+    beforeRouteEnter(to, from, next) {
+      axios.get("/api/series")
+        .then(({data}) => next(vm => vm.series = data))
+    },
     created() {
+      // TODO: hmr hack, rm later
       axios.get("/api/series")
         .then(({data}) => this.series = data)
-    }
+    },
   }
 </script>
 
 <style>
-  .items {
+  .seriesItems {
     display: grid;
     grid-column-gap: 1rem;
     grid-row-gap: 1.5rem;
@@ -34,7 +41,7 @@
   }
 
   @media screen and (max-width: 479px) {
-    .items {
+    .seriesItems {
       grid-template-columns: 1fr;
     }
   }

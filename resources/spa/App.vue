@@ -2,7 +2,7 @@
   <div class="app">
     <AppHeader/>
     <main class="main">
-      <!-- TODO: update KeepAlive views on changes (new playlist etc.) -->
+      <!-- TODO: make sure playlist etc. get updated -->
       <KeepAlive include="Series, Playlists">
         <RouterView/>
       </KeepAlive>

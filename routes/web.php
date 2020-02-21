@@ -26,6 +26,5 @@ Route::prefix('api')->middleware('auth')->group(function () {
   });
 
   Route::get('series', 'SeriesController@index');
-  // TODO: use slug instead of id
-  Route::get('series/{id}', 'SeriesController@show');
+  Route::get('series/{slug}', 'SeriesController@show');
 });

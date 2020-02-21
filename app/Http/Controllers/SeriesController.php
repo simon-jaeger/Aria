@@ -10,7 +10,7 @@ class SeriesController extends Controller {
     return Series::withCount('tracks')->orderBy('title')->get();
   }
 
-  public function show($id) {
-    return Series::with('tracks')->findOrFail($id);
+  public function show($slug) {
+    return Series::with('tracks')->where('slug', '=', $slug)->firstOrFail();
   }
 }

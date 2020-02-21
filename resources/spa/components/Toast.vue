@@ -43,12 +43,7 @@
     .toast {
       left: 1rem;
       bottom: 5rem;
-    }
-  }
-
-  @media screen and (max-width: 479px) {
-    .toast {
-      max-width: calc(100vw - 7.5rem);
+      margin-right: 5.5rem;
     }
   }
 </style>

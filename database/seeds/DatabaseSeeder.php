@@ -19,31 +19,37 @@ class DatabaseSeeder extends Seeder {
 
     // TODO: test series, remove later
     \App\Series::create([
+      'slug' => 'celeste',
       'title' => 'Celeste',
       'title_short' => 'Celeste',
       'cover' => 'celeste.jpg',
     ]);
     \App\Series::create([
+      'slug' => 'doki-doki-literature-club',
       'title' => 'Doki Doki Literature Club',
       'title_short' => 'DDLC',
       'cover' => 'doki-doki-literature-club.jpg',
     ]);
     \App\Series::create([
+      'slug' => 'final-fantasy',
       'title' => 'Final Fantasy',
       'title_short' => 'Final Fantasy',
       'cover' => 'final-fantasy.jpg',
     ]);
     \App\Series::create([
+      'slug' => 'hypderdimension-neptunia',
       'title' => 'Hypderdimension Neptunia',
       'title_short' => 'Neptunia',
       'cover' => 'hypderdimension-neptunia.jpg',
     ]);
     \App\Series::create([
+      'slug' => 'zelda-the-legend-of',
       'title' => 'Zelda, The Legend of',
       'title_short' => 'Zelda',
       'cover' => 'zelda-the-legend-of.jpg',
     ]);
     \App\Series::create([
+      'slug' => 'ar-tonelico',
       'title' => 'Ar Tonelico',
       'title_short' => 'Ar Tonelico',
       'cover' => 'ar-tonelico.jpg',
