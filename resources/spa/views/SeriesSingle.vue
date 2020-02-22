@@ -62,6 +62,7 @@
           this.series = data
           this.$root.$data.series[data.slug] = data // cache data
         })
+      .catch(() => this.$router.push('/player/not-found'))
     }
   }
 </script>
