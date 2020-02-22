@@ -1,8 +1,8 @@
 import axios from "axios"
 import Vue from "vue"
-import App from "./App.vue"
 import router from "./router"
 import data from "./data"
+import App from "./App.vue"
 import "./filters"
 
 window.axios = axios

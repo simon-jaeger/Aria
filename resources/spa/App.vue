@@ -8,9 +8,7 @@
       </KeepAlive>
     </main>
     <AppPlayer/>
-
     <PlayerMini/>
-
     <Toast>Added to playlist</Toast>
   </div>
 </template>
