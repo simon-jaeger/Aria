@@ -40,11 +40,13 @@
 </template>
 
 <script>
+  import Vue from "vue"
+
   export default {
     name: "SeriesSingle",
     data() {
       return {
-        series: null
+        series: this.$root.$data.series[this.$route.params.slug],
       }
     },
     computed: {
@@ -56,7 +58,10 @@
     },
     created() {
       axios.get("/api/series/" + this.$route.params.slug)
-        .then(({data}) => this.series = data)
+        .then(({data}) => {
+          this.series = data
+          this.$root.$data.series[data.slug] = data // cache data
+        })
     }
   }
 </script>

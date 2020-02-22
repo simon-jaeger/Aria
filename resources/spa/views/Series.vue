@@ -20,9 +20,12 @@
         series: []
       }
     },
-    created() {
-      axios.get("/api/series")
-        .then(({data}) => this.series = data)
+    async created() {
+      this.series = (await axios.get("/api/series")).data
+      for (let series of this.series) { // prefetch and cache details
+        this.$root.$data.series[series.slug] =
+          (await axios.get("/api/series/" + series.slug)).data
+      }
     },
   }
 </script>
