@@ -36,7 +36,7 @@
 <style>
   .header {
     z-index: 10;
-    width: 280px;
+    width: 240px;
     height: 100vh;
     position: sticky;
     top: 0;
@@ -46,7 +46,7 @@
   .header_logo {
     width: 100%;
     height: 6rem;
-    padding: 2rem 6rem;
+    padding: 2rem 4rem;
   }
 
   .account {
@@ -63,12 +63,12 @@
   .account_icon {
     margin-right: 1rem;
     font-family: 'Material Icons', sans-serif;
-    word-wrap: normal;
+    overflow-wrap: normal;
     font-size: 1.5rem;
     line-height: 1;
   }
 
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: 1224px) {
     .header {
       display: flex;
       width: auto;

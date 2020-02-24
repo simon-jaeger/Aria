@@ -16,8 +16,8 @@
     position: fixed;
     z-index: 20;
     right: auto;
-    bottom: 1.5rem;
-    left: 19rem;
+    bottom: 1rem;
+    left: 16rem;
     display: flex;
     border-radius: 2px;
     background-color: var(--black3);
@@ -39,7 +39,7 @@
     background-color: var(--blue7);
   }
 
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: 1224px) {
     .toast {
       left: 1rem;
       bottom: 5rem;

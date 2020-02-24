@@ -31,7 +31,7 @@
   .nav_icon {
     margin-right: 1rem;
     font-family: 'Material Icons', sans-serif;
-    word-wrap: normal;
+    overflow-wrap: normal;
     font-size: 1.5rem;
     line-height: 1;
   }
@@ -52,7 +52,7 @@
     color: var(--white5);
   }
 
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: 1224px) {
     .nav {
       position: fixed;
       z-index: 10;

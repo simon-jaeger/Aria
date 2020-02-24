@@ -3,8 +3,9 @@
     <!-- TODO: make dynamic -->
     <div class="player_track">
       <div class="player_info">
-        <div class="player_title">Bolero of Fire</div>
-        <div class="player_sub">Zelda • 04:50 / 06:06</div>
+        <div class="player_title">Bolero of Fire and Storms</div>
+        <div class="player_sub">Zelda<br>04:50 / 06:06</div>
+        <button class="player_more">more_vert</button>
       </div>
     </div>
 
@@ -14,11 +15,9 @@
     </div>
 
     <div class="player_actions">
-      <button class="player_action">repeat</button>
       <button class="player_action">skip_previous</button>
       <button class="player_action is-big">play_circle_filled</button>
       <button class="player_action">skip_next</button>
-      <button class="player_action">more_vert</button>
     </div>
   </aside>
 </template>
@@ -31,11 +30,11 @@
 
 <style>
   .player {
-    width: 320px;
+    width: 240px;
     height: 100vh;
     position: sticky;
     top: 0;
-    padding: 3rem 1.5rem 1.5rem;
+    padding: 3rem 1rem 1rem;
     background-color: var(--black5);
   }
 
@@ -62,13 +61,31 @@
 
   .player_title {
     margin-bottom: 0.25rem;
+    margin-right: 2rem;
     font-weight: 700;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   .player_sub {
     margin-right: 1.5rem;
     color: var(--white6);
     font-size: 0.875rem;
+  }
+
+  .player_more {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1rem;
+    font-family: 'Material Icons', sans-serif;
+    overflow-wrap: normal;
+    color: var(--white6);
+  }
+  .player_more:hover,
+  .player_more:focus {
+    color: var(--white5);
   }
 
   .player_progress {
@@ -95,14 +112,14 @@
   .player_actions {
     position: relative;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
   }
 
   .player_action {
     padding: 0.75rem;
     font-family: 'Material Icons', sans-serif;
-    word-wrap: normal;
+    overflow-wrap: normal;
     color: var(--white6);
     font-size: 1.5rem;
     line-height: 1;
@@ -115,7 +132,7 @@
     color: var(--white5);
   }
 
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: 1224px) {
     .player {
       display: none;
     }

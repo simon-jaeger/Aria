@@ -169,7 +169,7 @@
   .track_cell.is-m4 {
     width: 2.5rem;
     font-family: 'Material Icons', sans-serif;
-    word-wrap: normal;
+    overflow-wrap: normal;
   }
   .track_cell.is-m4:hover,
   .track_cell.is-m4:focus {
@@ -181,11 +181,11 @@
   }
   .track_cell.is-m20 {
     font-family: 'Material Icons', sans-serif;
-    word-wrap: normal;
+    overflow-wrap: normal;
   }
   .track_cell.is-m30 {
     font-family: 'Material Icons', sans-serif;
-    word-wrap: normal;
+    overflow-wrap: normal;
   }
 
   @media screen and (max-width: 479px) {

@@ -25,7 +25,7 @@ sets sane defaults (border-box, border-collapse, ...)
   -webkit-text-stroke: 0 currentColor;
 
   /* disable font boosting (auto zooming) on chrome android */
-  max-height: 999999999999999999999999999999999999999999999999999999999999999px;
+  max-height: 999999999999999999999999999999999999999999999999999999999999999vh;
 }
 
 :focus {

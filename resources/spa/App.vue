@@ -48,13 +48,13 @@
     background-color: var(--black5);
   }
 
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: 1224px) {
     .app {
       display: block;
     }
 
     .main {
-      padding: 1.5rem 1.5rem 5.5rem;
+      padding: 1.5rem 1.5rem 9.5rem;
     }
   }
 
@@ -140,7 +140,7 @@
     user-select: none;
   }
 
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: 1224px) {
     .input.is-search {
       min-width: 12rem;
       margin-right: 0;
@@ -192,7 +192,7 @@
     position: absolute;
     left: 0;
     font-family: 'Material Icons', sans-serif;
-    word-wrap: normal;
+    overflow-wrap: normal;
     color: var(--white6);
   }
   /* sync state of native checkbox with custom checkbox */
@@ -227,7 +227,7 @@
   .button_icon {
     margin-right: 0.5rem;
     font-family: 'Material Icons', sans-serif;
-    word-wrap: normal;
+    overflow-wrap: normal;
     font-weight: 400;
     text-transform: none;
   }
@@ -252,7 +252,7 @@
     right: 1rem;
     transform: translate(0px, -50%);
     font-family: 'Material Icons', sans-serif;
-    word-wrap: normal;
+    overflow-wrap: normal;
     color: var(--white6);
     font-size: 1.5rem;
     line-height: 1;
@@ -281,7 +281,7 @@
   .mobilesearch {
     display: none;
     font-family: 'Material Icons', sans-serif;
-    word-wrap: normal;
+    overflow-wrap: normal;
   }
 
   @media screen and (max-width: 479px) {
