@@ -60,7 +60,7 @@
     right: 0;
     padding: 1rem;
     font-family: 'Material Icons', sans-serif;
-    word-wrap: normal;
+    overflow-wrap: normal;
     color: var(--white6);
   }
   .modal_close:hover,

@@ -1,14 +1,16 @@
 <template>
   <header class="header">
-    <!-- TODO: add logo -->
-    <img class="header_logo" src="/logo-aria.svg" alt="Aria logo">
+    <RouterLink to="/player" style="display: contents;">
+      <img class="header_logo" src="/logo-aria.svg" alt="Aria logo">
+    </RouterLink>
 
     <AppNav/>
 
     <div class="input is-search">
       <span class="input_searchicon">search</span>
       <label for="search" class="sr">Search</label>
-      <input id="search"
+      <input type="text"
+             id="search"
              class="input_field is-search"
              placeholder="Search...">
     </div>
@@ -36,7 +38,7 @@
 <style>
   .header {
     z-index: 10;
-    width: 280px;
+    width: 240px;
     height: 100vh;
     position: sticky;
     top: 0;
@@ -45,7 +47,8 @@
 
   .header_logo {
     width: 100%;
-    padding: 2rem 6rem;
+    height: 6rem;
+    padding: 2rem 4rem;
   }
 
   .account {
@@ -62,17 +65,17 @@
   .account_icon {
     margin-right: 1rem;
     font-family: 'Material Icons', sans-serif;
-    word-wrap: normal;
+    overflow-wrap: normal;
     font-size: 1.5rem;
     line-height: 1;
   }
 
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: 1224px) {
     .header {
       display: flex;
       width: auto;
       height: 4rem;
-      padding-right: 1.5rem;
+      padding-right: 0.5rem;
       padding-left: 1.5rem;
       -webkit-box-align: center;
       -webkit-align-items: center;

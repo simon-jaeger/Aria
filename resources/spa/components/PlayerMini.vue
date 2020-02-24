@@ -15,7 +15,7 @@
     display: none;
   }
 
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: 1224px) {
     .playermini {
       position: fixed;
       right: 0;
@@ -33,7 +33,7 @@
     }
     .playermini_close {
       font-family: 'Material Icons', sans-serif;
-      word-wrap: normal;
+      overflow-wrap: normal;
       font-size: 1.5rem;
     }
   }

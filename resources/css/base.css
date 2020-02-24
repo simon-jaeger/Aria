@@ -54,10 +54,6 @@
   --shadow: 0 3px 3px rgba(0, 0, 0, 0.25);
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
   overflow-y: scroll; /* always show scrollbar to avoid jumps */
   overflow-x: hidden;
@@ -87,16 +83,16 @@ h6:not([class]) {
 }
 
 h1:not([class]) {
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin-bottom: 1rem;
 }
 
 h2:not([class]) {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
 }
 
 h3:not([class]) {
-  font-size: 1.25rem;
+  font-size: 1rem;
 }
 
 h4:not([class]) {

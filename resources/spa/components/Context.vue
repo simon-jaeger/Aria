@@ -41,7 +41,7 @@
   .context_icon {
     margin-right: 1rem;
     font-family: 'Material Icons', sans-serif;
-    word-wrap: normal;
+    overflow-wrap: normal;
   }
 
   .context_item {
@@ -53,7 +53,7 @@
     background-color: var(--blue7);
   }
 
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: 1224px) {
     .context {
       display: none;
     }

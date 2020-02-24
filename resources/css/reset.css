@@ -23,10 +23,9 @@ sets sane defaults (border-box, border-collapse, ...)
   text-decoration: none;
   text-shadow: inherit;
   -webkit-text-stroke: 0 currentColor;
-  overflow-wrap: break-word;
 
   /* disable font boosting (auto zooming) on chrome android */
-  max-height: 999999999999999999999999999999999999999999999999999999999999999px;
+  max-height: 999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999px;
 }
 
 :focus {

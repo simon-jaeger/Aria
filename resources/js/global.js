@@ -1,4 +1,1 @@
-import axios from "axios"
-window.axios = axios
-axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest"
-
+// TODO: remove global.js if not needed

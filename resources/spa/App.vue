@@ -2,12 +2,13 @@
   <div class="app">
     <AppHeader/>
     <main class="main">
-      <RouterView/>
+      <!-- TODO: make sure playlist etc. get updated -->
+      <KeepAlive include="Series, Playlists">
+        <RouterView/>
+      </KeepAlive>
     </main>
     <AppPlayer/>
-
     <PlayerMini/>
-
     <Toast>Added to playlist</Toast>
   </div>
 </template>
@@ -47,13 +48,13 @@
     background-color: var(--black5);
   }
 
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: 1224px) {
     .app {
       display: block;
     }
 
     .main {
-      padding: 1.5rem;
+      padding: 1.5rem 1.5rem 9.5rem;
     }
   }
 
@@ -97,7 +98,8 @@
 
   /* input */
   /******************************************************************************/
-  .input {}
+  .input {
+  }
   .input.is-search {
     display: flex;
     align-items: center;
@@ -138,7 +140,7 @@
     user-select: none;
   }
 
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: 1224px) {
     .input.is-search {
       min-width: 12rem;
       margin-right: 0;
@@ -181,7 +183,7 @@
     overflow: hidden;
   }
 
-  .check_label{
+  .check_label {
     position: relative;
     padding-left: 2rem;
   }
@@ -190,7 +192,7 @@
     position: absolute;
     left: 0;
     font-family: 'Material Icons', sans-serif;
-    word-wrap: normal;
+    overflow-wrap: normal;
     color: var(--white6);
   }
   /* sync state of native checkbox with custom checkbox */
@@ -225,13 +227,13 @@
   .button_icon {
     margin-right: 0.5rem;
     font-family: 'Material Icons', sans-serif;
-    word-wrap: normal;
+    overflow-wrap: normal;
     font-weight: 400;
     text-transform: none;
   }
   .button_icon.is-alone {
     width: 1.5rem;
-    margin-right:0;
+    margin-right: 0;
     text-align: center;
   }
 
@@ -250,7 +252,7 @@
     right: 1rem;
     transform: translate(0px, -50%);
     font-family: 'Material Icons', sans-serif;
-    word-wrap: normal;
+    overflow-wrap: normal;
     color: var(--white6);
     font-size: 1.5rem;
     line-height: 1;
@@ -279,7 +281,7 @@
   .mobilesearch {
     display: none;
     font-family: 'Material Icons', sans-serif;
-    word-wrap: normal;
+    overflow-wrap: normal;
   }
 
   @media screen and (max-width: 479px) {
