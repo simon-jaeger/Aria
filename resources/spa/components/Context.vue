@@ -26,7 +26,7 @@
     padding-bottom: 0.25rem;
     border-radius: 4px;
     background-color: var(--black3);
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow2);
     color: var(--white5);
   }
   /* TODO: use inline styles for these context variations? */

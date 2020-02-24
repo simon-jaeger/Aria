@@ -29,7 +29,7 @@
       align-items: center;
       border-radius: 9999px;
       background-color: var(--black3);
-      box-shadow: var(--shadow);
+      box-shadow: var(--shadow2);
     }
     .playermini_close {
       font-family: 'Material Icons', sans-serif;

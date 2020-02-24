@@ -3,7 +3,7 @@
     <AppHeader/>
     <main class="main">
       <!-- TODO: make sure playlist etc. get updated -->
-      <KeepAlive include="Series, Playlists">
+      <KeepAlive include="Series,Playlists">
         <RouterView/>
       </KeepAlive>
     </main>
@@ -46,6 +46,7 @@
     padding: 3rem;
     border-radius: 2px;
     background-color: var(--black5);
+    box-shadow: var(--shadow1);
   }
 
   @media screen and (max-width: 1224px) {

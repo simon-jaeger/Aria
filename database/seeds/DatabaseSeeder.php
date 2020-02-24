@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder {
       'password' => '$2y$10$ofiQGeXPluKG45u62i7.K.PuJArQUXgyY5Adu1EyJKM0zMcrO.MSO', // p
     ]);
 
-    // TODO: test series, remove later
+    // TODO: test series, remove later?
     \App\Series::create([
       'slug' => 'celeste',
       'title' => 'Celeste',
@@ -55,17 +55,31 @@ class DatabaseSeeder extends Seeder {
       'cover' => 'ar-tonelico.jpg',
     ]);
 
-    // TODO: test tracks, remove later
-    for ($i = 1; $i < 7; $i++) {
-      $ammount = rand(6, 12);
+    // TODO: test playlists, remove later?
+    for ($i = 1; $i <= 6; $i++) {
+      $title = $faker->unique()->words(3, true);
+      \App\Playlist::create([
+        'slug' => \Illuminate\Support\Str::slug($title),
+        'title' => $title,
+      ]);
+    }
+
+    // TODO: test tracks, remove later?
+    for ($i = 1; $i <= 6; $i++) {
+      $ammount = rand(8, 12);
       for ($j = 1; $j <= $ammount; $j++) {
-        \App\Track::create([
+        $track = \App\Track::create([
           'order' => $j,
-          'title' => $faker->words(3, true),
+          'title' => $faker->unique()->words(3, true),
           'duration' => $faker->numberBetween(1, 600) * 1000, // 00:01 - 10:00
           'file' => 'demo.mp3',
           'series_id' => $i,
         ]);
+        if (rand(0, 1)) { // 50% chance to add to a random playlist
+          \App\Playlist::find($faker->numberBetween(1, 6))
+            ->tracks()
+            ->attach($track);
+        }
       }
     }
   }

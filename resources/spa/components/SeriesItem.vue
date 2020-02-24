@@ -27,11 +27,10 @@
     overflow: hidden;
     border-radius: 2px;
     background-color: var(--black5);
-    box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.24), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: var(--shadow1);
   }
 
   .seriesItem_cover {
-    width: 100%;
     padding-bottom: 100%;
     background-size: cover;
   }

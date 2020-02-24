@@ -19,7 +19,10 @@ class CreateTracksTable extends Migration {
       $table->string('file');
 
       $table->unsignedBigInteger('series_id');
-      $table->foreign('series_id')->references('id')->on('series');
+      $table->foreign('series_id')
+        ->references('id')
+        ->on('series')
+        ->onDelete('cascade');
     });
   }
 

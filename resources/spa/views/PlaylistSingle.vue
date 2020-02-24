@@ -1,13 +1,12 @@
 <template>
-  <div class="main_inner is-box" v-if="series">
+  <!-- TODO: make more DRY (PlaylistSinge, SeriesSingle) -->
+  <div class="main_inner is-box" v-if="playlist">
     <div class="set">
-      <img :src="'/storage/covers/' + series.cover"
-           :alt="series.title"
-           class="set_cover">
+      <div class="set_cover"></div>
       <div class="set_info">
-        <h1 class="set_title">{{ series.title }}</h1>
+        <h1 class="set_title">{{ playlist.title }}</h1>
         <small class="set_sub">
-          {{ series.tracks.length }} Tracks &nbsp;•&nbsp;
+          {{ playlist.tracks.length }} Tracks &nbsp;•&nbsp;
           {{ totalDuration | duration }}
         </small>
         <div class="set_actions">
@@ -16,7 +15,7 @@
             <span>Play</span>
           </button>
           <button class="button is-secondary is-icon">
-            <span class="button_icon is-alone">favorite</span>
+            <span class="button_icon is-alone">more_vert</span>
           </button>
         </div>
       </div>
@@ -29,7 +28,7 @@
         <div class="track_cell is-m3 is-m20">access_time</div>
         <div class="track_cell is-m4"></div>
       </div>
-      <div class="track" v-for="track in series.tracks" :key="track.id">
+      <div class="track" v-for="track in playlist.tracks" :key="track.id">
         <div class="track_cell is-m1">{{ track.order | zeroPad }}</div>
         <div class="track_cell is-m2">{{ track.title }}</div>
         <div class="track_cell is-m3">{{ track.duration | duration }}</div>
@@ -41,24 +40,24 @@
 
 <script>
   export default {
-    name: "SeriesSingle",
+    name: "PlaylistSingle",
     data() {
       return {
-        series: this.$root.seriesCache[this.$route.params.slug],
+        playlist: this.$root.playlistsCache[this.$route.params.slug],
       }
     },
     computed: {
       totalDuration() {
-        return this.series.tracks.reduce((total, track) => {
+        return this.playlist.tracks.reduce((total, track) => {
           return total + track.duration
         }, 0)
       }
     },
     created() {
-      axios.get("/api/series/" + this.$route.params.slug)
+      axios.get("/api/playlists/" + this.$route.params.slug)
         .then(({data}) => {
-          this.series = data
-          this.$root.seriesCache[data.slug] = data // cache data
+          this.playlist = data
+          this.$root.playlistsCache[data.slug] = data // cache data
         })
         .catch((e) => {
           if (e.response.status === 404) {
@@ -82,6 +81,7 @@
     width: 10rem;
     height: 10rem;
     margin-right: 1.5rem;
+    background-color: var(--white7);
   }
 
   .set_info {

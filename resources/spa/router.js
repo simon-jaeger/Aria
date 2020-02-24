@@ -3,6 +3,7 @@ import VueRouter from "vue-router"
 import Series from "./views/Series"
 import SeriesSingle from "./views/SeriesSingle"
 import Playlists from "./views/Playlists"
+import PlaylistSingle from "./views/PlaylistSingle"
 import History from "./views/History"
 import Settings from "./views/Settings"
 import NotFound from "./views/NotFound"
@@ -27,6 +28,7 @@ export default new VueRouter({
     {path: "/player/series", component: Series},
     {path: "/player/series/:slug", component: SeriesSingle},
     {path: "/player/playlists", component: Playlists},
+    {path: "/player/playlists/:slug", component: PlaylistSingle},
     {path: "/player/history", component: History},
     {path: "/player/settings", component: Settings},
     {path: "/player/not-found", component: NotFound},

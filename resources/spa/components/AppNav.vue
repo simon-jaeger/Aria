@@ -47,8 +47,7 @@
     background-color: var(--blue7);
     color: var(--white5);
   }
-  .nav_link:hover,
-  .nav_link:focus {
+  .nav_link:hover {
     background-color: var(--blue7);
     color: var(--white5);
   }

@@ -21,7 +21,7 @@
     display: flex;
     border-radius: 2px;
     background-color: var(--black3);
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow2);
   }
 
   .toast_text {

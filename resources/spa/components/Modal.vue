@@ -35,7 +35,7 @@
     align-items: center;
     justify-content: center;
     background-color: var(--blackA);
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow2);
   }
 
   .modal_inner {
