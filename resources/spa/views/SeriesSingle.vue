@@ -46,7 +46,7 @@
     name: "SeriesSingle",
     data() {
       return {
-        series: this.$root.$data.series[this.$route.params.slug],
+        series: this.$root.seriesCache[this.$route.params.slug],
       }
     },
     computed: {
@@ -60,9 +60,13 @@
       axios.get("/api/series/" + this.$route.params.slug)
         .then(({data}) => {
           this.series = data
-          this.$root.$data.series[data.slug] = data // cache data
+          this.$root.seriesCache[data.slug] = data // cache data
         })
-      .catch(() => this.$router.push('/player/not-found'))
+        .catch((e) => {
+          if (e.response.status === 404) {
+            this.$router.push("/player/not-found")
+          }
+        })
     }
   }
 </script>

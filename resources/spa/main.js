@@ -5,12 +5,12 @@ import data from "./data"
 import router from "./router"
 import App from "./App.vue"
 import "./filters"
+import "./errorHandler"
 
 window.axios = axios
 axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest"
 
 Vue.config.productionTip = false
-Vue.config.errorHandler = errorHandler
 new Vue({
   data,
   router,

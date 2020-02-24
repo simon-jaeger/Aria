@@ -1,6 +1,8 @@
 <template>
   <header class="header">
-    <img class="header_logo" src="/logo-aria.svg" alt="Aria logo">
+    <RouterLink to="/player" style="display: contents;">
+      <img class="header_logo" src="/logo-aria.svg" alt="Aria logo">
+    </RouterLink>
 
     <AppNav/>
 
@@ -73,7 +75,7 @@
       display: flex;
       width: auto;
       height: 4rem;
-      padding-right: 1.5rem;
+      padding-right: 0.5rem;
       padding-left: 1.5rem;
       -webkit-box-align: center;
       -webkit-align-items: center;

@@ -1,6 +1,8 @@
 // global error handler
-// TODO: improve global error handling
+// TODO: improve global error handling, show notification to user
 
-export default (err, vm, info) => {
-  console.error(err)
+window.onerror = function (e) {
+  console.error('--------[ GLOBAL ERROR]--------')
+  console.error(e)
 }
+

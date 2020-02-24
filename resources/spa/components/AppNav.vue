@@ -47,7 +47,8 @@
     background-color: var(--blue7);
     color: var(--white5);
   }
-  .nav_link:hover {
+  .nav_link:hover,
+  .nav_link:focus {
     background-color: var(--blue7);
     color: var(--white5);
   }
@@ -73,6 +74,11 @@
     .nav_link.is-active {
       border-bottom: 4px solid var(--blue5);
       border-left-style: none;
+    }
+    .nav_link:hover,
+    .nav_link:focus {
+      background-color: inherit;
+      color: inherit;
     }
   }
 

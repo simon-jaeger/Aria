@@ -1,11 +1,11 @@
 <template>
   <div class="main_inner">
     <h1 class="sr">Series</h1>
-    <div class="seriesItems">
-      <SeriesItem v-for="aSeries in series"
-                  :key="aSeries.id"
-                  :series="aSeries"/>
-    </div>
+      <div class="seriesItems" v-if="series.length">
+        <SeriesItem v-for="aSeries in series"
+                    :key="aSeries.id"
+                    :series="aSeries"/>
+      </div>
   </div>
 </template>
 
@@ -23,7 +23,7 @@
     async created() {
       this.series = (await axios.get("/api/series")).data
       for (let series of this.series) { // prefetch and cache details
-        this.$root.$data.series[series.slug] =
+        this.$root.seriesCache[series.slug] =
           (await axios.get("/api/series/" + series.slug)).data
       }
     },

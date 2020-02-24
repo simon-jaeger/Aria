@@ -8,10 +8,12 @@
         "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --disable-host-check --config=node_modules/laravel-mix/setup/webpack.config.js",
         "prod": "npm run production",
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "proxy": "browser-sync start --port 3000 --proxy aria.test --files \"./resources/spa/**/*\" --ghostMode false --no-notify",
         "helper": "php artisan clear-compiled && php artisan ide-helper:generate && php artisan ide-helper:models -N && php artisan ide-helper:meta"
     },
     "devDependencies": {
         "axios": "^0.19",
+        "browser-sync": "2.26.7",
         "cross-env": "^7.0",
         "laravel-mix": "^5.0.1",
         "luxon": "1.22.0",
