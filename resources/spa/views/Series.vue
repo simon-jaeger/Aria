@@ -1,20 +1,22 @@
 <template>
   <div class="main_inner">
     <h1 class="sr">Series</h1>
-    <div class="items" v-if="series.length">
-      <SeriesItem v-for="aSeries in series"
-                  :key="aSeries.id"
-                  :series="aSeries"/>
-    </div>
+        <div class="items" v-if="series.length">
+          <SeriesItem v-for="aSeries in series"
+                      :key="aSeries.id"
+                      :series="aSeries"/>
+        </div>
+        <Loading v-else/>
   </div>
 </template>
 
 <script>
   import SeriesItem from "../components/SeriesItem"
+  import Loading from "../components/Loading"
 
   export default {
     name: "Series",
-    components: {SeriesItem},
+    components: {Loading, SeriesItem},
     data() {
       return {
         series: []

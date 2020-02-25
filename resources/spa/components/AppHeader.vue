@@ -35,7 +35,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   .header {
     z-index: 10;
     width: 240px;

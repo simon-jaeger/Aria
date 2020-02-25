@@ -78,7 +78,7 @@ class DatabaseSeeder extends Seeder {
         if (rand(0, 1)) { // 50% chance to add to a random playlist
           \App\Playlist::find($faker->numberBetween(1, 6))
             ->tracks()
-            ->attach($track);
+            ->attach($track, ['order' => $faker->numberBetween(1, 9),]);
         }
       }
     }

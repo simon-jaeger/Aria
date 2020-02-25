@@ -6,15 +6,17 @@
                     :key="playlist.id"
                     :playlist="playlist"/>
     </div>
+    <Loading v-else/>
   </div>
 </template>
 
 <script>
   import PlaylistItem from "../components/PlaylistItem"
+  import Loading from "../components/Loading"
 
   export default {
     name: "Playlists",
-    components: {PlaylistItem},
+    components: {Loading, PlaylistItem},
     data() {
       return {
         playlists: []

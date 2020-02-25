@@ -21,6 +21,7 @@ class CreatePlaylistsTable extends Migration {
       $table->bigIncrements('id');
       $table->unsignedBigInteger('playlist_id');
       $table->unsignedBigInteger('track_id');
+      $table->integer('order');
       $table->unique(['playlist_id', 'track_id']);
 
       $table->foreign('playlist_id')
@@ -32,6 +33,8 @@ class CreatePlaylistsTable extends Migration {
         ->on('tracks')
         ->onDelete('cascade');
     });
+
+    // TODO: link playlists to users
   }
 
   /**

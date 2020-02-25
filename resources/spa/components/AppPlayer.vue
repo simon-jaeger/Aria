@@ -28,7 +28,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   .player {
     width: 240px;
     height: 100vh;

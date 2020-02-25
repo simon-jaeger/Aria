@@ -22,7 +22,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   .nav {
     margin-bottom: 6rem;
     background-color: var(--black5);

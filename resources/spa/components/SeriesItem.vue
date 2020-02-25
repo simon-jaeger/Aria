@@ -1,11 +1,14 @@
 <template>
   <RouterLink class="seriesItem" :to="'/player/series/' + series.slug">
-    <div class="seriesItem_cover" :style="{backgroundImage: `url(/storage/covers/${series.cover}`}"></div>
+    <div class="seriesItem_cover"
+         :style="{backgroundImage: `url(/storage/covers/${series.cover}`}"></div>
     <div class="seriesItem_body">
       <h2 class="seriesItem_title">{{ series.title }}</h2>
       <small class="seriesItem_sub">{{ series.tracks_count }} Tracks</small>
       <!-- TODO: fav dynamic and toggable. also, order favs first. -->
-      <button @click.prevent="foo" class="seriesItem_action is-hearted">favorite</button>
+      <button @click.prevent="foo" class="seriesItem_action is-hearted">
+        favorite
+      </button>
     </div>
   </RouterLink>
 </template>
