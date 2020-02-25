@@ -66,7 +66,7 @@
     color: var(--white5);
   }
 
-  @media screen and (max-width: 479px) {
+  @media screen and (max-width: 480px) {
     .PlaylistItem {
       display: flex;
     }

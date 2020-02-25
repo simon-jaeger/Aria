@@ -6,7 +6,8 @@ import Playlists from "./views/Playlists"
 import PlaylistSingle from "./views/PlaylistSingle"
 import History from "./views/History"
 import Settings from "./views/Settings"
-import NotFound from "./views/NotFound"
+import e404 from "./views/e404"
+import e500 from "./views/e500"
 
 // TODO: maybe lazy load certain heavy routes, example below:
 // const LazyRoute = () => import(/* webpackChunkName: "LazyRoute" */ './views/LazyRoute')
@@ -31,7 +32,8 @@ export default new VueRouter({
     {path: "/player/playlists/:slug", component: PlaylistSingle},
     {path: "/player/history", component: History},
     {path: "/player/settings", component: Settings},
-    {path: "/player/not-found", component: NotFound},
-    {path: "/player/*", component: NotFound}
+    {path: "/player/404", component: e404},
+    {path: "/player/500", component: e500},
+    {path: "/player/*", component: e404}
   ]
 })

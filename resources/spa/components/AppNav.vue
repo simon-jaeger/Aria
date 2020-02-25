@@ -81,7 +81,7 @@
     }
   }
 
-  @media screen and (max-width: 479px) {
+  @media screen and (max-width: 480px) {
     .nav_link {
       flex-direction: column;
       align-items: center;

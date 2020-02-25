@@ -73,7 +73,7 @@
     color: var(--white5);
   }
 
-  @media screen and (max-width: 479px) {
+  @media screen and (max-width: 480px) {
     .seriesItem {
       display: flex;
     }

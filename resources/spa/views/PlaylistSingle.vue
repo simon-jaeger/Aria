@@ -1,5 +1,4 @@
 <template>
-  <!-- TODO: make more DRY (PlaylistSinge, SeriesSingle) -->
   <div class="main_inner is-box" v-if="playlist">
     <div class="set">
       <div class="set_cover"></div>
@@ -7,7 +6,7 @@
         <h1 class="set_title">{{ playlist.title }}</h1>
         <small class="set_sub">
           {{ playlist.tracks.length }} Tracks &nbsp;•&nbsp;
-          {{ totalDuration | duration }}
+          {{ playlist.tracks | map(x => x.duration) | sum | duration }}
         </small>
         <div class="set_actions">
           <button class="button">
@@ -46,23 +45,11 @@
         playlist: this.$root.playlistsCache[this.$route.params.slug],
       }
     },
-    computed: {
-      totalDuration() {
-        return this.playlist.tracks.reduce((total, track) => {
-          return total + track.duration
-        }, 0)
-      }
-    },
     created() {
       axios.get("/api/playlists/" + this.$route.params.slug)
         .then(({data}) => {
           this.playlist = data
           this.$root.playlistsCache[data.slug] = data // cache data
-        })
-        .catch((e) => {
-          if (e.response.status === 404) {
-            this.$router.push("/player/not-found")
-          }
         })
     }
   }
@@ -107,7 +94,7 @@
     grid-gap: 1rem;
   }
 
-  @media screen and (max-width: 479px) {
+  @media screen and (max-width: 480px) {
     .set {
       display: block;
     }
@@ -190,7 +177,7 @@
     overflow-wrap: normal;
   }
 
-  @media screen and (max-width: 479px) {
+  @media screen and (max-width: 480px) {
     .track {
       padding-right: 3rem;
       flex-wrap: wrap;

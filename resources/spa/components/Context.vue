@@ -59,7 +59,7 @@
     }
   }
 
-  @media screen and (max-width: 479px) {
+  @media screen and (max-width: 480px) {
     .context.is-account {
       left: auto;
       right: 0;

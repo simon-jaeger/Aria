@@ -8,7 +8,7 @@
         <h1 class="set_title">{{ series.title }}</h1>
         <small class="set_sub">
           {{ series.tracks.length }} Tracks &nbsp;•&nbsp;
-          {{ totalDuration | duration }}
+          {{ series.tracks | map(x => x.duration) | sum | duration }}
         </small>
         <div class="set_actions">
           <button class="button">
@@ -47,23 +47,11 @@
         series: this.$root.seriesCache[this.$route.params.slug],
       }
     },
-    computed: {
-      totalDuration() {
-        return this.series.tracks.reduce((total, track) => {
-          return total + track.duration
-        }, 0)
-      }
-    },
     created() {
       axios.get("/api/series/" + this.$route.params.slug)
         .then(({data}) => {
           this.series = data
           this.$root.seriesCache[data.slug] = data // cache data
-        })
-        .catch((e) => {
-          if (e.response.status === 404) {
-            this.$router.push("/player/not-found")
-          }
         })
     }
   }
@@ -107,7 +95,7 @@
     grid-gap: 1rem;
   }
 
-  @media screen and (max-width: 479px) {
+  @media screen and (max-width: 480px) {
     .set {
       display: block;
     }
@@ -190,7 +178,7 @@
     overflow-wrap: normal;
   }
 
-  @media screen and (max-width: 479px) {
+  @media screen and (max-width: 480px) {
     .track {
       padding-right: 3rem;
       flex-wrap: wrap;
