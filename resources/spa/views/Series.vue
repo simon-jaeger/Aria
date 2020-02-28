@@ -23,17 +23,7 @@
       },
     },
     async created() {
-      if (!store.series.length) {
-        store.series = (await axios.get("/api/series")).data
-      }
-      // prefetch details
-      for (let series of store.series) {
-        this.$set(
-          store.seriesDetails,
-          series.slug,
-          (await axios.get("/api/series/" + series.slug)).data
-        )
-      }
+      store.series = (await axios.get("/api/series")).data
     },
   }
 </script>

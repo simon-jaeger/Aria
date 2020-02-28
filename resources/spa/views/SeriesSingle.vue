@@ -1,5 +1,5 @@
 <template>
-  <div class="main_inner is-box" v-if="series">
+  <div class="main_inner is-box">
     <header class="header">
       <img :src="'/storage/covers/' + series.cover"
            :alt="series.title"
@@ -24,26 +24,29 @@
 
     <Tracks :tracks="series.tracks"/>
   </div>
-  <Loading v-else/>
 </template>
 
 <script>
+  import Vue from "vue"
   import Tracks from "../components/Tracks"
-  import Loading from "../components/Loading"
 
   export default {
     name: "SeriesSingle",
-    components: {Loading, Tracks},
+    components: {Tracks},
     computed: {
       series() {
-        return store.seriesDetails[this.$route.params.slug]
+        return store.seriesSingle[this.$route.params.slug]
       },
     },
-    created() {
-      axios.get("/api/series/" + this.$route.params.slug)
-        .then(({data}) => {
-          this.$set(store.seriesDetails, data.slug, data)
-        })
+    async beforeRouteEnter(to, from, next) {
+      if (!store.seriesSingle[to.params.slug]) {
+        Vue.set(
+          store.seriesSingle,
+          to.params.slug,
+          (await axios.get("/api/series/" + to.params.slug)).data
+        )
+      }
+      next()
     }
   }
 </script>

@@ -5,8 +5,10 @@
     <div class="PlaylistItem_body">
       <h2 class="PlaylistItem_title">{{ playlist.title }}</h2>
       <small class="PlaylistItem_sub">{{ playlist.tracks_count }} Tracks</small>
-      <!-- TODO: del and rename playlist -->
-      <button class="PlaylistItem_action">more_vert</button>
+      <!-- TODO: del and rename playlist in context -->
+      <button @click.prevent="deletePlaylist(playlist.id)"
+              class="PlaylistItem_action">more_vert
+      </button>
     </div>
   </RouterLink>
 </template>
@@ -14,7 +16,12 @@
 <script>
   export default {
     name: "PlaylistItem",
-    props: ["playlist"]
+    props: ["playlist"],
+    methods: {
+      deletePlaylist(id) {
+        store.deletePlaylist(id)
+      },
+    }
   }
 </script>
 

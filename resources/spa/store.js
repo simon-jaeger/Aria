@@ -1,6 +1,11 @@
 export default {
   series: [],
-  seriesDetails: {},
+  seriesSingle: {},
   playlists: [],
-  playlistsDetails: {},
+  playlistsSingle: {},
+
+  // TODO: wip, also update database and show toast etc.
+  deletePlaylist(id) {
+    this.playlists = this.playlists.filter(x => x.id !== id)
+  },
 }

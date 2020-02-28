@@ -6,7 +6,7 @@
                     :key="playlist.id"
                     :playlist="playlist"/>
     </div>
-    <!-- TODO: prettier no playlists notice -->
+    <!-- TODO: prettier no playlists notice, cta to create first? -->
     <div v-else>No playlists</div>
   </div>
   <Loading v-else/>
@@ -30,18 +30,8 @@
       },
     },
     async created() {
-      if (!store.playlists.length) {
-        store.playlists = (await axios.get("/api/playlists")).data
-      }
+      store.playlists = (await axios.get("/api/playlists")).data
       this.ready = true
-      // prefetch details
-      for (let playlist of store.playlists) {
-        this.$set(
-          store.playlistsDetails,
-          playlist.slug,
-          (await axios.get("/api/playlists/" + playlist.slug)).data
-        )
-      }
     },
   }
 </script>

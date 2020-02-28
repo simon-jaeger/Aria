@@ -3,7 +3,7 @@
     <AppHeader/>
     <main class="main">
       <!-- TODO: make sure playlist etc. get updated -->
-      <KeepAlive include="Series,Playlists">
+      <KeepAlive include="Series,Playlists,History">
         <RouterView/>
       </KeepAlive>
     </main>

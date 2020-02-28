@@ -1,5 +1,5 @@
 <template>
-  <div class="main_inner is-box" v-if="playlist">
+  <div class="main_inner is-box">
     <header class="header">
       <!-- TODO: playlist cover uses combination of covers of contained tracks? -->
       <div class="cover"></div>
@@ -14,7 +14,8 @@
             <span class="button_icon">play_arrow<br></span>
             <span>Play</span>
           </button>
-          <button class="button is-secondary is-icon">
+          <button @click="deletePlaylist(playlist.id)"
+                  class="button is-secondary is-icon">
             <span class="button_icon is-alone">more_vert</span>
           </button>
         </div>
@@ -23,26 +24,35 @@
 
     <Tracks :tracks="playlist.tracks"/>
   </div>
-  <Loading v-else/>
 </template>
 
 <script>
   import Tracks from "../components/Tracks"
-  import Loading from "../components/Loading"
+  import Vue from "vue"
 
   export default {
-    name: "PlaylistSingle",
-    components: {Loading, Tracks},
+    name: "PlaylistsSingle",
+    components: {Tracks},
     computed: {
       playlist() {
-        return store.playlistsDetails[this.$route.params.slug]
+        return store.playlistsSingle[this.$route.params.slug]
       },
     },
-    created() {
-      axios.get("/api/playlists/" + this.$route.params.slug)
-        .then(({data}) => {
-          this.$set(store.playlistsDetails, data.slug, data)
-        })
+    methods: {
+      deletePlaylist(id) {
+        store.deletePlaylist(id)
+        this.$router.push("/player/playlists")
+      },
+    },
+    async beforeRouteEnter(to, from, next) {
+      if (!store.playlistsSingle[to.params.slug]) {
+        Vue.set(
+          store.playlistsSingle,
+          to.params.slug,
+          (await axios.get("/api/playlists/" + to.params.slug)).data
+        )
+      }
+      next()
     }
   }
 </script>
