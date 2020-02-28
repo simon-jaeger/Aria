@@ -1,13 +1,13 @@
 <template>
-  <div class="main_inner">
+  <div class="main_inner" v-if="series.length">
     <h1 class="sr">Series</h1>
-        <div class="items" v-if="series.length">
-          <SeriesItem v-for="aSeries in series"
-                      :key="aSeries.id"
-                      :series="aSeries"/>
-        </div>
-        <Loading v-else/>
+    <div class="items">
+      <SeriesItem v-for="aSeries in series"
+                  :key="aSeries.id"
+                  :series="aSeries"/>
+    </div>
   </div>
+  <Loading v-else/>
 </template>
 
 <script>
@@ -17,16 +17,22 @@
   export default {
     name: "Series",
     components: {Loading, SeriesItem},
-    data() {
-      return {
-        series: []
-      }
+    computed: {
+      series() {
+        return store.series
+      },
     },
     async created() {
-      this.series = (await axios.get("/api/series")).data
-      for (let series of this.series) { // prefetch and cache details
-        this.$root.seriesCache[series.slug] =
+      if (!store.series.length) {
+        store.series = (await axios.get("/api/series")).data
+      }
+      // prefetch details
+      for (let series of store.series) {
+        this.$set(
+          store.seriesDetails,
+          series.slug,
           (await axios.get("/api/series/" + series.slug)).data
+        )
       }
     },
   }

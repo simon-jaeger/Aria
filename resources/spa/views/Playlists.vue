@@ -1,13 +1,15 @@
 <template>
-  <div class="main_inner">
+  <div class="main_inner" v-if="ready">
     <h1 class="sr">Playlists</h1>
     <div class="items" v-if="playlists.length">
       <PlaylistItem v-for="playlist in playlists"
                     :key="playlist.id"
                     :playlist="playlist"/>
     </div>
-    <Loading v-else/>
+    <!-- TODO: prettier no playlists notice -->
+    <div v-else>No playlists</div>
   </div>
+  <Loading v-else/>
 </template>
 
 <script>
@@ -19,14 +21,26 @@
     components: {Loading, PlaylistItem},
     data() {
       return {
-        playlists: []
+        ready: false
       }
     },
+    computed: {
+      playlists() {
+        return store.playlists
+      },
+    },
     async created() {
-      this.playlists = (await axios.get("/api/playlists")).data
-      for (let playlist of this.playlists) { // prefetch and cache details
-        this.$root.playlistsCache[playlist.slug] =
+      if (!store.playlists.length) {
+        store.playlists = (await axios.get("/api/playlists")).data
+      }
+      this.ready = true
+      // prefetch details
+      for (let playlist of store.playlists) {
+        this.$set(
+          store.playlistsDetails,
+          playlist.slug,
           (await axios.get("/api/playlists/" + playlist.slug)).data
+        )
       }
     },
   }

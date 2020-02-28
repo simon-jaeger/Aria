@@ -33,16 +33,15 @@
   export default {
     name: "PlaylistSingle",
     components: {Loading, Tracks},
-    data() {
-      return {
-        playlist: this.$root.playlistsCache[this.$route.params.slug],
-      }
+    computed: {
+      playlist() {
+        return store.playlistsDetails[this.$route.params.slug]
+      },
     },
     created() {
       axios.get("/api/playlists/" + this.$route.params.slug)
         .then(({data}) => {
-          this.playlist = data
-          this.$root.playlistsCache[data.slug] = data // cache data
+          this.$set(store.playlistsDetails, data.slug, data)
         })
     }
   }

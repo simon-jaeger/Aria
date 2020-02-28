@@ -34,16 +34,15 @@
   export default {
     name: "SeriesSingle",
     components: {Loading, Tracks},
-    data() {
-      return {
-        series: this.$root.seriesCache[this.$route.params.slug],
-      }
+    computed: {
+      series() {
+        return store.seriesDetails[this.$route.params.slug]
+      },
     },
     created() {
       axios.get("/api/series/" + this.$route.params.slug)
         .then(({data}) => {
-          this.series = data
-          this.$root.seriesCache[data.slug] = data // cache data
+          this.$set(store.seriesDetails, data.slug, data)
         })
     }
   }
