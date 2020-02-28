@@ -35,7 +35,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   .header {
     z-index: 10;
     width: 240px;
@@ -91,7 +91,7 @@
     }
   }
 
-  @media screen and (max-width: 479px) {
+  @media screen and (max-width: 480px) {
     .header {
       border-bottom: 1px solid var(--white7);
     }

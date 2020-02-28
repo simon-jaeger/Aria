@@ -3,7 +3,7 @@
     <AppHeader/>
     <main class="main">
       <!-- TODO: make sure playlist etc. get updated -->
-      <KeepAlive include="Series, Playlists">
+      <KeepAlive include="Series,Playlists,History">
         <RouterView/>
       </KeepAlive>
     </main>
@@ -46,6 +46,7 @@
     padding: 3rem;
     border-radius: 2px;
     background-color: var(--black5);
+    box-shadow: var(--shadow1);
   }
 
   @media screen and (max-width: 1224px) {
@@ -58,7 +59,7 @@
     }
   }
 
-  @media screen and (max-width: 479px) {
+  @media screen and (max-width: 480px) {
     .main_inner.is-box {
       margin-top: -1.5rem;
       margin-right: -1.5rem;
@@ -153,7 +154,7 @@
     }
   }
 
-  @media screen and (max-width: 479px) {
+  @media screen and (max-width: 480px) {
     .input.is-search {
       display: none;
     }
@@ -264,7 +265,7 @@
     content: 'error_outline';
   }
 
-  @media screen and (max-width: 479px) {
+  @media screen and (max-width: 480px) {
     .alert {
       padding-right: 1rem;
     }
@@ -284,7 +285,7 @@
     overflow-wrap: normal;
   }
 
-  @media screen and (max-width: 479px) {
+  @media screen and (max-width: 480px) {
     .mobilesearch {
       display: block;
       padding: 1rem;

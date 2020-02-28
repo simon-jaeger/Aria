@@ -1,6 +1,5 @@
 <template>
   <div class="main_inner is-box">
-    <h1>Settings</h1>
     <form class="form">
       <div class="alert is-error">
         Choose a password with at least 6 characters
@@ -15,6 +14,7 @@
       </div>
 
       <div class="input">
+        <!-- TODO: password component? -->
         <label for="newPassword" class="input_label">New password</label>
         <div style="display: grid; grid-template-columns: 1fr auto;">
           <input type="password" id="newPassword" class="input_field">

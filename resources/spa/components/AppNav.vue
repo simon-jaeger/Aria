@@ -22,7 +22,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   .nav {
     margin-bottom: 6rem;
     background-color: var(--black5);
@@ -47,8 +47,7 @@
     background-color: var(--blue7);
     color: var(--white5);
   }
-  .nav_link:hover,
-  .nav_link:focus {
+  .nav_link:hover {
     background-color: var(--blue7);
     color: var(--white5);
   }
@@ -82,7 +81,7 @@
     }
   }
 
-  @media screen and (max-width: 479px) {
+  @media screen and (max-width: 480px) {
     .nav_link {
       flex-direction: column;
       align-items: center;

@@ -1,18 +1,14 @@
-import axios from "axios"
 import Vue from "vue"
-import errorHandler from "./errorHandler"
-import data from "./data"
+import store from "./store"
 import router from "./router"
 import App from "./App.vue"
 import "./filters"
-import "./errorHandler"
+import "./axios"
 
-window.axios = axios
-axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest"
-
+window.store = store
 Vue.config.productionTip = false
 new Vue({
-  data,
+  data: store,
   router,
   render: (h) => h(App)
 }).$mount("#app")

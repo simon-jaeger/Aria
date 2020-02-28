@@ -1,49 +1,55 @@
 <template>
   <div class="main_inner is-box">
     <header class="header">
-      <img :src="'/storage/covers/' + series.cover"
-           :alt="series.title"
-           class="cover">
+      <!-- TODO: playlist cover uses combination of covers of contained tracks? -->
+      <div class="cover"></div>
       <div class="info">
-        <h1>{{ series.title }}</h1>
+        <h1>{{ playlist.title }}</h1>
         <small class="sub">
-          {{ series.tracks.length }} Tracks &nbsp;•&nbsp;
-          {{ series.tracks | map(x => x.duration) | sum | duration }}
+          {{ playlist.tracks.length }} Tracks &nbsp;•&nbsp;
+          {{ playlist.tracks | map(x => x.duration) | sum | duration }}
         </small>
         <div class="actions">
           <button class="button">
             <span class="button_icon">play_arrow<br></span>
             <span>Play</span>
           </button>
-          <button class="button is-secondary is-icon">
-            <span class="button_icon is-alone">favorite</span>
+          <button @click="deletePlaylist(playlist.id)"
+                  class="button is-secondary is-icon">
+            <span class="button_icon is-alone">more_vert</span>
           </button>
         </div>
       </div>
     </header>
 
-    <Tracks :tracks="series.tracks"/>
+    <Tracks :tracks="playlist.tracks"/>
   </div>
 </template>
 
 <script>
-  import Vue from "vue"
   import Tracks from "../components/Tracks"
+  import Vue from "vue"
 
   export default {
-    name: "SeriesSingle",
+    name: "PlaylistsSingle",
     components: {Tracks},
     computed: {
-      series() {
-        return store.seriesSingle[this.$route.params.slug]
+      playlist() {
+        return store.playlistsSingle[this.$route.params.slug]
+      },
+    },
+    methods: {
+      deletePlaylist(id) {
+        store.deletePlaylist(id)
+        this.$router.push("/player/playlists")
       },
     },
     async beforeRouteEnter(to, from, next) {
-      if (!store.seriesSingle[to.params.slug]) {
+      if (!store.playlistsSingle[to.params.slug]) {
         Vue.set(
-          store.seriesSingle,
+          store.playlistsSingle,
           to.params.slug,
-          (await axios.get("/api/series/" + to.params.slug)).data
+          (await axios.get("/api/playlists/" + to.params.slug)).data
         )
       }
       next()
@@ -62,6 +68,7 @@
     width: 10rem;
     height: 10rem;
     margin-right: 1.5rem;
+    background-color: var(--white7);
   }
 
   .info {
@@ -88,8 +95,8 @@
 
     .cover {
       width: 100vw;
-      max-width: none;
       height: 12rem;
+      max-width: none;
       margin: -1.5rem 0 1.5rem -1.5rem;
       object-fit: cover;
       object-position: 50% 0;

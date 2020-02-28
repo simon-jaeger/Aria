@@ -11,6 +11,11 @@
   <meta name="description" content="A music streaming app for soundtracks">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
 
+  <link rel="preload"
+        href="/fonts/MaterialIcons-Regular.woff2"
+        as="font"
+        type="font/woff2"
+        crossorigin>
   <link rel="stylesheet" href="/css/global.css">
   <script src="/js/global.js" defer></script>
   <script src="{{ mix('js/spa.js') }}" defer></script>
