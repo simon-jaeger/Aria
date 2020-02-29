@@ -1,39 +1,55 @@
 <template>
   <div class="main_inner is-box">
-    <h2>History</h2>
-    <ul>
-      <li>Playing the Moon</li>
-      <li>Prelude</li>
-      <li>Facing myself</li>
-    </ul>
-
-    <Modal>
-      <div class="checks">
-        <div class="check">
-          <input type="checkbox" checked id="1" name="fantasy-and-rpgs">
-          <label for="1" class="check_label">Fantasy and RPGs</label>
-        </div>
-        <div class="check">
-          <input type="checkbox" id="2" name="fantasy-and-rpgs">
-          <label for="2" class="check_label">Weekend Playlist</label>
-        </div>
-        <div class="check">
-          <input type="checkbox" id="3" name="fantasy-and-rpgs">
-          <label for="3" class="check_label">Relaxing Tracks</label>
-        </div>
+    <header class="header">
+      <div class="info">
+        <h1>History</h1>
+        <small class="sub">
+          {{ history.length }} Tracks
+        </small>
+        <button @click="clearHistory" class="button is-secondary">
+          <span class="button_icon">delete_sweep</span>
+          <span>Clear history</span>
+        </button>
       </div>
-    </Modal>
+    </header>
+
+    <Tracks :tracks="history" :numbered="false" v-if="history.length"/>
   </div>
 </template>
 
 <script>
   import Modal from "../components/Modal"
+  import Tracks from "../components/Tracks"
+  import Vue from "vue"
+
   export default {
     name: "History",
-    components: {Modal}
+    components: {Tracks, Modal},
+    computed: {
+      history() {
+        return store.history
+      },
+    },
+    methods:{
+      clearHistory() {
+        store.clearHistory()
+      },
+    },
+    async created() {
+      if (!store.history.length) {
+        store.history = (await axios.get("/api/history")).data
+      }
+    }
   }
 </script>
 
 <style scoped>
-
+  .header:not(:last-child) {
+    margin-bottom: 3rem;
+  }
+  .sub {
+    margin-top: -0.5rem;
+    margin-bottom: 1rem;
+    color: var(--white6);
+  }
 </style>

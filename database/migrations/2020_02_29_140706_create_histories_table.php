@@ -4,29 +4,27 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePlaylistsTable extends Migration {
+class CreateHistoriesTable extends Migration {
   /**
    * Run the migrations.
    *
    * @return void
    */
   public function up() {
-    Schema::create('playlists', function (Blueprint $table) {
+    Schema::create('histories', function (Blueprint $table) {
       $table->bigIncrements('id');
-      $table->string('slug')->unique();
-      $table->string('title');
     });
 
-    Schema::create('playlist_track', function (Blueprint $table) {
-      $table->bigIncrements('id');
-      $table->unsignedBigInteger('playlist_id');
-      $table->unsignedBigInteger('track_id');
-      $table->integer('order');
-      $table->unique(['playlist_id', 'track_id']);
 
-      $table->foreign('playlist_id')
+    Schema::create('history_track', function (Blueprint $table) {
+      $table->bigIncrements('id');
+      $table->unsignedBigInteger('history_id');
+      $table->unsignedBigInteger('track_id');
+      $table->timestamp('created_at', 0);
+
+      $table->foreign('history_id')
         ->references('id')
-        ->on('playlists')
+        ->on('histories')
         ->onDelete('cascade');
       $table->foreign('track_id')
         ->references('id')
@@ -34,7 +32,7 @@ class CreatePlaylistsTable extends Migration {
         ->onDelete('cascade');
     });
 
-    // TODO: link playlists to users (fix controller too)
+    // TODO: link histories to users (fix controller too)
   }
 
   /**
@@ -43,7 +41,7 @@ class CreatePlaylistsTable extends Migration {
    * @return void
    */
   public function down() {
-    Schema::dropIfExists('playlists');
-    Schema::dropIfExists('playlist_track');
+    Schema::dropIfExists('histories');
+    Schema::dropIfExists('history_track');
   }
 }

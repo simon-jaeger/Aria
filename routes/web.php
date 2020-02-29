@@ -30,4 +30,6 @@ Route::prefix('api')->middleware('auth')->group(function () {
 
   Route::get('playlists', 'PlaylistController@index');
   Route::get('playlists/{slug}', 'PlaylistController@show');
+
+  Route::get('history', 'HistoryController@show');
 });
