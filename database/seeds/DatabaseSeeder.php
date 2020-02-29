@@ -16,6 +16,9 @@ class DatabaseSeeder extends Seeder {
       'email' => 'a@b',
       'password' => '$2y$10$ofiQGeXPluKG45u62i7.K.PuJArQUXgyY5Adu1EyJKM0zMcrO.MSO', // p
     ]);
+    // TODO: test history, remove later
+    \App\History::create([]);
+
 
     // TODO: test series, remove later?
     \App\Series::create([
@@ -75,10 +78,15 @@ class DatabaseSeeder extends Seeder {
           'file' => 'demo.mp3',
           'series_id' => $i,
         ]);
-        if (rand(0, 1)) { // 50% chance to add to a random playlist
+        if (mt_rand(0, 1)) { // 50% chance to add to a random playlist
           \App\Playlist::find($faker->numberBetween(1, 6))
             ->tracks()
             ->attach($track, ['order' => $faker->numberBetween(1, 9),]);
+        }
+        if (mt_rand(1, 10) <= 2) { // 20% chance to add to dummy history
+          \App\History::find(1)
+            ->tracks()
+            ->attach($track);
         }
       }
     }

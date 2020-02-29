@@ -14,4 +14,8 @@ class Track extends Model {
   public function playlists() {
     return $this->belongsToMany(Playlist::class);
   }
+
+  public function histories() {
+    return $this->belongsToMany(History::class);
+  }
 }

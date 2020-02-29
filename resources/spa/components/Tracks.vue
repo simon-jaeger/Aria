@@ -1,13 +1,13 @@
 <template>
   <ol class="_">
     <li class="track is-header">
-      <div class="track_cell is-m1">#</div>
+      <div class="track_cell is-m1" v-if="numbered">#</div>
       <div class="track_cell is-m2 is-m10">Title</div>
       <div class="track_cell is-m3 is-m20">access_time</div>
       <div class="track_cell is-m4"></div>
     </li>
     <li class="track" v-for="(track, i) in tracks" :key="track.id">
-      <div class="track_cell is-m1">{{ ++i | zeroPad }}</div>
+      <div class="track_cell is-m1" v-if="numbered">{{ ++i | zeroPad }}</div>
       <div class="track_cell is-m2">{{ track.title }}</div>
       <div class="track_cell is-m3">{{ track.duration | duration }}</div>
       <button class="track_cell is-m4">more_vert</button>
@@ -18,7 +18,7 @@
 <script>
   export default {
     name: "Tracks",
-    props: ["tracks"]
+    props: {tracks: Array, numbered: {type: Boolean, default: true}}
   }
 </script>
 
