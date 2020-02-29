@@ -14,6 +14,7 @@ mysql # create a database for aria
 
 composer install
 npm install
+# php artisan telescope:install # (for local debugging, optional)
 
 cp .env.example .env
 vim .env # add database credentials
@@ -23,6 +24,7 @@ php artisan config:cache
 php artisan migrate:fresh --seed
 
 npm run dev # or npm run prod
+
 ```
 
 [//]: # (TODO: für abgabe: .env und config cache bereits generiert, public generiert mit production script)
