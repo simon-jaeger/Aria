@@ -6,10 +6,14 @@
       <KeepAlive include="Series,Playlists,History">
         <RouterView/>
       </KeepAlive>
+      <!-- TODO: rm test modal toggle -->
+      <a href="#modalPlaylists"
+         style="display:block;text-align:center;margin:2rem;">modal</a>
     </main>
     <AppPlayer/>
     <PlayerMini/>
     <Toast>Added to playlist</Toast>
+    <ModalPlaylists/>
   </div>
 </template>
 
@@ -18,10 +22,11 @@
   import AppPlayer from "./components/AppPlayer"
   import Toast from "./components/Toast"
   import PlayerMini from "./components/PlayerMini"
+  import ModalPlaylists from "./components/ModalPlaylists"
 
   export default {
     name: "App",
-    components: {PlayerMini, Toast, AppHeader, AppPlayer}
+    components: {ModalPlaylists, PlayerMini, Toast, AppHeader, AppPlayer}
   }
 </script>
 

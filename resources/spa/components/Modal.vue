@@ -1,16 +1,16 @@
 <template>
   <dialog class="modal">
+    <a href="#_" class="modal_cancel"></a>
     <div class="modal_inner">
       <header class="modal_header">
-        <h2 class="modal_title">Add to...</h2>
-        <button class="modal_close">close</button>
+        <h2 class="modal_title">{{ title }}</h2>
+        <a href="#_" class="modal_close">close</a>
       </header>
       <div class="modal_body">
         <slot/>
       </div>
       <footer class="modal_actions">
-        <button class="modal_action">+ New playlist</button>
-        <button class="modal_action">Done</button>
+        <slot name="actions"></slot>
       </footer>
     </div>
   </dialog>
@@ -18,12 +18,14 @@
 
 <script>
   export default {
-    name: "Modal"
+    name: "Modal",
+    props: ["title"]
   }
 </script>
 
 <style scoped>
   .modal {
+    visibility: hidden;
     position: fixed;
     z-index: 30;
     left: 0;
@@ -36,12 +38,31 @@
     justify-content: center;
     background-color: var(--blackA);
     box-shadow: var(--shadow2);
+    transition: all 0.3s;
+    opacity: 0;
+  }
+  .modal:target {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .modal_cancel {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    cursor: default;
   }
 
   .modal_inner {
+    position: relative;
     overflow: hidden;
     width: 480px;
     border-radius: 4px;
+    transition: all 0.3s;
+    transform: translateY(-1rem);
+  }
+  .modal:target > .modal_inner {
+    transform: translateY(0);
   }
 
   .modal_header {
@@ -78,17 +99,20 @@
     border-top: 1px solid var(--white7);
     background-color: var(--black5);
   }
+  .modal_actions:empty {
+    display: none;
+  }
 
-  .modal_action {
+  .modal_actions > * {
     padding: 1rem;
     flex: 1 0 0;
     text-align: center;
   }
-  .modal_action:hover,
-  .modal_action:focus {
+  .modal_actions > *:hover,
+  .modal_actions > *:focus {
     background-image: linear-gradient(0, var(--blue7), var(--blue7));
   }
-  .modal_action:not(:last-child) {
+  .modal_actions > *:not(:last-child) {
     border-right: 1px solid var(--white7);
   }
 </style>
