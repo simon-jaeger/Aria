@@ -12,7 +12,7 @@
         </small>
         <div class="actions">
           <button class="button">
-            <span class="button_icon">play_arrow<br></span>
+            <i class="button_icon">play_arrow<br></i>
             <span>Play</span>
           </button>
           <button class="button is-secondary is-icon">

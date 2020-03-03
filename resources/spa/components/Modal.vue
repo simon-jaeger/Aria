@@ -1,5 +1,5 @@
 <template>
-  <dialog class="modal">
+  <div class="modal">
     <a href="#_" class="modal_cancel"></a>
     <div class="modal_inner">
       <header class="modal_header">
@@ -13,7 +13,7 @@
         <slot name="actions"></slot>
       </footer>
     </div>
-  </dialog>
+  </div>
 </template>
 
 <script>
@@ -27,7 +27,7 @@
   .modal {
     visibility: hidden;
     position: fixed;
-    z-index: 30;
+    z-index: 100;
     left: 0;
     top: 0;
     right: 0;

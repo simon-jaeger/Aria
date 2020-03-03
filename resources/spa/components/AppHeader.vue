@@ -7,7 +7,7 @@
     <AppNav/>
 
     <div class="input is-search">
-      <span class="input_searchicon">search</span>
+      <i class="input_searchicon">search</i>
       <label for="search" class="sr">Search</label>
       <input type="text"
              id="search"
@@ -17,11 +17,25 @@
 
     <button class="mobilesearch">search</button>
 
-    <button class="account">
-      <span class="account_icon">person</span>
-      <span class="account_text">Account</span>
-      <!--<Context/>-->
-    </button>
+    <Context>
+      <button class="account">
+        <i class="account_icon">person</i>
+        <span class="account_text">Account</span>
+      </button>
+      <template v-slot:menu>
+        <div class="account_menu">
+          <RouterLink to="/player/settings">
+            <i>settings</i>
+            <span>Settings</span>
+          </RouterLink>
+          <button>
+            <i>power_settings_new</i>
+            <span>Log out</span>
+          </button>
+        </div>
+      </template>
+    </Context>
+
   </header>
 </template>
 
@@ -70,6 +84,11 @@
     line-height: 1;
   }
 
+  .account_menu {
+    left: 1.75rem;
+    right: auto
+  }
+
   @media screen and (max-width: 1224px) {
     .header {
       display: flex;
@@ -88,6 +107,12 @@
       height: 1.5rem;
       margin-right: auto;
       padding: 0;
+    }
+
+    .account_menu {
+      left: auto;
+      right: 0;
+      margin-top: -0.25rem;
     }
   }
 

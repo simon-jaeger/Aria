@@ -6,14 +6,16 @@
     <Context>
       <button>context</button>
       <template v-slot:menu>
-        <RouterLink class="context_item" to="/player/settings">
-          <i class="context_icon">settings</i>
-          <span>Settings</span>
-        </RouterLink>
-        <button class="context_item" @click="foo">
-          <i class="context_icon">power_settings_new</i>
-          <span>Log out</span>
-        </button>
+        <div>
+          <RouterLink to="/player/settings">
+            <i>settings</i>
+            <span>Settings</span>
+          </RouterLink>
+          <button>
+            <i>power_settings_new</i>
+            <span>Log out</span>
+          </button>
+        </div>
       </template>
     </Context>
 
@@ -25,12 +27,7 @@
   import Context from "../components/Context"
 
   export default {
-    components: {Context},
-    methods: {
-      foo() {
-        console.log("foo")
-      },
-    }
+    components: {Context}
   }
 </script>
 

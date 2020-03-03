@@ -7,7 +7,7 @@
           {{ history.length }} Tracks
         </small>
         <button @click="clearHistory" class="button is-secondary">
-          <span class="button_icon">delete_sweep</span>
+          <i class="button_icon">delete_sweep</i>
           <span>Clear history</span>
         </button>
       </div>
