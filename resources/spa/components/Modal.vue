@@ -1,16 +1,16 @@
 <template>
-  <div class="modal">
-    <a href="#_" class="modal_cancel"></a>
+  <div class="modal" :class="{'is-visible': open}">
+    <button @click="close" class="modal_cancel"></button>
     <div class="modal_inner">
       <header class="modal_header">
         <h2 class="modal_title">{{ title }}</h2>
-        <a href="#_" class="modal_close">close</a>
+        <button @click="close" class="modal_close">close</button>
       </header>
       <div class="modal_body">
         <slot/>
       </div>
       <footer class="modal_actions">
-        <slot name="actions"></slot>
+        <slot name="actions" :close="close"></slot>
       </footer>
     </div>
   </div>
@@ -19,7 +19,25 @@
 <script>
   export default {
     name: "Modal",
-    props: ["title"]
+    props: ["title", "name"],
+    data() {
+      return {
+        open: false
+      }
+    },
+    methods: {
+      close() {
+        this.open = false
+      }
+    },
+    mounted() {
+      this.$root.$on("modal-" + this.name, () => this.open = true)
+    },
+    watch: {
+      $route() {
+        this.close()
+      }
+    },
   }
 </script>
 
@@ -41,7 +59,7 @@
     transition: all 0.3s;
     opacity: 0;
   }
-  .modal:target {
+  .modal.is-visible {
     visibility: visible;
     opacity: 1;
   }
@@ -61,7 +79,7 @@
     transition: all 0.3s;
     transform: translateY(-1rem);
   }
-  .modal:target > .modal_inner {
+  .modal.is-visible > .modal_inner {
     transform: translateY(0);
   }
 

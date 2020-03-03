@@ -17,8 +17,6 @@
     },
     methods: {
       closeIfOutside(e) {
-        // close only if focused something outside
-        console.log(e)
         if (!this.$el.contains(e.relatedTarget)) {
           this.open = false
         }
@@ -44,7 +42,6 @@
 
   .context > .menuWrap > div >>> button, a {
     width: 100%;
-    border: none;
     display: flex;
     padding: 0.75rem 1.5rem;
   }

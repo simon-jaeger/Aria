@@ -2,10 +2,11 @@ import Vue from "vue"
 import store from "./store"
 import router from "./router"
 import App from "./App.vue"
+import axios from "./axios"
 import "./filters"
-import "./axios"
 
 window.store = store
+window.axios = axios
 Vue.config.productionTip = false
 new Vue({
   data: store,

@@ -66,6 +66,7 @@
   }
 
   .account {
+    width: 100%;
     position: relative;
     display: flex;
     padding: 1rem 1.5rem 1rem 1.75rem;

@@ -1,7 +1,6 @@
 import router from "./router"
 import axios from "axios"
 
-window.axios = axios
 axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest"
 
 // global error handling
@@ -20,3 +19,5 @@ axios.interceptors.response.use(null, error => {
   }
   return Promise.reject(error)
 })
+
+export default axios
