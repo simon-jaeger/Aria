@@ -9,6 +9,9 @@ import Settings from "./views/Settings"
 import e404 from "./views/e404"
 import e500 from "./views/e500"
 
+// TODO: rm dev route
+import _dev from "./views/_dev"
+
 // TODO: maybe lazy load certain heavy routes, example below:
 // const LazyRoute = () => import(/* webpackChunkName: "LazyRoute" */ './views/LazyRoute')
 
@@ -25,6 +28,7 @@ export default new VueRouter({
     }
   },
   routes: [
+    {path: "/player/_dev", component: _dev},
     {path: "/player", redirect: "/player/series"},
     {path: "/player/series", component: Series},
     {path: "/player/series/:slug", component: SeriesSingle},

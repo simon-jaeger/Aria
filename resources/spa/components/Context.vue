@@ -1,33 +1,41 @@
 <template>
-  <div class="context is-account">
-    <RouterLink class="context_item" to="/player/settings">
-      <span class="context_icon">settings</span>
-      <span>Settings</span>
-    </RouterLink>
-    <div class="context_item">
-      <span class="context_icon">power_settings_new</span>
-      <span>Log out</span>
+  <dialog class="wrap">
+    <slot></slot>
+    <div class="context" @click="blur">
+      <slot name="menu"></slot>
     </div>
-  </div>
+  </dialog>
 </template>
 
 <script>
   export default {
-    name: "Context"
+    name: "Context",
+    methods: {
+      blur() {
+        document.activeElement.blur()
+      },
+    }
   }
 </script>
 
 <style scoped>
   .context {
+    visibility: hidden;
     position: absolute;
-    top: 100%;
-    right: 0;
+    /*top: 100%;*/
+    /*right: 0;*/
     padding-top: 0.25rem;
     padding-bottom: 0.25rem;
     border-radius: 4px;
     background-color: var(--black3);
     box-shadow: var(--shadow2);
     color: var(--white5);
+  }
+  .wrap {
+    display: contents;
+  }
+  .wrap:focus-within > .context {
+    visibility: visible;
   }
   /* TODO: use inline styles for these context variations? */
   .context.is-track {
@@ -38,13 +46,14 @@
     right: auto;
   }
 
-  .context_icon {
+  >>> .context_icon {
     margin-right: 1rem;
     font-family: 'Material Icons', sans-serif;
     overflow-wrap: normal;
   }
 
   .context_item {
+    width: 100%;
     display: flex;
     padding: 0.75rem 1.5rem;
   }

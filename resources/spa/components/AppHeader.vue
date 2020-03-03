@@ -20,7 +20,7 @@
     <button class="account">
       <span class="account_icon">person</span>
       <span class="account_text">Account</span>
-      <Context/>
+      <!--<Context/>-->
     </button>
   </header>
 </template>
