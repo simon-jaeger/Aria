@@ -1,8 +1,8 @@
 <template>
-  <dialog class="toast">
+  <div class="toast">
     <div class="toast_text"><slot/></div>
     <button class="toast_undo">Undo</button>
-  </dialog>
+  </div>
 </template>
 
 <script>

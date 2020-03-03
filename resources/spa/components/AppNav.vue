@@ -1,15 +1,15 @@
 <template>
   <nav class="nav">
     <RouterLink class="nav_link" to="/player/series">
-      <span class="nav_icon">library_music</span>
+      <i class="nav_icon">library_music</i>
       <span class="nav_text">Series</span>
     </RouterLink>
     <RouterLink class="nav_link" to="/player/playlists">
-      <span class="nav_icon">queue_music</span>
+      <i class="nav_icon">queue_music</i>
       <span class="nav_text">Playlists</span>
     </RouterLink>
     <RouterLink class="nav_link" to="/player/history">
-      <span class="nav_icon">history</span>
+      <i class="nav_icon">history</i>
       <span class="nav_text">History</span>
     </RouterLink>
   </nav>
