@@ -44,7 +44,6 @@
 
   .context > .menuWrap > div >>> button, a {
     width: 100%;
-    border: none;
     display: flex;
     padding: 0.75rem 1.5rem;
   }

@@ -7,8 +7,9 @@
         <RouterView/>
       </KeepAlive>
       <!-- TODO: rm test modal toggle -->
-      <a href="#modalPlaylists"
-         style="display:block;text-align:center;margin:2rem;">modal</a>
+      <button @click="$root.$emit('modal-playlists')" style="margin-top: 2rem;">
+        modal
+      </button>
     </main>
     <AppPlayer/>
     <PlayerMini/>

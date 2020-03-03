@@ -19,15 +19,22 @@
       </template>
     </Context>
 
+    <div style="height: 2rem;"></div>
+
+    <button @click="$root.$emit('modal-playlists')">modal</button>
+
+    <div style="height: 2rem;"></div>
+
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
   </div>
 </template>
 
 <script>
   import Context from "../components/Context"
+  import Modal from "../components/Modal"
 
   export default {
-    components: {Context}
+    components: {Modal, Context}
   }
 </script>
 
