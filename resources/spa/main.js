@@ -7,9 +7,9 @@ import "./filters"
 
 window.store = store
 window.axios = axios
-Vue.config.productionTip = false
-new Vue({
+window.root = new Vue({
   data: store,
   router,
   render: (h) => h(App)
 }).$mount("#app")
+Vue.config.productionTip = false

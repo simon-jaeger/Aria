@@ -1,20 +1,42 @@
 <template>
-  <div class="toast">
-    <div class="toast_text"><slot/></div>
-    <button class="toast_undo">Undo</button>
+  <div class="toast" :class="{'is-visible': open}">
+    <div class="toast_msg">{{ msg }}</div>
+    <!-- TODO: undo action, pass callback with event? -->
+    <button @click="close" class="toast_undo">Undo</button>
   </div>
 </template>
 
 <script>
   export default {
-    name: "Toast"
+    name: "Toast",
+    data() {
+      return {
+        open: false,
+        msg: "",
+        timeout: null,
+      }
+    },
+    methods: {
+      close() {
+        this.open = false
+        clearTimeout(this.timeout)
+      }
+    },
+    mounted() {
+      this.$root.$on("toast", (e) => {
+        this.close()
+        this.msg = e.msg
+        this.open = true
+        this.timeout = setTimeout(() => this.close(), 3000)
+      })
+    },
   }
 </script>
 
 <style scoped>
   .toast {
     position: fixed;
-    z-index: 20;
+    z-index: 5;
     right: auto;
     bottom: 1rem;
     left: 16rem;
@@ -22,9 +44,16 @@
     border-radius: 2px;
     background-color: var(--black3);
     box-shadow: var(--shadow2);
+    transition: all 0.4s;
+    visibility: hidden;
+    transform: translateY(5rem);
+  }
+  .toast.is-visible {
+    visibility: visible;
+    transform: translateY(0);
   }
 
-  .toast_text {
+  .toast_msg {
     padding: 1rem;
   }
 
