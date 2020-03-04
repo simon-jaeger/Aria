@@ -34,11 +34,6 @@
       clearHistory() {
         store.clearHistory()
       },
-    },
-    async created() {
-      if (!store.history.length) {
-        store.history = (await axios.get("/api/history")).data
-      }
     }
   }
 </script>

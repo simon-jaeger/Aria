@@ -1,7 +1,7 @@
 export default {
   series: [],
   seriesSingle: {},
-  playlists: [],
+  playlists: null,
   playlistsSingle: {},
   history: [],
 

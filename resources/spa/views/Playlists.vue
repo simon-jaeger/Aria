@@ -1,5 +1,5 @@
 <template>
-  <div class="main_inner" v-if="ready">
+  <div class="main_inner" v-if="playlists">
     <h1 class="sr">Playlists</h1>
     <div class="items" v-if="playlists.length">
       <PlaylistItem v-for="playlist in playlists"
@@ -19,20 +19,11 @@
   export default {
     name: "Playlists",
     components: {Loading, PlaylistItem},
-    data() {
-      return {
-        ready: false
-      }
-    },
     computed: {
       playlists() {
         return store.playlists
       },
-    },
-    async created() {
-      store.playlists = (await axios.get("/api/playlists")).data
-      this.ready = true
-    },
+    }
   }
 </script>
 

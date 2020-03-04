@@ -2,10 +2,7 @@
   <div class="app">
     <AppHeader/>
     <main class="main">
-      <!-- TODO: make sure playlist etc. get updated -->
-      <KeepAlive include="Series,Playlists,History">
-        <RouterView/>
-      </KeepAlive>
+      <RouterView/>
       <!-- TODO: rm test modal toggle -->
       <button @click="$root.$emit('modal-playlists')" style="margin-top: 2rem;">
         modal
@@ -27,7 +24,13 @@
 
   export default {
     name: "App",
-    components: {ModalPlaylists, PlayerMini, Toast, AppHeader, AppPlayer}
+    components: {ModalPlaylists, PlayerMini, Toast, AppHeader, AppPlayer},
+    created() {
+      // fetch core data
+      axios.get("/api/series").then(({data}) => store.series = data)
+      axios.get("/api/playlists").then(({data}) => store.playlists = data)
+      axios.get("/api/history").then(({data}) => store.history = data)
+    }
   }
 </script>
 

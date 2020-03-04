@@ -21,10 +21,7 @@
       series() {
         return store.series
       },
-    },
-    async created() {
-      store.series = (await axios.get("/api/series")).data
-    },
+    }
   }
 </script>
 
