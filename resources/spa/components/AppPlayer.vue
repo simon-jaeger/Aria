@@ -1,22 +1,42 @@
+<!-- TODO: make dynamic -->
+<!-- TODO: keyboard controls? space for toggle etc? -->
 <template>
   <aside class="player">
-    <!-- TODO: make dynamic -->
+    <!-- TODO: hide when ui done (no controls and styles) -->
+    <audio ref="audio"
+           src="/storage/tracks/demo.mp3"
+           controls
+           @loadedmetadata="onLoadedmetadata"
+           @timeupdate="onTimeupdate"
+           @play="onPlaypause"
+           @pause="onPlaypause"
+           style="width: 100%;height: 2rem;"></audio>
+
     <div class="player_track">
       <div class="player_info">
-        <div class="player_title">Bolero of Fire and Storms</div>
-        <div class="player_sub">Zelda<br>04:50 / 06:06</div>
+        <div class="player_title">Fair Theme</div>
+        <div class="player_sub">
+          RPG Soundtrack Pack<br>
+          {{ currentTime | duration }} / {{ duration | duration }}
+        </div>
         <button class="player_more">more_vert</button>
       </div>
     </div>
 
-    <div class="player_progress">
-      <span class="player_progressfill"></span>
+    <div @click="jump($event)" class="player_progress">
+      <span class="player_progressfill"
+            :style="{width: currentTime / duration * 100 + '%'}"></span>
       <span class="player_progressempty"></span>
     </div>
 
     <div class="player_actions">
       <button class="player_action">skip_previous</button>
-      <button class="player_action is-big">play_circle_filled</button>
+      <button v-if="playing" @click="pause" class="player_action is-big">
+        pause_circle_filled
+      </button>
+      <button v-else @click="play" class="player_action is-big">
+        play_circle_filled
+      </button>
       <button class="player_action">skip_next</button>
     </div>
   </aside>
@@ -24,7 +44,36 @@
 
 <script>
   export default {
-    name: "AppPlayer"
+    name: "AppPlayer",
+    data() {
+      return {
+        // TODO: get duration from api data directly (onloadedmeta not needed?)
+        duration: 0,
+        currentTime: 0,
+        playing: false,
+      }
+    },
+    methods: {
+      play() {
+        this.$refs.audio.play()
+      },
+      pause() {
+        this.$refs.audio.pause()
+      },
+      jump(e) {
+        this.$refs.audio.currentTime =
+          this.$refs.audio.duration * (e.offsetX / e.target.offsetWidth)
+      },
+      onLoadedmetadata() {
+        this.duration = this.$refs.audio.duration
+      },
+      onTimeupdate() {
+        this.currentTime = this.$refs.audio.currentTime
+      },
+      onPlaypause() {
+        this.playing = !this.$refs.audio.paused
+      },
+    },
   }
 </script>
 
@@ -44,10 +93,6 @@
     padding-bottom: 100%;
     background-image: url('/storage/covers/zelda-the-legend-of.jpg');
     background-size: cover;
-  }
-
-  .player_cover {
-    width: 100%;
   }
 
   .player_info {
@@ -96,17 +141,17 @@
   }
 
   .player_progressfill {
-    width: 75%;
     height: 4px;
     flex: 0 0 auto;
     background-color: var(--blue5);
+    pointer-events: none;
   }
 
   .player_progressempty {
-    width: 75%;
     height: 4px;
     flex: 1;
     background-color: var(--white7);
+    pointer-events: none;
   }
 
   .player_actions {

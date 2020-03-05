@@ -74,7 +74,7 @@ class DatabaseSeeder extends Seeder {
         $track = \App\Track::create([
           'order' => $j,
           'title' => $faker->unique()->words(3, true),
-          'duration' => $faker->numberBetween(1, 600) * 1000, // 00:01 - 10:00
+          'duration' => $faker->numberBetween(1, 600), // 00:01 - 10:00
           'file' => 'demo.mp3',
           'series_id' => $i,
         ]);
