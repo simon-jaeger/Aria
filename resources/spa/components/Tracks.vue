@@ -1,15 +1,19 @@
+<!-- TODO: wip, add functionality -->
 <template>
   <ol class="_">
     <li class="track is-header">
-      <div class="track_cell is-m1" v-if="numbered">#</div>
-      <div class="track_cell is-m2 is-m10">Title</div>
-      <div class="track_cell is-m3 is-m20">access_time</div>
-      <div class="track_cell is-m4"></div>
+      <span class="track_cell is-m1" v-if="numbered">#</span>
+      <span class="track_cell is-m2 is-m10">Title</span>
+      <span class="track_cell is-m3 is-m20">access_time</span>
+      <span class="track_cell is-m4"></span>
     </li>
     <li class="track" v-for="(track, i) in tracks" :key="track.id">
-      <div class="track_cell is-m1" v-if="numbered">{{ ++i | zeroPad }}</div>
-      <div class="track_cell is-m2">{{ track.title }}</div>
-      <div class="track_cell is-m3">{{ track.duration | duration }}</div>
+      <button @click="$root.$emit('toast', {msg:'clicked '+i})"
+              style="display: contents;">
+        <span class="track_cell is-m1" v-if="numbered">{{ ++i | zeroPad }}</span>
+        <span class="track_cell is-m2">{{ track.title }}</span>
+        <span class="track_cell is-m3">{{ track.duration | duration }}</span>
+      </button>
       <button class="track_cell is-m4">more_vert</button>
     </li>
   </ol>

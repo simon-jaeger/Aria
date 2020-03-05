@@ -2,6 +2,10 @@
 <template>
   <Modal title="Add to..." name="playlists">
     <div class="checks">
+      <!--
+        TODO: check current playlist of track (sent with event?)
+        maybe fetch playlists from api/tracks when modal opened?
+      -->
       <div v-for="playlist in playlists" :key="playlist.id" class="check">
         <input type="checkbox" :id="playlist.id">
         <label :for="playlist.id" class="check_label">

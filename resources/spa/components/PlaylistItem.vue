@@ -1,16 +1,19 @@
 <template>
-  <RouterLink class="PlaylistItem" :to="'/player/playlists/' + playlist.slug">
-    <!-- TODO: cover based on tracks in playlist -->
-    <div class="PlaylistItem_cover"></div>
-    <div class="PlaylistItem_body">
-      <h2 class="PlaylistItem_title">{{ playlist.title }}</h2>
-      <small class="PlaylistItem_sub">{{ playlist.tracks_count }} Tracks</small>
-      <!-- TODO: del and rename playlist in context -->
-      <button @click.prevent="deletePlaylist(playlist.id)"
-              class="PlaylistItem_action">more_vert
-      </button>
-    </div>
-  </RouterLink>
+  <div style="position: relative;">
+    <RouterLink class="PlaylistItem" :to="'/player/playlists/' + playlist.slug">
+      <!-- TODO: cover based on tracks in playlist -->
+      <div class="PlaylistItem_cover"></div>
+      <div class="PlaylistItem_body">
+        <h2 class="PlaylistItem_title">{{ playlist.title }}</h2>
+        <small class="PlaylistItem_sub">{{ playlist.tracks_count }}
+          Tracks</small>
+      </div>
+    </RouterLink>
+    <!-- TODO: del and rename playlist in context -->
+    <button @click="deletePlaylist(playlist.slug)"
+            class="PlaylistItem_action">more_vert
+    </button>
+  </div>
 </template>
 
 <script>
@@ -18,8 +21,8 @@
     name: "PlaylistItem",
     props: ["playlist"],
     methods: {
-      deletePlaylist(id) {
-        store.deletePlaylist(id)
+      deletePlaylist(slug) {
+        store.deletePlaylist(slug)
       },
     }
   }
@@ -27,6 +30,7 @@
 
 <style scoped>
   .PlaylistItem {
+    display: block;
     overflow: hidden;
     border-radius: 2px;
     background-color: var(--black5);
@@ -39,7 +43,6 @@
   }
 
   .PlaylistItem_body {
-    position: relative;
     padding: 1rem 3rem 1rem 1rem;
   }
 
@@ -59,8 +62,8 @@
 
   .PlaylistItem_action {
     position: absolute;
-    top: 0;
     right: 0;
+    bottom: 1.75rem;
     padding: 1rem;
     font-family: 'Material Icons', sans-serif;
     overflow-wrap: normal;

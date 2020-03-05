@@ -14,7 +14,7 @@
             <i class="button_icon">play_arrow<br></i>
             <span>Play</span>
           </button>
-          <button @click="deletePlaylist(playlist.id)"
+          <button @click="deletePlaylist(playlist.slug)"
                   class="button is-secondary is-icon">
             <span class="button_icon is-alone">more_vert</span>
           </button>
@@ -39,8 +39,8 @@
       },
     },
     methods: {
-      deletePlaylist(id) {
-        store.deletePlaylist(id)
+      deletePlaylist(slug) {
+        store.deletePlaylist(slug)
         this.$router.push("/player/playlists")
       },
     },
