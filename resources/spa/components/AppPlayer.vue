@@ -53,15 +53,9 @@
       }
     },
     computed: {
-      playing() {
-        return store.playing
-      },
-      track() {
-        return store.currentTrack
-      },
-      series() {
-        return store.currentSeries
-      },
+      playing: () => store.playing,
+      track: () => store.currentTrack,
+      series: () => store.currentSeries,
     },
     methods: {
       play() {
@@ -88,8 +82,10 @@
     },
     mounted() {
       this.$root.$on("player-play", e => {
-        store.currentSeries = e.series
-        store.currentTrack = e.track
+        if (e) {
+          store.currentSeries = e.series
+          store.currentTrack = e.track
+        }
         this.play()
       })
       this.$root.$on("player-pause", () => {

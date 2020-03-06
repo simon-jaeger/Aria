@@ -18,9 +18,7 @@
     name: "Series",
     components: {Loading, SeriesItem},
     computed: {
-      series() {
-        return store.series
-      },
+      series: () => store.series,
     }
   }
 </script>

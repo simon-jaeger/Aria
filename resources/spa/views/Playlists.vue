@@ -20,9 +20,7 @@
     name: "Playlists",
     components: {Loading, PlaylistItem},
     computed: {
-      playlists() {
-        return store.playlists
-      },
+      playlists: () => store.playlists,
     }
   }
 </script>

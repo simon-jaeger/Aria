@@ -26,9 +26,7 @@
     name: "History",
     components: {Tracks, Modal},
     computed: {
-      history() {
-        return store.history
-      },
+      history:() => store.history,
     },
     methods:{
       clearHistory() {

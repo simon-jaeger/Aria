@@ -8,15 +8,14 @@
       <span class="track_cell is-m4"></span>
     </li>
     <li class="track"
-        :class="{'is-active': track === activeTrack}"
+        :class="{'is-active': track === currentTrack}"
         v-for="(track, i) in tracks"
         :key="track.id">
-      <!-- TODO: pause if active track clicked? -->
       <button @click="$emit('selection', track)"
               style="display: contents;">
         <span class="track_cell is-m1"
               v-if="numbered">
-          <Equalizer v-if="track === activeTrack" :playing="playing"/>
+          <Equalizer v-if="track === currentTrack" :playing="playing"/>
           <span v-else>{{ ++i | zeroPad }}</span>
         </span>
         <span class="track_cell is-m2">{{ track.title }}</span>
@@ -33,14 +32,11 @@
   export default {
     name: "Tracks",
     components: {Equalizer},
-    props: {tracks: Array, numbered: {type: Boolean, default: true}},
-    computed: {
-      activeTrack() {
-        return store.currentTrack
-      },
-      playing() {
-        return store.playing
-      },
+    props: {
+      numbered: {type: Boolean, default: true},
+      tracks: Array,
+      currentTrack: Object,
+      playing: Boolean,
     },
   }
 </script>
