@@ -3,6 +3,11 @@
   <div class="main_inner is-box">
     <h1>dev</h1>
 
+    <Equalizer playing/>
+    <Equalizer/>
+
+    <div style="height: 2rem;"></div>
+
     <Context>
       <button>context</button>
       <template v-slot:menu>
@@ -35,9 +40,10 @@
 <script>
   import Context from "../components/Context"
   import Modal from "../components/Modal"
+  import Equalizer from "../components/Equalizer"
 
   export default {
-    components: {Modal, Context}
+    components: {Equalizer, Modal, Context}
   }
 </script>
 

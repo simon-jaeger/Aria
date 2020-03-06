@@ -11,8 +11,14 @@
           {{ series.tracks | map(x => x.duration) | sum | duration }}
         </small>
         <div class="actions">
-          <button class="button">
-            <i class="button_icon">play_arrow<br></i>
+          <button v-if="active" @click="$root.$emit('player-pause')"
+                  class="button">
+            <i class="button_icon">pause</i>
+            <span>Pause</span>
+          </button>
+          <button v-else @click="play(series, series.tracks[0])"
+                  class="button">
+            <i class="button_icon">play_arrow</i>
             <span>Play</span>
           </button>
           <button class="button is-secondary is-icon">
@@ -22,7 +28,7 @@
       </div>
     </header>
 
-    <Tracks :tracks="series.tracks"/>
+    <Tracks :tracks="series.tracks" @selection="play(series, $event)"/>
   </div>
 </template>
 
@@ -37,6 +43,14 @@
       series() {
         return store.seriesSingle[this.$route.params.slug]
       },
+      active() {
+        return store.playing && store.currentSeries === this.series
+      },
+    },
+    methods: {
+      play(series, track) {
+        this.$root.$emit('player-play', {series, track})
+      }
     },
     async beforeRouteEnter(to, from, next) {
       if (!store.seriesSingle[to.params.slug]) {
@@ -76,8 +90,8 @@
 
   .actions {
     display: grid;
+    grid-template-columns: 7rem auto;
     justify-content: start;
-    grid-auto-flow: column;
     grid-gap: 1rem;
   }
 

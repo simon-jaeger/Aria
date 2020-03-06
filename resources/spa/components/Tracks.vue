@@ -7,10 +7,18 @@
       <span class="track_cell is-m3 is-m20">access_time</span>
       <span class="track_cell is-m4"></span>
     </li>
-    <li class="track" v-for="(track, i) in tracks" :key="track.id">
-      <button @click="$root.$emit('toast', {msg:'clicked '+i})"
+    <li class="track"
+        :class="{'is-active': track === activeTrack}"
+        v-for="(track, i) in tracks"
+        :key="track.id">
+      <!-- TODO: pause if active track clicked? -->
+      <button @click="$emit('selection', track)"
               style="display: contents;">
-        <span class="track_cell is-m1" v-if="numbered">{{ ++i | zeroPad }}</span>
+        <span class="track_cell is-m1"
+              v-if="numbered">
+          <Equalizer v-if="track === activeTrack" :playing="playing"/>
+          <span v-else>{{ ++i | zeroPad }}</span>
+        </span>
         <span class="track_cell is-m2">{{ track.title }}</span>
         <span class="track_cell is-m3">{{ track.duration | duration }}</span>
       </button>
@@ -20,9 +28,20 @@
 </template>
 
 <script>
+  import Equalizer from "./Equalizer"
+
   export default {
     name: "Tracks",
-    props: {tracks: Array, numbered: {type: Boolean, default: true}}
+    components: {Equalizer},
+    props: {tracks: Array, numbered: {type: Boolean, default: true}},
+    computed: {
+      activeTrack() {
+        return store.currentTrack
+      },
+      playing() {
+        return store.playing
+      },
+    },
   }
 </script>
 
@@ -91,7 +110,7 @@
 
   @media screen and (max-width: 480px) {
     .track {
-      padding-right: 3rem;
+      padding-right: 2.5rem;
       flex-wrap: wrap;
     }
     .track_cell.is-m1 {
@@ -102,11 +121,12 @@
       flex: 1 0 100%;
     }
     .track_cell.is-m3 {
-      width: auto;
+      width: 100%;
       padding-top: 0.25rem;
       padding-bottom: 0.5rem;
       padding-left: 0.75rem;
       font-size: 0.875rem;
+      text-align: left;
     }
     .track_cell.is-m4 {
       position: absolute;

@@ -222,6 +222,7 @@
     display: flex;
     padding: 0.75rem 1.5rem;
     align-items: center;
+    justify-content: center;
     border-radius: 2px;
     background-color: var(--blue6);
     font-weight: 500;

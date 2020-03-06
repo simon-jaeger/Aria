@@ -5,6 +5,10 @@ export default {
   playlistsSingle: {},
   history: [],
 
+  playing: false,
+  currentSeries: null,
+  currentTrack: null,
+
   // TODO: wip, also update database etc.
   deletePlaylist(slug) {
     delete this.playlistsSingle[slug]

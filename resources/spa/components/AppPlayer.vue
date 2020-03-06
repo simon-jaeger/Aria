@@ -50,15 +50,27 @@
         // TODO: get duration from api data directly (onloadedmeta not needed?)
         duration: 0,
         currentTime: 0,
-        playing: false,
       }
+    },
+    computed: {
+      playing() {
+        return store.playing
+      },
+      track() {
+        return store.currentTrack
+      },
+      series() {
+        return store.currentSeries
+      },
     },
     methods: {
       play() {
         this.$refs.audio.play()
+        store.playing = true
       },
       pause() {
         this.$refs.audio.pause()
+        store.playing = false
       },
       jump(e) {
         this.$refs.audio.currentTime =
@@ -71,9 +83,19 @@
         this.currentTime = this.$refs.audio.currentTime
       },
       onPlaypause() {
-        this.playing = !this.$refs.audio.paused
+        store.playing = !this.$refs.audio.paused
       },
     },
+    mounted() {
+      this.$root.$on("player-play", e => {
+        store.currentSeries = e.series
+        store.currentTrack = e.track
+        this.play()
+      })
+      this.$root.$on("player-pause", () => {
+        this.pause()
+      })
+    }
   }
 </script>
 
