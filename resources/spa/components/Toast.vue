@@ -40,13 +40,14 @@
     right: auto;
     bottom: 1rem;
     left: 16rem;
+    margin-right: 256px;
     display: flex;
     border-radius: 2px;
     background-color: var(--black3);
     box-shadow: var(--shadow2);
     transition: all 0.4s;
     visibility: hidden;
-    transform: translateY(5rem);
+    transform: translateY(calc(100% + 2rem));
   }
   .toast.is-visible {
     visibility: visible;
