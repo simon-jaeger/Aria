@@ -1,12 +1,13 @@
 <!-- TODO: make dynamic -->
+<!-- TODO: auto play next song -->
+<!-- TODO: cta when no track selected yet -->
 <!-- TODO: keyboard controls? space for toggle etc? -->
 <template>
   <aside class="player">
     <!-- TODO: hide when ui done (no controls and styles) -->
     <audio ref="audio"
-           src="/storage/tracks/demo.mp3"
+           :src="track ? '/storage/tracks/' + track.file : ''"
            controls
-           @loadedmetadata="onLoadedmetadata"
            @timeupdate="onTimeupdate"
            @play="onPlaypause"
            @pause="onPlaypause"
@@ -14,10 +15,11 @@
 
     <div class="player_track">
       <div class="player_info">
-        <div class="player_title">Fair Theme</div>
+        <div class="player_title">{{ track ? track.title : "" }}</div>
         <div class="player_sub">
-          RPG Soundtrack Pack<br>
-          {{ currentTime | duration }} / {{ duration | duration }}
+          {{ series ? series.title_short : "" }}<br>
+          {{ currentTime | duration }} / {{ (track ? track.duration : 0) |
+          duration }}
         </div>
         <button class="player_more">more_vert</button>
       </div>
@@ -25,7 +27,8 @@
 
     <div @click="jump($event)" class="player_progress">
       <span class="player_progressfill"
-            :style="{width: currentTime / duration * 100 + '%'}"></span>
+            v-if="track"
+            :style="{width: currentTime / track.duration * 100 + '%'}"></span>
       <span class="player_progressempty"></span>
     </div>
 
@@ -43,12 +46,12 @@
 </template>
 
 <script>
+  import Vue from "vue"
+
   export default {
     name: "AppPlayer",
     data() {
       return {
-        // TODO: get duration from api data directly (onloadedmeta not needed?)
-        duration: 0,
         currentTime: 0,
       }
     },
@@ -70,9 +73,6 @@
         this.$refs.audio.currentTime =
           this.$refs.audio.duration * (e.offsetX / e.target.offsetWidth)
       },
-      onLoadedmetadata() {
-        this.duration = this.$refs.audio.duration
-      },
       onTimeupdate() {
         this.currentTime = this.$refs.audio.currentTime
       },
@@ -86,7 +86,7 @@
           store.currentSeries = e.series
           store.currentTrack = e.track
         }
-        this.play()
+        Vue.nextTick(() => this.play())
       })
       this.$root.$on("player-pause", () => {
         this.pause()

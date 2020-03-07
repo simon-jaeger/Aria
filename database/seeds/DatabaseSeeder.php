@@ -74,8 +74,9 @@ class DatabaseSeeder extends Seeder {
         $track = \App\Track::create([
           'order' => $j,
           'title' => $faker->unique()->words(3, true),
-          'duration' => $faker->numberBetween(1, 600), // 00:01 - 10:00
-          'file' => 'demo.mp3',
+//          'duration' => $faker->numberBetween(1, 600), // 00:01 - 10:00
+          'duration' => $j % 2 === 0 ? 44 : 51,
+          'file' => ($j % 2 === 0 ? 'fair-theme.mp3' : 'field.mp3') . "#{$i}{$j}",
           'series_id' => $i,
         ]);
         if (mt_rand(0, 1)) { // 50% chance to add to a random playlist
