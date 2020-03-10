@@ -11,15 +11,13 @@
           {{ series.tracks | map(x => x.duration) | sum | duration }}
         </small>
         <div class="actions">
-          <button v-if="active"
-                  @click="pause"
-                  class="button">
+          <!--
+          <button class="button">
             <i class="button_icon">pause</i>
             <span>Pause</span>
           </button>
-          <button v-else
-                  @click="resume"
-                  class="button">
+          -->
+          <button class="button">
             <i class="button_icon">play_arrow</i>
             <span>Play</span>
           </button>
@@ -31,9 +29,9 @@
     </header>
 
     <Tracks :tracks="series.tracks"
-            :playing="playing"
-            :current-track="currentTrack"
-            @selection="play(series, $event)"/>
+            :playing="false"
+            :current-track="null"
+            @selection=""/>
   </div>
 </template>
 
@@ -48,34 +46,8 @@
       series() {
         return store.seriesSingle[this.$route.params.slug]
       },
-      active() {
-        return this.playing && this.currentSeries === this.series
-      },
-
-      playing: () => store.playing,
-      currentTrack: () => store.currentTrack,
-      currentSeries: () => store.currentSeries,
     },
-    methods: {
-      play(series, track) {
-        if (this.playing && track === this.currentTrack) {
-          return this.pause()
-        }
-        this.$root.$emit("player-play", {series, track})
-      },
-      pause() {
-        this.$root.$emit("player-pause")
-      },
-      resume() {
-        if (this.series === this.currentSeries) {
-          return this.$root.$emit("player-play")
-        }
-        this.$root.$emit("player-play", {
-          series: this.series,
-          track: this.series.tracks[0]
-        })
-      },
-    },
+    methods: {},
     async beforeRouteEnter(to, from, next) {
       if (!store.seriesSingle[to.params.slug]) {
         Vue.set(

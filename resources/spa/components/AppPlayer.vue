@@ -4,40 +4,31 @@
 <!-- TODO: keyboard controls? space for toggle etc? -->
 <template>
   <aside class="player">
-    <!-- TODO: hide when ui done (no controls and styles) -->
-    <audio ref="audio"
-           :src="track ? '/storage/tracks/' + track.file : ''"
-           controls
-           @timeupdate="onTimeupdate"
-           @play="onPlaypause"
-           @pause="onPlaypause"
-           style="width: 100%;height: 2rem;"></audio>
-
     <div class="player_track">
       <div class="player_info">
-        <div class="player_title">{{ track ? track.title : "" }}</div>
+        <div class="player_title">track title</div>
         <div class="player_sub">
-          {{ series ? series.title_short : "" }}<br>
-          {{ currentTime | duration }} / {{ (track ? track.duration : 0) |
-          duration }}
+          track_short<br>
+          00:00 / 00:44
         </div>
         <button class="player_more">more_vert</button>
       </div>
     </div>
 
-    <div @click="jump($event)" class="player_progress">
+    <div class="player_progress">
       <span class="player_progressfill"
-            v-if="track"
-            :style="{width: currentTime / track.duration * 100 + '%'}"></span>
+            :style="{width: '25%'}"></span>
       <span class="player_progressempty"></span>
     </div>
 
     <div class="player_actions">
       <button class="player_action">skip_previous</button>
-      <button v-if="playing" @click="pause" class="player_action is-big">
+      <!--
+      <button class="player_action is-big">
         pause_circle_filled
       </button>
-      <button v-else @click="play" class="player_action is-big">
+      -->
+      <button class="player_action is-big">
         play_circle_filled
       </button>
       <button class="player_action">skip_next</button>
@@ -51,46 +42,11 @@
   export default {
     name: "AppPlayer",
     data() {
-      return {
-        currentTime: 0,
-      }
+      return {}
     },
-    computed: {
-      playing: () => store.playing,
-      track: () => store.currentTrack,
-      series: () => store.currentSeries,
-    },
-    methods: {
-      play() {
-        this.$refs.audio.play()
-        store.playing = true
-      },
-      pause() {
-        this.$refs.audio.pause()
-        store.playing = false
-      },
-      jump(e) {
-        this.$refs.audio.currentTime =
-          this.$refs.audio.duration * (e.offsetX / e.target.offsetWidth)
-      },
-      onTimeupdate() {
-        this.currentTime = this.$refs.audio.currentTime
-      },
-      onPlaypause() {
-        store.playing = !this.$refs.audio.paused
-      },
-    },
+    computed: {},
+    methods: {},
     mounted() {
-      this.$root.$on("player-play", e => {
-        if (e) {
-          store.currentSeries = e.series
-          store.currentTrack = e.track
-        }
-        Vue.nextTick(() => this.play())
-      })
-      this.$root.$on("player-pause", () => {
-        this.pause()
-      })
     }
   }
 </script>
