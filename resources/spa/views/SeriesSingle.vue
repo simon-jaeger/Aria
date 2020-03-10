@@ -10,21 +10,16 @@
           {{ series.tracks.length }} Tracks &nbsp;•&nbsp;
           {{ series.tracks | map(x => x.duration) | sum | duration }}
         </small>
-        <div class="actions">
-          <!--
-          <button class="button">
+          <button v-if="playing && series === currentSeries"
+                  @click="pause"
+                  class="button action">
             <i class="button_icon">pause</i>
             <span>Pause</span>
           </button>
-          -->
-          <button @click="play" class="button">
+          <button v-else @click="playSeries" class="button action">
             <i class="button_icon">play_arrow</i>
             <span>Play</span>
           </button>
-          <button class="button is-secondary is-icon">
-            <span class="button_icon is-alone">favorite</span>
-          </button>
-        </div>
       </div>
     </header>
 
@@ -46,19 +41,20 @@
       series() {
         return store.seriesSingle[this.$route.params.slug]
       },
-      playing:() => player.playing,
+      playing: () => player.playing,
+      currentSeries: () => player.series,
       currentTrack: () => player.track,
     },
     methods: {
-      play() {
-        player.track = this.series.tracks[0]
-        player.play()
+      playSeries() {
+        if (this.series === player.series) player.play()
+        else player.play(this.series, this.series.tracks[0])
       },
       onSelection(e) {
-        if (e.track === player.track) return player.toggle()
-        player.setTrack(e.track)
-        player.play()
+        if (e.track === player.track) player.toggle()
+        else player.play(this.series, e.track)
       },
+      pause: () => player.pause()
     },
     async beforeRouteEnter(to, from, next) {
       if (!store.seriesSingle[to.params.slug]) {
@@ -96,11 +92,8 @@
     color: var(--white6);
   }
 
-  .actions {
-    display: grid;
-    grid-template-columns: 7rem auto;
-    justify-content: start;
-    grid-gap: 1rem;
+  .action {
+    width: 7rem;
   }
 
   @media screen and (max-width: 480px) {

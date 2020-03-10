@@ -15,7 +15,7 @@
     </main>
     <AppPlayer/>
     <PlayerMini/>
-    <Toast>Added to playlist</Toast>
+    <Toast/>
     <ModalPlaylists/>
   </div>
 </template>

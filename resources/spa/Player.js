@@ -1,6 +1,5 @@
 class Player {
-  // TODO: rm default mp3
-  audio = new Audio("/storage/tracks/field.mp3#61")
+  audio = new Audio()
   playing = false
   currentTime = 0
   duration = 0
@@ -22,7 +21,14 @@ class Player {
     })
   }
 
-  play() {
+  play(series, track) {
+    if (series) {
+      this.series = series
+    }
+    if (track) {
+      this.track = track
+      this.audio.src = "/storage/tracks/" + track.file
+    }
     this.audio.play()
   }
 
@@ -37,11 +43,6 @@ class Player {
 
   seek(seconds) {
     this.audio.currentTime = seconds
-  }
-
-  setTrack(track) {
-    this.track = track
-    this.audio.src = "/storage/tracks/" + track.file
   }
 }
 

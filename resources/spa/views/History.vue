@@ -26,12 +26,10 @@
     name: "History",
     components: {Tracks, Modal},
     computed: {
-      history:() => store.history,
+      history: () => store.history,
     },
-    methods:{
-      clearHistory() {
-        store.clearHistory()
-      },
+    methods: {
+      clearHistory: () => store.clearHistory()
     }
   }
 </script>

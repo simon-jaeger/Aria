@@ -4,33 +4,37 @@
 <!-- TODO: keyboard controls? space for toggle etc? -->
 <template>
   <aside class="player">
-    <div class="player_track">
-      <div class="player_info">
-        <div class="player_title">track title</div>
-        <div class="player_sub">
-          track_short<br>
-          {{ currentTime | duration }} / {{ duration | duration }}
+    <template v-if="track">
+      <div class="player_track">
+        <div class="player_info">
+          <div class="player_title">{{ track.title }}</div>
+          <div class="player_sub">
+            {{ series.title_short }}<br>
+            {{ currentTime | duration }} / {{ duration | duration }}
+          </div>
+          <button class="player_more">more_vert</button>
         </div>
-        <button class="player_more">more_vert</button>
       </div>
-    </div>
 
-    <div @click="jump($event)" class="player_progress">
+      <div @click="jump($event)" class="player_progress">
       <span class="player_progressfill"
             :style="{width: currentTime / duration * 100 + '%'}"></span>
-      <span class="player_progressempty"></span>
-    </div>
+        <span class="player_progressempty"></span>
+      </div>
 
-    <div class="player_actions">
-      <button class="player_action">skip_previous</button>
-      <button v-if="playing" @click="pause" class="player_action is-big">
-        pause_circle_filled
-      </button>
-      <button v-else @click="play" class="player_action is-big">
-        play_circle_filled
-      </button>
-      <button class="player_action">skip_next</button>
-    </div>
+      <div class="player_actions">
+        <button class="player_action">skip_previous</button>
+        <button v-if="playing" @click="pause" class="player_action is-big">
+          pause_circle_filled
+        </button>
+        <button v-else @click="play" class="player_action is-big">
+          play_circle_filled
+        </button>
+        <button class="player_action">skip_next</button>
+      </div>
+    </template>
+    <!-- TODO: prettier no track msg with cta -->
+    <template v-else>no track</template>
   </aside>
 </template>
 
@@ -41,12 +45,13 @@
       playing: () => player.playing,
       currentTime: () => player.currentTime,
       duration: () => player.duration,
+      series: () => player.series,
+      track: () => player.track,
     },
     methods: {
       jump(e) {
         player.seek(player.duration * (e.offsetX / e.target.offsetWidth))
       },
-
       play: () => player.play(),
       pause: () => player.pause(),
     },

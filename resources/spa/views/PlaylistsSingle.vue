@@ -83,8 +83,8 @@
 
   .actions {
     display: grid;
+    grid-template-columns: 7rem auto;
     justify-content: start;
-    grid-auto-flow: column;
     grid-gap: 1rem;
   }
 
