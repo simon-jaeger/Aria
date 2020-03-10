@@ -9,7 +9,7 @@
 <script>
   export default {
     name: "Equalizer",
-    props: {playing: {type: Boolean}}
+    props: {playing: Boolean}
   }
 </script>
 
