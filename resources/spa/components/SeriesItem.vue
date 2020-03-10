@@ -1,29 +1,18 @@
 <template>
-  <div style="position: relative;">
-    <RouterLink class="seriesItem" :to="'/player/series/' + series.slug">
-      <div class="seriesItem_cover"
-           :style="{backgroundImage: `url(/storage/covers/${series.cover}`}"></div>
-      <div class="seriesItem_body">
-        <h2 class="seriesItem_title">{{ series.title }}</h2>
-        <small class="seriesItem_sub">{{ series.tracks_count }} Tracks</small>
-      </div>
-    </RouterLink>
-    <!-- TODO: fav dynamic and toggable. also, order favs first. -->
-    <button @click="foo" class="seriesItem_action is-hearted">
-      favorite
-    </button>
-  </div>
+  <RouterLink class="seriesItem" :to="'/player/series/' + series.slug">
+    <div class="seriesItem_cover"
+         :style="{backgroundImage: `url(/storage/covers/${series.cover}`}"></div>
+    <div class="seriesItem_body">
+      <h2 class="seriesItem_title">{{ series.title }}</h2>
+      <small class="seriesItem_sub">{{ series.tracks_count }} Tracks</small>
+    </div>
+  </RouterLink>
 </template>
 
 <script>
   export default {
     name: "SeriesItem",
     props: ["series"],
-    methods: {
-      foo() {
-        alert("heart clicked")
-      }
-    }
   }
 </script>
 
@@ -42,7 +31,7 @@
   }
 
   .seriesItem_body {
-    padding: 1rem 3rem 1rem 1rem;
+    padding: 1rem;
   }
 
   .seriesItem_title {
@@ -57,25 +46,6 @@
   .seriesItem_sub {
     color: var(--white6);
     font-size: 0.875rem;
-  }
-
-  .seriesItem_action {
-    position: absolute;
-    right: 0;
-    bottom: 1.75rem;
-    padding: 1rem;
-    font-family: 'Material Icons', sans-serif;
-    overflow-wrap: normal;
-    word-break: normal;
-    color: var(--white6);
-    font-weight: 400;
-  }
-  .seriesItem_action.is-hearted {
-    color: var(--pink5);
-  }
-  .seriesItem_action:hover,
-  .seriesItem_action:focus {
-    color: var(--white5);
   }
 
   @media screen and (max-width: 480px) {

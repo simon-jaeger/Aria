@@ -1,6 +1,6 @@
 <template>
-  <div class="modal" :class="{'is-visible': open}">
-    <button @click="close" class="modal_cancel"></button>
+  <div class="modal" :class="{'is-open': open}">
+    <button @click="close" class="modal_background"></button>
     <div class="modal_inner">
       <header class="modal_header">
         <h2 class="modal_title">{{ title }}</h2>
@@ -54,20 +54,19 @@
     padding: 1rem;
     align-items: center;
     justify-content: center;
-    background-color: var(--blackA);
-    box-shadow: var(--shadow2);
     transition: all 0.3s;
     opacity: 0;
   }
-  .modal.is-visible {
+  .modal.is-open {
     visibility: visible;
     opacity: 1;
   }
 
-  .modal_cancel {
+  .modal_background {
     position: absolute;
     width: 100%;
     height: 100%;
+    background-color: var(--blackA);
     cursor: default;
   }
 
@@ -76,6 +75,7 @@
     overflow: hidden;
     width: 480px;
     border-radius: 4px;
+    box-shadow: var(--shadow2);
     transition: all 0.3s;
     transform: translateY(-1rem);
   }
