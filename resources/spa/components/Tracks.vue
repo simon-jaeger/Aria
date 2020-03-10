@@ -11,7 +11,7 @@
         :class="{'is-active': track === currentTrack}"
         v-for="(track, i) in tracks"
         :key="track.id">
-      <button @click="$emit('selection', track)"
+      <button @click="$emit('selection', {track})"
               style="display: contents;">
         <span class="track_cell is-m1"
               v-if="numbered">

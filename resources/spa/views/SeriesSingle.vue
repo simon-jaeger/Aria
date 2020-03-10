@@ -17,7 +17,7 @@
             <span>Pause</span>
           </button>
           -->
-          <button class="button">
+          <button @click="play" class="button">
             <i class="button_icon">play_arrow</i>
             <span>Play</span>
           </button>
@@ -29,9 +29,9 @@
     </header>
 
     <Tracks :tracks="series.tracks"
-            :playing="false"
-            :current-track="null"
-            @selection=""/>
+            :playing="playing"
+            :current-track="currentTrack"
+            @selection="onSelection($event)"/>
   </div>
 </template>
 
@@ -46,8 +46,20 @@
       series() {
         return store.seriesSingle[this.$route.params.slug]
       },
+      playing:() => player.playing,
+      currentTrack: () => player.track,
     },
-    methods: {},
+    methods: {
+      play() {
+        player.track = this.series.tracks[0]
+        player.play()
+      },
+      onSelection(e) {
+        if (e.track === player.track) return player.toggle()
+        player.setTrack(e.track)
+        player.play()
+      },
+    },
     async beforeRouteEnter(to, from, next) {
       if (!store.seriesSingle[to.params.slug]) {
         Vue.set(

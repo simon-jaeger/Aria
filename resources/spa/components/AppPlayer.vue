@@ -9,26 +9,24 @@
         <div class="player_title">track title</div>
         <div class="player_sub">
           track_short<br>
-          00:00 / 00:44
+          {{ currentTime | duration }} / {{ duration | duration }}
         </div>
         <button class="player_more">more_vert</button>
       </div>
     </div>
 
-    <div class="player_progress">
+    <div @click="jump($event)" class="player_progress">
       <span class="player_progressfill"
-            :style="{width: '25%'}"></span>
+            :style="{width: currentTime / duration * 100 + '%'}"></span>
       <span class="player_progressempty"></span>
     </div>
 
     <div class="player_actions">
       <button class="player_action">skip_previous</button>
-      <!--
-      <button class="player_action is-big">
+      <button v-if="playing" @click="pause" class="player_action is-big">
         pause_circle_filled
       </button>
-      -->
-      <button class="player_action is-big">
+      <button v-else @click="play" class="player_action is-big">
         play_circle_filled
       </button>
       <button class="player_action">skip_next</button>
@@ -37,17 +35,21 @@
 </template>
 
 <script>
-  import Vue from "vue"
-
   export default {
     name: "AppPlayer",
-    data() {
-      return {}
+    computed: {
+      playing: () => player.playing,
+      currentTime: () => player.currentTime,
+      duration: () => player.duration,
     },
-    computed: {},
-    methods: {},
-    mounted() {
-    }
+    methods: {
+      jump(e) {
+        player.seek(player.duration * (e.offsetX / e.target.offsetWidth))
+      },
+
+      play: () => player.play(),
+      pause: () => player.pause(),
+    },
   }
 </script>
 
