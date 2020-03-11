@@ -1,5 +1,5 @@
 <template>
-  <div class="main_inner is-box">
+  <div class="main_inner is-box" v-if="series">
     <header class="header">
       <img :src="'/storage/covers/' + series.cover"
            :alt="series.title"
@@ -10,16 +10,16 @@
           {{ series.tracks.length }} Tracks &nbsp;•&nbsp;
           {{ series.tracks | map(x => x.duration) | sum | duration }}
         </small>
-          <button v-if="playing && series === currentSeries"
-                  @click="pause"
-                  class="button action">
-            <i class="button_icon">pause</i>
-            <span>Pause</span>
-          </button>
-          <button v-else @click="playSeries" class="button action">
-            <i class="button_icon">play_arrow</i>
-            <span>Play</span>
-          </button>
+        <button v-if="playing && series === currentSeries"
+                @click="pause"
+                class="button action">
+          <i class="button_icon">pause</i>
+          <span>Pause</span>
+        </button>
+        <button v-else @click="playSeries" class="button action">
+          <i class="button_icon">play_arrow</i>
+          <span>Play</span>
+        </button>
       </div>
     </header>
 
@@ -31,23 +31,24 @@
 </template>
 
 <script>
-  import Vue from "vue"
   import Tracks from "../components/Tracks"
 
   export default {
     name: "SeriesSingle",
     components: {Tracks},
+    data() {
+      return {
+        series: null
+      }
+    },
     computed: {
-      series() {
-        return store.seriesSingle[this.$route.params.slug]
-      },
       playing: () => player.playing,
-      currentSeries: () => player.series,
+      currentSeries: () => player.seriesOrPlaylist,
       currentTrack: () => player.track,
     },
     methods: {
       playSeries() {
-        if (this.series === player.series) player.play()
+        if (this.series === player.seriesOrPlaylist) player.play()
         else player.play(this.series, this.series.tracks[0])
       },
       onSelection(e) {
@@ -56,15 +57,8 @@
       },
       pause: () => player.pause()
     },
-    async beforeRouteEnter(to, from, next) {
-      if (!store.seriesSingle[to.params.slug]) {
-        Vue.set(
-          store.seriesSingle,
-          to.params.slug,
-          (await axios.get("/api/series/" + to.params.slug)).data
-        )
-      }
-      next()
+    created() {
+      this.series = store.getSeries(this.$route.params.slug)
     }
   }
 </script>

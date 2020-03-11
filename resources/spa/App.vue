@@ -1,5 +1,5 @@
 <template>
-  <div class="app">
+  <div v-if="ready" class="app">
     <AppHeader/>
     <main class="main">
       <RouterView/>
@@ -18,6 +18,7 @@
     <Toast/>
     <ModalPlaylists/>
   </div>
+  <Loading v-else/>
 </template>
 
 <script>
@@ -26,15 +27,25 @@
   import Toast from "./components/Toast"
   import PlayerMini from "./components/PlayerMini"
   import ModalPlaylists from "./components/ModalPlaylists"
+  import Loading from "./components/Loading"
 
   export default {
     name: "App",
-    components: {ModalPlaylists, PlayerMini, Toast, AppHeader, AppPlayer},
+    components: {
+      Loading,
+      ModalPlaylists, PlayerMini, Toast, AppHeader, AppPlayer},
+    data() {
+      return {
+        ready: false
+      }
+    },
     created() {
       // fetch core data
-      axios.get("/api/series").then(({data}) => store.series = data)
-      axios.get("/api/playlists").then(({data}) => store.playlists = data)
-      axios.get("/api/history").then(({data}) => store.history = data)
+      Promise.all([
+        axios.get("/api/series").then(({data}) => store.series = data),
+        axios.get("/api/playlists").then(({data}) => store.playlists = data),
+        axios.get("/api/history").then(({data}) => store.history = data),
+      ]).then(() => this.ready = true)
     }
   }
 </script>

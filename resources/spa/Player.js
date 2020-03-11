@@ -3,7 +3,7 @@ class Player {
   playing = false
   currentTime = 0
   duration = 0
-  series = null
+  seriesOrPlaylist = null
   track = null
 
   constructor() {
@@ -19,11 +19,20 @@ class Player {
     this.audio.addEventListener("durationchange", () => {
       this.duration = this.audio.duration
     })
+    this.audio.addEventListener("ended", () => {
+      // TODO: currently just loops, may change that, might be fine tho
+      this.playing = true
+      if (this.indexCurrent === this.seriesOrPlaylist.tracks.length - 1) {
+        this.play(null, this.seriesOrPlaylist.tracks[0])
+      } else {
+        this.next()
+      }
+    })
   }
 
-  play(series, track) {
-    if (series) {
-      this.series = series
+  play(seriesOrPlaylist, track) {
+    if (seriesOrPlaylist) {
+      this.seriesOrPlaylist = seriesOrPlaylist
     }
     if (track) {
       this.track = track
@@ -43,6 +52,20 @@ class Player {
 
   seek(seconds) {
     this.audio.currentTime = seconds
+  }
+
+  next() {
+    const nextTrack = this.seriesOrPlaylist.tracks[this.indexCurrent + 1]
+    this.play(null, nextTrack)
+  }
+
+  prev() {
+    const prevTrack = this.seriesOrPlaylist.tracks[this.indexCurrent - 1]
+    this.play(null, prevTrack)
+  }
+
+  get indexCurrent() {
+    return this.seriesOrPlaylist.tracks.indexOf(this.track)
   }
 }
 

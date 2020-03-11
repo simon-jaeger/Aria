@@ -1,5 +1,5 @@
 <template>
-  <div class="main_inner" v-if="playlists">
+  <div class="main_inner">
     <h1 class="sr">Playlists</h1>
     <div class="items" v-if="playlists.length">
       <PlaylistItem v-for="playlist in playlists"
@@ -9,16 +9,14 @@
     <!-- TODO: prettier no playlists notice, cta to create first? -->
     <div v-else>No playlists</div>
   </div>
-  <Loading v-else/>
 </template>
 
 <script>
   import PlaylistItem from "../components/PlaylistItem"
-  import Loading from "../components/Loading"
 
   export default {
     name: "Playlists",
-    components: {Loading, PlaylistItem},
+    components: {PlaylistItem},
     computed: {
       playlists: () => store.playlists,
     }

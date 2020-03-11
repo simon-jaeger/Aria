@@ -1,5 +1,5 @@
 <template>
-  <div class="main_inner" v-if="series.length">
+  <div class="main_inner">
     <h1 class="sr">Series</h1>
     <div class="items">
       <SeriesItem v-for="aSeries in series"
@@ -7,16 +7,14 @@
                   :series="aSeries"/>
     </div>
   </div>
-  <Loading v-else/>
 </template>
 
 <script>
   import SeriesItem from "../components/SeriesItem"
-  import Loading from "../components/Loading"
 
   export default {
     name: "Series",
-    components: {Loading, SeriesItem},
+    components: {SeriesItem},
     computed: {
       series: () => store.series,
     }

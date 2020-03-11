@@ -4,7 +4,7 @@
          :style="{backgroundImage: `url(/storage/covers/${series.cover}`}"></div>
     <div class="seriesItem_body">
       <h2 class="seriesItem_title">{{ series.title }}</h2>
-      <small class="seriesItem_sub">{{ series.tracks_count }} Tracks</small>
+      <small class="seriesItem_sub">{{ series.tracks.length }} Tracks</small>
     </div>
   </RouterLink>
 </template>

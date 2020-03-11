@@ -103,7 +103,6 @@
     }
   </style>
   @stack('styles')
-  <script src="/js/global.js" defer></script>
   @stack('scripts')
 </head>
 <body>

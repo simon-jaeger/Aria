@@ -5,13 +5,15 @@
       <div class="PlaylistItem_cover"></div>
       <div class="PlaylistItem_body">
         <h2 class="PlaylistItem_title">{{ playlist.title }}</h2>
-        <small class="PlaylistItem_sub">{{ playlist.tracks_count }}
-          Tracks</small>
+        <small class="PlaylistItem_sub">
+          {{ playlist.tracks.length }} Tracks
+        </small>
       </div>
     </RouterLink>
     <!-- TODO: del and rename playlist in context -->
     <button @click="deletePlaylist(playlist.slug)"
-            class="PlaylistItem_action">more_vert
+            class="PlaylistItem_action">
+      more_vert
     </button>
   </div>
 </template>
@@ -21,9 +23,7 @@
     name: "PlaylistItem",
     props: ["playlist"],
     methods: {
-      deletePlaylist(slug) {
-        store.deletePlaylist(slug)
-      },
+      deletePlaylist: slug => store.deletePlaylist(slug)
     }
   }
 </script>

@@ -8,6 +8,7 @@ import "./filters"
 
 window.store = store
 window.player = player
+window.router = router
 window.axios = axios
 window.root = new Vue({
   data: {store, player},

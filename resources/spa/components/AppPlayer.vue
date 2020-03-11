@@ -9,8 +9,9 @@
         <div class="player_info">
           <div class="player_title">{{ track.title }}</div>
           <div class="player_sub">
-            {{ series.title_short }}<br>
-            {{ currentTime | duration }} / {{ duration | duration }}
+            <div class="player_seriesOrPlaylist">{{ seriesOrPlaylist.title }}
+            </div>
+            <div>{{ currentTime | duration }} / {{ duration | duration }}</div>
           </div>
           <button class="player_more">more_vert</button>
         </div>
@@ -23,14 +24,20 @@
       </div>
 
       <div class="player_actions">
-        <button class="player_action">skip_previous</button>
+        <button @click="prev"
+                :disabled="indexCurrent === 0"
+                class="player_action">skip_previous
+        </button>
         <button v-if="playing" @click="pause" class="player_action is-big">
           pause_circle_filled
         </button>
         <button v-else @click="play" class="player_action is-big">
           play_circle_filled
         </button>
-        <button class="player_action">skip_next</button>
+        <button @click="next"
+                :disabled="indexCurrent === seriesOrPlaylist.tracks.length - 1"
+                class="player_action">skip_next
+        </button>
       </div>
     </template>
     <!-- TODO: prettier no track msg with cta -->
@@ -45,8 +52,9 @@
       playing: () => player.playing,
       currentTime: () => player.currentTime,
       duration: () => player.duration,
-      series: () => player.series,
+      seriesOrPlaylist: () => player.seriesOrPlaylist,
       track: () => player.track,
+      indexCurrent: () => player.indexCurrent,
     },
     methods: {
       jump(e) {
@@ -54,6 +62,8 @@
       },
       play: () => player.play(),
       pause: () => player.pause(),
+      prev: () => player.prev(),
+      next: () => player.next(),
     },
   }
 </script>
@@ -98,6 +108,12 @@
     margin-right: 1.5rem;
     color: var(--white6);
     font-size: 0.875rem;
+  }
+
+  .player_seriesOrPlaylist {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   .player_more {
@@ -156,6 +172,9 @@
   .player_action:hover,
   .player_action:focus {
     color: var(--white5);
+  }
+  .player_action[disabled] {
+    opacity: 0.5;
   }
 
   @media screen and (max-width: 1224px) {

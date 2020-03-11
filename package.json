@@ -24,6 +24,8 @@
         "vue-template-compiler": "^2.6.11"
     },
     "babel": {
-        "plugins": ["transform-class-properties"]
+        "plugins": [
+            "transform-class-properties"
+        ]
     }
 }
