@@ -2,7 +2,7 @@
 <template>
   <ol class="_">
     <li class="track is-header">
-      <span class="track_cell is-m1" v-if="numbered">#</span>
+      <span class="track_cell is-m1">#</span>
       <span class="track_cell is-m2 is-m10">Title</span>
       <span class="track_cell is-m3 is-m20">access_time</span>
       <span class="track_cell is-m4"></span>
@@ -13,8 +13,7 @@
         :key="track.id">
       <button @click="$emit('selection', {track})"
               style="display: contents;">
-        <span class="track_cell is-m1"
-              v-if="numbered">
+        <span class="track_cell is-m1">
           <Equalizer v-if="track === currentTrack" :playing="playing"/>
           <span v-else>{{ ++i | zeroPad }}</span>
         </span>
@@ -33,7 +32,6 @@
     name: "Tracks",
     components: {Equalizer},
     props: {
-      numbered: {type: Boolean, default: true},
       tracks: Array,
       currentTrack: Object,
       playing: Boolean,
@@ -106,10 +104,20 @@
 
   @media screen and (max-width: 480px) {
     .track {
+      padding-left: 2.5rem;
       padding-right: 2.5rem;
       flex-wrap: wrap;
     }
     .track_cell.is-m1 {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .track.is-header > .track_cell.is-m1 {
       display: none;
     }
     .track_cell.is-m2 {

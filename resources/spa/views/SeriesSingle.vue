@@ -1,5 +1,5 @@
 <template>
-  <div class="main_inner is-box" v-if="series">
+  <div class="main_inner is-box">
     <header class="header">
       <img :src="'/storage/covers/' + series.cover"
            :alt="series.title"
@@ -38,7 +38,7 @@
     components: {Tracks},
     data() {
       return {
-        series: null
+        series: store.getSeries(this.$route.params.slug)
       }
     },
     computed: {
@@ -57,9 +57,6 @@
       },
       pause: () => player.pause()
     },
-    created() {
-      this.series = store.getSeries(this.$route.params.slug)
-    }
   }
 </script>
 
@@ -102,6 +99,10 @@
       margin: -1.5rem 0 1.5rem -1.5rem;
       object-fit: cover;
       object-position: 50% 0;
+    }
+
+    .action {
+      width: 100%;
     }
   }
 </style>

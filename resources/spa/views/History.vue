@@ -13,7 +13,7 @@
       </div>
     </header>
 
-    <Tracks :tracks="history" :numbered="false" v-if="history.length"/>
+    <Tracks :tracks="history" v-if="history.length"/>
   </div>
 </template>
 

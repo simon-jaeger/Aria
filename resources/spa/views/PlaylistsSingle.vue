@@ -1,8 +1,6 @@
 <template>
-  <div class="main_inner is-box" v-if="playlist">
+  <div class="main_inner is-box">
     <header class="header">
-      <!-- TODO: playlist cover uses combination of covers of contained tracks? -->
-      <div class="cover"></div>
       <div class="info">
         <h1>{{ playlist.title }}</h1>
         <small class="sub">
@@ -43,7 +41,7 @@
     components: {Tracks},
     data() {
       return {
-        playlist: null
+        playlist: store.getPlaylist(this.$route.params.slug)
       }
     },
     computed: {
@@ -66,28 +64,12 @@
       },
       pause: () => player.pause()
     },
-    created() {
-      this.playlist = store.getPlaylist(this.$route.params.slug)
-    }
   }
 </script>
 
 <style scoped>
   .header {
-    display: flex;
     margin-bottom: 3rem;
-    align-items: center;
-  }
-
-  .cover {
-    width: 10rem;
-    height: 10rem;
-    margin-right: 1.5rem;
-    background-color: var(--white7);
-  }
-
-  .info {
-    flex: 1;
   }
 
   .sub {
@@ -108,13 +90,8 @@
       display: block;
     }
 
-    .cover {
-      width: 100vw;
-      height: 12rem;
-      max-width: none;
-      margin: -1.5rem 0 1.5rem -1.5rem;
-      object-fit: cover;
-      object-position: 50% 0;
+    .actions {
+      grid-template-columns: 1fr auto;
     }
   }
 </style>

@@ -1,6 +1,5 @@
 <template>
-  <div class="modal" :class="{'is-open': open}">
-    <button @click="close" class="modal_background"></button>
+  <div @click.self="close" class="modal" :class="{'is-open': open}">
     <div class="modal_inner">
       <header class="modal_header">
         <h2 class="modal_title">{{ title }}</h2>
@@ -54,20 +53,13 @@
     padding: 1rem;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s;
+    background-color: var(--blackA);
     opacity: 0;
+    transition: all 0.3s;
   }
   .modal.is-open {
     visibility: visible;
     opacity: 1;
-  }
-
-  .modal_background {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: var(--blackA);
-    cursor: default;
   }
 
   .modal_inner {

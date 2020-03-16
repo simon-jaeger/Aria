@@ -3,15 +3,6 @@
     <AppHeader/>
     <main class="main">
       <RouterView/>
-      <!-- TODO: rm test modal toggle -->
-      <button @click="$root.$emit('modal-playlists')" style="margin-top: 1rem;">
-        modal
-      </button>
-      <!-- TODO: rm test toast toggle -->
-      <button @click="$root.$emit('toast', {msg:'hello world'})"
-              style="margin-top: 1rem;">
-        toast
-      </button>
     </main>
     <AppPlayer/>
     <PlayerMini/>
