@@ -1,7 +1,7 @@
 <template>
   <div class="toast" :class="{'is-open': open}">
     <div class="toast_msg">{{ msg }}</div>
-    <!-- TODO: undo action, pass callback with event? -->
+    <!-- TODO: undo aborts delayed backend sync with cleartimeout? -->
     <button @click="close" class="toast_undo">Undo</button>
   </div>
 </template>

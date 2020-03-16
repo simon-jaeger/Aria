@@ -74,6 +74,9 @@
       border-bottom: 4px solid var(--blue5);
       border-left-style: none;
     }
+    .nav_link:not(.is-active):hover {
+      background-color: inherit;
+    }
   }
 
   @media screen and (max-width: 480px) {

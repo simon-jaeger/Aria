@@ -20,6 +20,7 @@ class Player {
       this.duration = this.audio.duration
     })
     this.audio.addEventListener("ended", () => {
+      store.addToHistory(this.track)
       // TODO: currently just loops, may change that, might be fine tho
       this.playing = true
       if (this.indexCurrent === this.seriesOrPlaylist.tracks.length - 1) {
@@ -62,6 +63,12 @@ class Player {
   prev() {
     const prevTrack = this.seriesOrPlaylist.tracks[this.indexCurrent - 1]
     this.play(null, prevTrack)
+  }
+
+  reset() {
+    this.track = null
+    this.seriesOrPlaylist = null
+    this.playing = false
   }
 
   get indexCurrent() {

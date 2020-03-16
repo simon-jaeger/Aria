@@ -1,11 +1,9 @@
-<!-- TODO: make dynamic -->
-<!-- TODO: auto play next song -->
 <!-- TODO: cta when no track selected yet -->
-<!-- TODO: keyboard controls? space for toggle etc? -->
+<!-- TODO: context: add to playlist, loop ON/OFF, random ON/OFF (exlude current) -->
 <template>
   <aside class="player">
     <template v-if="track">
-      <div class="player_track">
+      <RouterLink :to="link" class="player_track" :style="{backgroundImage: `url('${cover}')`}">
         <div class="player_info">
           <div class="player_title">{{ track.title }}</div>
           <div class="player_sub">
@@ -15,7 +13,7 @@
           </div>
           <button class="player_more">more_vert</button>
         </div>
-      </div>
+      </RouterLink>
 
       <div @click="jump($event)" class="player_progress">
       <span class="player_progressfill"
@@ -49,6 +47,17 @@
   export default {
     name: "AppPlayer",
     computed: {
+      cover: () => {
+        const series = store.getSeriesByTrack(player.track)
+        return "/storage/covers/" + series.cover
+      },
+      link: () => {
+        const series = store.series.find(x => x === player.seriesOrPlaylist)
+        if (series) return "/player/series/" + series.slug
+
+        const playlist = store.playlists.find(x => x === player.seriesOrPlaylist)
+        return "/player/playlists/" + playlist.slug
+      },
       playing: () => player.playing,
       currentTime: () => player.currentTime,
       duration: () => player.duration,
@@ -79,10 +88,10 @@
   }
 
   .player_track {
+    display: block;
     position: relative;
     margin-bottom: 0.5rem;
     padding-bottom: 100%;
-    background-image: url('/storage/covers/zelda-the-legend-of.jpg');
     background-size: cover;
   }
 

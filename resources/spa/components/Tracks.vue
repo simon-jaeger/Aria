@@ -2,18 +2,18 @@
 <template>
   <ol class="_">
     <li class="track is-header">
-      <span class="track_cell is-m1">#</span>
+      <span class="track_cell is-m1" v-if="numbered">#</span>
       <span class="track_cell is-m2 is-m10">Title</span>
       <span class="track_cell is-m3 is-m20">access_time</span>
       <span class="track_cell is-m4"></span>
     </li>
     <li class="track"
-        :class="{'is-active': track === currentTrack}"
+        :class="{'is-active': track === currentTrack, 'is-notNumbered': !numbered}"
         v-for="(track, i) in tracks"
-        :key="track.id">
+        :key="i">
       <button @click="$emit('selection', {track})"
               style="display: contents;">
-        <span class="track_cell is-m1">
+        <span class="track_cell is-m1" v-if="numbered">
           <Equalizer v-if="track === currentTrack" :playing="playing"/>
           <span v-else>{{ ++i | zeroPad }}</span>
         </span>
@@ -27,15 +27,23 @@
 
 <script>
   import Equalizer from "./Equalizer"
+  import Vue from "vue"
 
   export default {
     name: "Tracks",
     components: {Equalizer},
     props: {
       tracks: Array,
+      numbered: {type: Boolean, default: true},
       currentTrack: Object,
       playing: Boolean,
     },
+    mounted() {
+      Vue.nextTick(() => {
+        const activeTrack = this.$el.querySelector(".track.is-active")
+        if (activeTrack) activeTrack.scrollIntoView({block: "center"})
+      })
+    }
   }
 </script>
 
@@ -107,6 +115,9 @@
       padding-left: 2.5rem;
       padding-right: 2.5rem;
       flex-wrap: wrap;
+    }
+    .track.is-notNumbered {
+      padding-left: 0;
     }
     .track_cell.is-m1 {
       position: absolute;

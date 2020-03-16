@@ -5,8 +5,9 @@
       <PlaylistItem v-for="playlist in playlists"
                     :key="playlist.id"
                     :playlist="playlist"/>
+      <!-- TODO: outlined button item to open modal for adding new playlist  -->
     </div>
-    <!-- TODO: prettier no playlists notice, cta to create first? -->
+    <!-- TODO: prettier no playlists notice -->
     <div v-else>No playlists</div>
   </div>
 </template>
