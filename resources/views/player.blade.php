@@ -17,7 +17,6 @@
         type="font/woff2"
         crossorigin>
   <link rel="stylesheet" href="/css/global.css">
-  <script src="/js/global.js" defer></script>
   <script src="{{ mix('js/spa.js') }}" defer></script>
 </head>
 <body>

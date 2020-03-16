@@ -26,10 +26,8 @@ Route::prefix('api')->middleware('auth')->group(function () {
   });
 
   Route::get('series', 'SeriesController@index');
-  Route::get('series/{slug}', 'SeriesController@show');
 
   Route::get('playlists', 'PlaylistController@index');
-  Route::get('playlists/{slug}', 'PlaylistController@show');
 
   Route::get('history', 'HistoryController@show');
 });

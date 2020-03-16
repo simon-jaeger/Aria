@@ -74,14 +74,16 @@
       border-bottom: 4px solid var(--blue5);
       border-left-style: none;
     }
-    .nav_link:hover,
-    .nav_link:focus {
+    .nav_link:not(.is-active):hover {
       background-color: inherit;
-      color: inherit;
     }
   }
 
   @media screen and (max-width: 480px) {
+    .nav {
+      border-top: 1px solid var(--white7);
+    }
+
     .nav_link {
       flex-direction: column;
       align-items: center;

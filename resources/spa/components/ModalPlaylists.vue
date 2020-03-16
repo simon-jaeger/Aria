@@ -28,9 +28,7 @@
     name: "ModalPlaylists",
     components: {Modal},
     computed: {
-      playlists() {
-        return store.playlists
-      },
+      playlists: () => store.playlists,
     }
   }
 </script>

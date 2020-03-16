@@ -1,7 +1,7 @@
 <template>
-  <div class="toast" :class="{'is-visible': open}">
+  <div class="toast" :class="{'is-open': open}">
     <div class="toast_msg">{{ msg }}</div>
-    <!-- TODO: undo action, pass callback with event? -->
+    <!-- TODO: undo aborts delayed backend sync with cleartimeout? -->
     <button @click="close" class="toast_undo">Undo</button>
   </div>
 </template>
@@ -49,7 +49,7 @@
     visibility: hidden;
     transform: translateY(calc(100% + 2rem));
   }
-  .toast.is-visible {
+  .toast.is-open {
     visibility: visible;
     transform: translateY(0);
   }

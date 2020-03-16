@@ -10,44 +10,53 @@
           {{ series.tracks.length }} Tracks &nbsp;•&nbsp;
           {{ series.tracks | map(x => x.duration) | sum | duration }}
         </small>
-        <div class="actions">
-          <button class="button">
-            <i class="button_icon">play_arrow<br></i>
-            <span>Play</span>
-          </button>
-          <button class="button is-secondary is-icon">
-            <span class="button_icon is-alone">favorite</span>
-          </button>
-        </div>
+        <button v-if="playing && series === currentSeries"
+                @click="pause"
+                class="button action">
+          <i class="button_icon">pause</i>
+          <span>Pause</span>
+        </button>
+        <button v-else @click="playSeries" class="button action">
+          <i class="button_icon">play_arrow</i>
+          <span>Play</span>
+        </button>
       </div>
     </header>
 
-    <Tracks :tracks="series.tracks"/>
+    <Tracks :tracks="series.tracks"
+            :playing="playing"
+            :current-track="currentTrack"
+            @selection="onSelection($event)"/>
   </div>
 </template>
 
 <script>
-  import Vue from "vue"
   import Tracks from "../components/Tracks"
 
   export default {
     name: "SeriesSingle",
     components: {Tracks},
-    computed: {
-      series() {
-        return store.seriesSingle[this.$route.params.slug]
-      },
-    },
-    async beforeRouteEnter(to, from, next) {
-      if (!store.seriesSingle[to.params.slug]) {
-        Vue.set(
-          store.seriesSingle,
-          to.params.slug,
-          (await axios.get("/api/series/" + to.params.slug)).data
-        )
+    data() {
+      return {
+        series: store.getSeries(this.$route.params.slug)
       }
-      next()
-    }
+    },
+    computed: {
+      playing: () => player.playing,
+      currentSeries: () => player.seriesOrPlaylist,
+      currentTrack: () => player.track,
+    },
+    methods: {
+      playSeries() {
+        if (this.series === player.seriesOrPlaylist) player.play()
+        else player.play(this.series, this.series.tracks[0])
+      },
+      onSelection(e) {
+        if (e.track === player.track) player.toggle()
+        else player.play(this.series, e.track)
+      },
+      pause: () => player.pause()
+    },
   }
 </script>
 
@@ -74,11 +83,8 @@
     color: var(--white6);
   }
 
-  .actions {
-    display: grid;
-    justify-content: start;
-    grid-auto-flow: column;
-    grid-gap: 1rem;
+  .action {
+    width: 7rem;
   }
 
   @media screen and (max-width: 480px) {
@@ -93,6 +99,10 @@
       margin: -1.5rem 0 1.5rem -1.5rem;
       object-fit: cover;
       object-position: 50% 0;
+    }
+
+    .action {
+      width: 100%;
     }
   }
 </style>

@@ -14,6 +14,6 @@ Vue.filter("sum", function (value) {
 })
 
 Vue.filter("duration", function (value) {
-  return Duration.fromMillis(value)
+  return Duration.fromMillis(value * 1000)
     .toFormat((value >= 3600000 ? "hh:" : "") + "mm:ss")
 })

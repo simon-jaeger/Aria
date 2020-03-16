@@ -15,5 +15,4 @@ mix.disableSuccessNotifications();
 
 mix
   .styles(["resources/css/reset.css", "resources/css/base.css", "resources/css/components.css"], "public/css/global.css")
-  .js("resources/js/global.js", "public/js")
   .js("resources/spa/main.js", "public/js/spa.js")

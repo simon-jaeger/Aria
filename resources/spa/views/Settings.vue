@@ -1,5 +1,6 @@
 <template>
   <div class="main_inner is-box">
+    <h1>Settings</h1>
     <form class="form">
       <div class="alert is-error">
         Choose a password with at least 6 characters

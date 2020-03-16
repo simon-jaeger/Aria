@@ -1,8 +1,6 @@
 <template>
   <div class="main_inner is-box">
     <header class="header">
-      <!-- TODO: playlist cover uses combination of covers of contained tracks? -->
-      <div class="cover"></div>
       <div class="info">
         <h1>{{ playlist.title }}</h1>
         <small class="sub">
@@ -10,8 +8,14 @@
           {{ playlist.tracks | map(x => x.duration) | sum | duration }}
         </small>
         <div class="actions">
-          <button class="button">
-            <i class="button_icon">play_arrow<br></i>
+          <button v-if="playing && playlist === currentPlaylist"
+                  @click="pause"
+                  class="button action">
+            <i class="button_icon">pause</i>
+            <span>Pause</span>
+          </button>
+          <button v-else @click="playPlaylist" class="button action">
+            <i class="button_icon">play_arrow</i>
             <span>Play</span>
           </button>
           <button @click="deletePlaylist(playlist.slug)"
@@ -22,57 +26,50 @@
       </div>
     </header>
 
-    <Tracks :tracks="playlist.tracks"/>
+    <Tracks :tracks="playlist.tracks"
+            :playing="playing"
+            :current-track="currentTrack"
+            @selection="onSelection($event)"/>
   </div>
 </template>
 
 <script>
   import Tracks from "../components/Tracks"
-  import Vue from "vue"
 
   export default {
     name: "PlaylistsSingle",
     components: {Tracks},
+    data() {
+      return {
+        playlist: store.getPlaylist(this.$route.params.slug)
+      }
+    },
     computed: {
-      playlist() {
-        return store.playlistsSingle[this.$route.params.slug]
-      },
+      playing: () => player.playing,
+      currentPlaylist: () => player.seriesOrPlaylist,
+      currentTrack: () => player.track,
     },
     methods: {
       deletePlaylist(slug) {
         store.deletePlaylist(slug)
         this.$router.push("/player/playlists")
       },
+      playPlaylist() {
+        if (this.playlist === player.seriesOrPlaylist) player.play()
+        else player.play(this.playlist, this.playlist.tracks[0])
+      },
+      onSelection(e) {
+        if (e.track === player.track) player.toggle()
+        else player.play(this.playlist, e.track)
+      },
+      pause: () => player.pause()
     },
-    async beforeRouteEnter(to, from, next) {
-      if (!store.playlistsSingle[to.params.slug]) {
-        Vue.set(
-          store.playlistsSingle,
-          to.params.slug,
-          (await axios.get("/api/playlists/" + to.params.slug)).data
-        )
-      }
-      next()
-    }
   }
 </script>
 
 <style scoped>
   .header {
-    display: flex;
     margin-bottom: 3rem;
-    align-items: center;
-  }
-
-  .cover {
-    width: 10rem;
-    height: 10rem;
-    margin-right: 1.5rem;
-    background-color: var(--white7);
-  }
-
-  .info {
-    flex: 1;
   }
 
   .sub {
@@ -83,8 +80,8 @@
 
   .actions {
     display: grid;
+    grid-template-columns: 7rem auto;
     justify-content: start;
-    grid-auto-flow: column;
     grid-gap: 1rem;
   }
 
@@ -93,13 +90,8 @@
       display: block;
     }
 
-    .cover {
-      width: 100vw;
-      height: 12rem;
-      max-width: none;
-      margin: -1.5rem 0 1.5rem -1.5rem;
-      object-fit: cover;
-      object-position: 50% 0;
+    .actions {
+      grid-template-columns: 1fr auto;
     }
   }
 </style>

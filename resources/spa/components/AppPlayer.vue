@@ -1,30 +1,76 @@
 <template>
   <aside class="player">
-    <!-- TODO: make dynamic -->
-    <div class="player_track">
-      <div class="player_info">
-        <div class="player_title">Bolero of Fire and Storms</div>
-        <div class="player_sub">Zelda<br>04:50 / 06:06</div>
-        <button class="player_more">more_vert</button>
+    <template v-if="track">
+      <RouterLink :to="link" class="player_track" :style="{backgroundImage: `url('${cover}')`}">
+        <div class="player_info">
+          <div class="player_title">{{ track.title }}</div>
+          <div class="player_sub">
+            <div class="player_seriesOrPlaylist">{{ seriesOrPlaylist.title }}
+            </div>
+            <div>{{ currentTime | duration }} / {{ duration | duration }}</div>
+          </div>
+        </div>
+      </RouterLink>
+
+      <div @click="jump($event)" class="player_progress">
+      <span class="player_progressfill"
+            :style="{width: currentTime / duration * 100 + '%'}"></span>
+        <span class="player_progressempty"></span>
       </div>
-    </div>
 
-    <div class="player_progress">
-      <span class="player_progressfill"></span>
-      <span class="player_progressempty"></span>
-    </div>
-
-    <div class="player_actions">
-      <button class="player_action">skip_previous</button>
-      <button class="player_action is-big">play_circle_filled</button>
-      <button class="player_action">skip_next</button>
-    </div>
+      <div class="player_actions">
+        <button @click="prev"
+                :disabled="indexCurrent === 0"
+                class="player_action">skip_previous
+        </button>
+        <button v-if="playing" @click="pause" class="player_action is-big">
+          pause_circle_filled
+        </button>
+        <button v-else @click="play" class="player_action is-big">
+          play_circle_filled
+        </button>
+        <button @click="next"
+                :disabled="indexCurrent === seriesOrPlaylist.tracks.length - 1"
+                class="player_action">skip_next
+        </button>
+      </div>
+    </template>
+    <!-- TODO: prettier no track msg with cta -->
+    <template v-else>no track</template>
   </aside>
 </template>
 
 <script>
   export default {
-    name: "AppPlayer"
+    name: "AppPlayer",
+    computed: {
+      cover: () => {
+        const series = store.getSeriesByTrack(player.track)
+        return "/storage/covers/" + series.cover
+      },
+      link: () => {
+        const series = store.series.find(x => x === player.seriesOrPlaylist)
+        if (series) return "/player/series/" + series.slug
+
+        const playlist = store.playlists.find(x => x === player.seriesOrPlaylist)
+        return "/player/playlists/" + playlist.slug
+      },
+      playing: () => player.playing,
+      currentTime: () => player.currentTime,
+      duration: () => player.duration,
+      seriesOrPlaylist: () => player.seriesOrPlaylist,
+      track: () => player.track,
+      indexCurrent: () => player.indexCurrent,
+    },
+    methods: {
+      jump(e) {
+        player.seek(player.duration * (e.offsetX / e.target.offsetWidth))
+      },
+      play: () => player.play(),
+      pause: () => player.pause(),
+      prev: () => player.prev(),
+      next: () => player.next(),
+    },
   }
 </script>
 
@@ -39,15 +85,11 @@
   }
 
   .player_track {
+    display: block;
     position: relative;
     margin-bottom: 0.5rem;
     padding-bottom: 100%;
-    background-image: url('/storage/covers/zelda-the-legend-of.jpg');
     background-size: cover;
-  }
-
-  .player_cover {
-    width: 100%;
   }
 
   .player_info {
@@ -61,7 +103,6 @@
 
   .player_title {
     margin-bottom: 0.25rem;
-    margin-right: 2rem;
     font-weight: 700;
     overflow: hidden;
     white-space: nowrap;
@@ -74,18 +115,10 @@
     font-size: 0.875rem;
   }
 
-  .player_more {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 1rem;
-    font-family: 'Material Icons', sans-serif;
-    overflow-wrap: normal;
-    color: var(--white6);
-  }
-  .player_more:hover,
-  .player_more:focus {
-    color: var(--white5);
+  .player_seriesOrPlaylist {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   .player_progress {
@@ -96,17 +129,17 @@
   }
 
   .player_progressfill {
-    width: 75%;
     height: 4px;
     flex: 0 0 auto;
     background-color: var(--blue5);
+    pointer-events: none;
   }
 
   .player_progressempty {
-    width: 75%;
     height: 4px;
     flex: 1;
     background-color: var(--white7);
+    pointer-events: none;
   }
 
   .player_actions {
@@ -130,6 +163,9 @@
   .player_action:hover,
   .player_action:focus {
     color: var(--white5);
+  }
+  .player_action[disabled] {
+    opacity: 0.5;
   }
 
   @media screen and (max-width: 1224px) {

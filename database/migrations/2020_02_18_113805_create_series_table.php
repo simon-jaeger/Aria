@@ -15,7 +15,6 @@ class CreateSeriesTable extends Migration {
       $table->bigIncrements('id');
       $table->string('slug')->unique();
       $table->string('title');
-      $table->string('title_short');
       $table->string('cover');
     });
   }

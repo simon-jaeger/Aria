@@ -1,23 +1,15 @@
 <template>
-  <div class="app">
+  <div v-if="ready" class="app">
     <AppHeader/>
     <main class="main">
       <RouterView/>
-      <!-- TODO: rm test modal toggle -->
-      <button @click="$root.$emit('modal-playlists')" style="margin-top: 1rem;">
-        modal
-      </button>
-      <!-- TODO: rm test toast toggle -->
-      <button @click="$root.$emit('toast', {msg:'hello world'})"
-              style="margin-top: 1rem;">
-        toast
-      </button>
     </main>
     <AppPlayer/>
     <PlayerMini/>
-    <Toast>Added to playlist</Toast>
+    <Toast/>
     <ModalPlaylists/>
   </div>
+  <Loading v-else/>
 </template>
 
 <script>
@@ -26,15 +18,25 @@
   import Toast from "./components/Toast"
   import PlayerMini from "./components/PlayerMini"
   import ModalPlaylists from "./components/ModalPlaylists"
+  import Loading from "./components/Loading"
 
   export default {
     name: "App",
-    components: {ModalPlaylists, PlayerMini, Toast, AppHeader, AppPlayer},
+    components: {
+      Loading,
+      ModalPlaylists, PlayerMini, Toast, AppHeader, AppPlayer},
+    data() {
+      return {
+        ready: false
+      }
+    },
     created() {
       // fetch core data
-      axios.get("/api/series").then(({data}) => store.series = data)
-      axios.get("/api/playlists").then(({data}) => store.playlists = data)
-      axios.get("/api/history").then(({data}) => store.history = data)
+      Promise.all([
+        axios.get("/api/series").then(({data}) => store.series = data),
+        axios.get("/api/playlists").then(({data}) => store.playlists = data),
+        axios.get("/api/history").then(({data}) => store.history = data),
+      ]).then(() => this.ready = true)
     }
   }
 </script>
@@ -222,6 +224,7 @@
     display: flex;
     padding: 0.75rem 1.5rem;
     align-items: center;
+    justify-content: center;
     border-radius: 2px;
     background-color: var(--blue6);
     font-weight: 500;
