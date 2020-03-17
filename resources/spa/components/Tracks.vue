@@ -20,7 +20,19 @@
         <span class="track_cell is-m2">{{ track.title }}</span>
         <span class="track_cell is-m3">{{ track.duration | duration }}</span>
       </button>
-      <button class="track_cell is-m4">more_vert</button>
+      <Context>
+        <button class="track_cell is-m4">more_vert</button>
+        <template v-slot:menu>
+          <div class="contextMenu">
+            <button @click="$root.$emit('modal-playlists-add',{track})">
+              <i>playlist_add</i><span>Add to playlist</span>
+            </button>
+            <button v-if="removable" @click="$emit('remove', {track})">
+              <i>delete</i><span>Remove track</span>
+            </button>
+          </div>
+        </template>
+      </Context>
     </li>
   </ol>
 </template>
@@ -28,13 +40,15 @@
 <script>
   import Equalizer from "./Equalizer"
   import Vue from "vue"
+  import Context from "./Context"
 
   export default {
     name: "Tracks",
-    components: {Equalizer},
+    components: {Context, Equalizer},
     props: {
       tracks: Array,
       numbered: {type: Boolean, default: true},
+      removable: Boolean,
       currentTrack: Object,
       playing: Boolean,
     },
@@ -108,6 +122,11 @@
   .track_cell.is-m30 {
     font-family: 'Material Icons', sans-serif;
     overflow-wrap: normal;
+  }
+
+  .contextMenu {
+    right: 0;
+    margin-top: -0.5rem;
   }
 
   @media screen and (max-width: 480px) {

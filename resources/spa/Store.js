@@ -28,9 +28,11 @@ class Store {
     root.$emit("toast", {msg: "Playlist deleted"})
   }
 
-  // TODO: wip
+  // TODO: wip, also update database etc.
   removeTrack(playlist, track) {
     playlist.tracks.splice(playlist.tracks.findIndex(x => x === track), 1)
+    if (track === player.track) player.reset()
+    root.$emit("toast", {msg: "Track removed"})
   }
 
   // TODO: wip, also update database etc.
