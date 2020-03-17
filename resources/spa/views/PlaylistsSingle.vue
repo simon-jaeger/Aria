@@ -18,10 +18,21 @@
             <i class="button_icon">play_arrow</i>
             <span>Play</span>
           </button>
-          <button @click="deletePlaylist(playlist.slug)"
-                  class="button is-secondary is-icon">
-            <span class="button_icon is-alone">more_vert</span>
-          </button>
+          <Context>
+            <button class="button is-secondary is-icon">
+              <i class="button_icon is-alone">more_vert</i>
+            </button>
+            <template v-slot:menu>
+              <div class="contextMenu">
+                <button @click="$root.$emit('modal-playlist-rename', {playlist})">
+                  <i>edit</i><span>Rename playlist</span>
+                </button>
+                <button @click="deletePlaylist(playlist.slug)">
+                  <i>delete</i><span>Delete playlist</span>
+                </button>
+              </div>
+            </template>
+          </Context>
         </div>
       </div>
     </header>
@@ -35,10 +46,11 @@
 
 <script>
   import Tracks from "../components/Tracks"
+  import Context from "../components/Context"
 
   export default {
     name: "PlaylistsSingle",
-    components: {Tracks},
+    components: {Context, Tracks},
     data() {
       return {
         playlist: store.getPlaylist(this.$route.params.slug)
@@ -85,6 +97,10 @@
     grid-gap: 1rem;
   }
 
+  .contextMenu {
+    margin-top: 0.5rem;
+  }
+
   @media screen and (max-width: 480px) {
     .header {
       display: block;
@@ -92,6 +108,10 @@
 
     .actions {
       grid-template-columns: 1fr auto;
+    }
+
+    .contextMenu {
+      right: 0;
     }
   }
 </style>

@@ -1,6 +1,6 @@
 <!-- TODO: wip, add functionality -->
 <template>
-  <Modal title="Add to..." name="playlists">
+  <Modal title="Add to..." name="playlists-add">
     <div class="checks">
       <!--
         TODO: check current playlist of track (sent with event?)
@@ -25,7 +25,7 @@
   import Modal from "./Modal"
 
   export default {
-    name: "ModalPlaylists",
+    name: "ModalPlaylistsAdd",
     components: {Modal},
     computed: {
       playlists: () => store.playlists,

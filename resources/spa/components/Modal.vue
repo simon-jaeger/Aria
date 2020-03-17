@@ -102,7 +102,7 @@
   .modal_body {
     max-height: calc(100vh - 9rem);
     overflow-y: auto;
-    padding: 1rem 1.5rem;
+    padding: 1.5rem;
     background-color: var(--black5);
   }
 

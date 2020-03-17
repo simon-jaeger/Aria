@@ -26,7 +26,7 @@
 
     <div style="height: 2rem;"></div>
 
-    <button @click="$root.$emit('modal-playlists')">modal</button>
+    <button @click="$root.$emit('modal-playlists-add')">modal</button>
 
     <div style="height: 2rem;"></div>
 
