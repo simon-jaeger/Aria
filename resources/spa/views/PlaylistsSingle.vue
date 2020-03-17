@@ -40,6 +40,8 @@
     <Tracks :tracks="playlist.tracks"
             :playing="playing"
             :current-track="currentTrack"
+            removable
+            @remove="onRemove($event)"
             @selection="onSelection($event)"/>
   </div>
 </template>
@@ -73,6 +75,9 @@
       onSelection(e) {
         if (e.track === player.track) player.toggle()
         else player.play(this.playlist, e.track)
+      },
+      onRemove(e) {
+        store.removeTrack(this.playlist, e.track)
       },
       pause: () => player.pause()
     },
