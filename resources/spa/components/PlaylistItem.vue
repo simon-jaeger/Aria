@@ -6,17 +6,27 @@
         {{ playlist.tracks.length }} Tracks
       </small>
     </RouterLink>
-    <!-- TODO: del and rename playlist in context -->
-    <button @click="deletePlaylist(playlist.slug)"
-            class="action">
-      more_vert
-    </button>
+    <Context>
+      <button class="action">more_vert</button>
+      <template v-slot:menu>
+        <div class="contextMenu">
+          <button @click="$root.$emit('modal-playlist-rename', {playlist})">
+            <i>edit</i><span>Rename playlist</span>
+          </button>
+          <button @click="deletePlaylist(playlist.slug)">
+            <i>delete</i><span>Delete playlist</span>
+          </button>
+        </div>
+      </template>
+    </Context>
   </div>
 </template>
 
 <script>
+  import Context from "./Context"
   export default {
     name: "PlaylistItem",
+    components: {Context},
     props: ["playlist"],
     methods: {
       deletePlaylist: slug => store.deletePlaylist(slug)
@@ -61,5 +71,10 @@
   .action:hover,
   .action:focus {
     color: var(--white5);
+  }
+
+  .contextMenu {
+    top: -2rem;
+    right: 0.5rem;
   }
 </style>
