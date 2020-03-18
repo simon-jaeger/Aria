@@ -13,8 +13,8 @@ class CreateSeriesTable extends Migration {
   public function up() {
     Schema::create('series', function (Blueprint $table) {
       $table->bigIncrements('id');
-      $table->string('slug')->unique();
-      $table->string('title');
+      $table->string('slug', 64)->unique();
+      $table->string('title', 64);
       $table->string('cover');
     });
   }

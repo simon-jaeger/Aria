@@ -1,5 +1,5 @@
 <template>
-  <div @click.self="close" class="modal" :class="{'is-open': open}">
+  <div @mousedown.self="close" class="modal" :class="{'is-open': open}">
     <div class="modal_inner">
       <header class="modal_header">
         <h2 class="modal_title">{{ title }}</h2>
@@ -126,5 +126,8 @@
   }
   .modal_actions > *:not(:last-child) {
     border-right: 1px solid var(--white7);
+  }
+  .modal_actions > *[disabled] {
+    opacity: 0.5;
   }
 </style>
