@@ -1,3 +1,5 @@
+import slug from "slug"
+
 class Store {
   series = []
   /** @type {Array} */
@@ -18,6 +20,13 @@ class Store {
     const playlist = this.playlists.find(x => x.slug === slug)
     if (!playlist) router.replace("player/404")
     return playlist
+  }
+
+  // TODO: wip, also update database etc.
+  renamePlaylist(playlist, newName) {
+    playlist.title = newName
+    playlist.slug = slug(newName, {lower: true})
+    root.$emit("toast", {msg: "Playlist renamed"})
   }
 
   // TODO: wip, also update database etc.

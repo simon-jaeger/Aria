@@ -27,7 +27,7 @@
         this.close()
         this.msg = e.msg
         this.open = true
-        this.timeout = setTimeout(() => this.close(), 3000)
+        this.timeout = setTimeout(() => this.close(), 5000)
       })
     },
   }
