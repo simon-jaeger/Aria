@@ -16,7 +16,7 @@
 
     <template v-slot:actions="modal">
       <button>+ New playlist</button>
-      <button @click="modal.close()">Done</button>
+      <button @click="$children[0].close()">Done</button>
     </template>
   </Modal>
 </template>

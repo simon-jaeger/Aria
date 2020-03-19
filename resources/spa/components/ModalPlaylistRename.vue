@@ -1,5 +1,5 @@
 <!-- TODO: wip, add functionality -->
-<template>
+<template v-slot:default="modal">
   <Modal title="Rename playlist" name="playlist-rename">
     <template v-if="playlist">
       <div class="input">
@@ -8,12 +8,13 @@
                id="newName"
                class="input_field"
                maxlength="32"
-               v-model.trim="newName">
+               v-model.trim="newName"
+               @keydown.enter="rename($children[0])">
       </div>
     </template>
-    <template v-slot:actions="modal">
-      <button @click="modal.close()">Cancel</button>
-      <button @click="rename(modal)" :disabled="!nameValid">Rename</button>
+    <template v-slot:actions>
+      <button @click="$children[0].close()">Cancel</button>
+      <button @click="rename($children[0])" :disabled="!nameValid">Rename</button>
     </template>
   </Modal>
 </template>

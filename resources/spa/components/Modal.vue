@@ -1,4 +1,4 @@
-<template>
+<template :close="close">
   <div @mousedown.self="close" class="modal" :class="{'is-open': open}">
     <div class="modal_inner">
       <header class="modal_header">
@@ -9,7 +9,7 @@
         <slot/>
       </div>
       <footer class="modal_actions">
-        <slot name="actions" :close="close"></slot>
+        <slot name="actions"></slot>
       </footer>
     </div>
   </div>
