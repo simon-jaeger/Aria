@@ -1,4 +1,4 @@
-<template :close="close">
+<template>
   <div @mousedown.self="close" class="modal" :class="{'is-open': open}">
     <div class="modal_inner">
       <header class="modal_header">
@@ -30,7 +30,13 @@
       }
     },
     mounted() {
-      this.$root.$on("modal-" + this.name, () => this.open = true)
+      this.$root.$on("modal-" + this.name, () => {
+        this.open = true
+        // auto focus first input if exists
+        setTimeout(() => {
+          this.$el.querySelector("input").focus()
+        }, 200)
+      })
     },
     watch: {
       $route() {

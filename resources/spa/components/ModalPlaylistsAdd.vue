@@ -4,7 +4,6 @@
     <div class="checks">
       <!--
         TODO: check current playlist of track (sent with event?)
-        maybe fetch playlists from api/tracks when modal opened?
       -->
       <div v-for="playlist in playlists" :key="playlist.id" class="check">
         <input type="checkbox" :id="playlist.id">
@@ -15,7 +14,7 @@
     </div>
 
     <template v-slot:actions="modal">
-      <button>+ New playlist</button>
+      <button @click="toNewPlaylist">+ New playlist</button>
       <button @click="$children[0].close()">Done</button>
     </template>
   </Modal>
@@ -29,7 +28,13 @@
     components: {Modal},
     computed: {
       playlists: () => store.playlists,
-    }
+    },
+    methods: {
+      toNewPlaylist() {
+        this.$root.$emit('modal-playlist-new')
+        this.$children[0].close()
+      }
+    },
   }
 </script>
 

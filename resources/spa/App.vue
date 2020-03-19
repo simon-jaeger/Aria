@@ -7,8 +7,9 @@
     <AppPlayer/>
     <PlayerMini/>
     <Toast/>
-    <ModalPlaylistsAdd/>
+    <ModalPlaylistsNew/>
     <ModalPlaylistsRename/>
+    <ModalPlaylistsAdd/>
   </div>
   <Loading v-else/>
 </template>
@@ -21,10 +22,12 @@
   import Loading from "./components/Loading"
   import ModalPlaylistsAdd from "./components/ModalPlaylistsAdd"
   import ModalPlaylistsRename from "./components/ModalPlaylistRename"
+  import ModalPlaylistsNew from "./components/ModalPlaylistNew"
 
   export default {
     name: "App",
     components: {
+      ModalPlaylistsNew,
       ModalPlaylistsRename,
       ModalPlaylistsAdd,
       Loading, PlayerMini, Toast, AppHeader, AppPlayer},
