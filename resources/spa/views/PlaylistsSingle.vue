@@ -24,7 +24,7 @@
             </button>
             <template v-slot:menu>
               <div class="contextMenu">
-                <button @click="$root.$emit('modal-playlist-rename', {playlist})">
+                <button @click="$root.$emit('modal-playlists-rename', {playlist})">
                   <i>edit</i><span>Rename playlist</span>
                 </button>
                 <button @click="deletePlaylist(playlist.slug)">

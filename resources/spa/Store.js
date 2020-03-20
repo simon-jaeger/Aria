@@ -23,12 +23,12 @@ class Store {
   }
 
   // TODO: wip, also update database etc.
-  newPlaylist(name) {
+  newPlaylist(name, firstTrack) {
     this.playlists.unshift({
       id: null,
       title: name,
       slug: slug(name),
-      tracks: [],
+      tracks: firstTrack ? [{...firstTrack}] : [],
     })
     root.$emit("toast", {msg: "Playlist created"})
   }

@@ -21,8 +21,8 @@
   import PlayerMini from "./components/PlayerMini"
   import Loading from "./components/Loading"
   import ModalPlaylistsAdd from "./components/ModalPlaylistsAdd"
-  import ModalPlaylistsRename from "./components/ModalPlaylistRename"
-  import ModalPlaylistsNew from "./components/ModalPlaylistNew"
+  import ModalPlaylistsRename from "./components/ModalPlaylistsRename"
+  import ModalPlaylistsNew from "./components/ModalPlaylistsNew"
 
   export default {
     name: "App",

@@ -26,14 +26,24 @@
   export default {
     name: "ModalPlaylistsAdd",
     components: {Modal},
+    data() {
+      return {
+        track: null
+      }
+    },
     computed: {
       playlists: () => store.playlists,
     },
     methods: {
       toNewPlaylist() {
         this.$children[0].close()
-        setTimeout(() => this.$root.$emit("modal-playlist-new"), 300)
+        setTimeout(() => this.$root.$emit("modal-playlists-new", {track: this.track}), 300)
       }
+    },
+    mounted() {
+      this.$root.$on("modal-playlists-add", e => {
+        this.track = e.track
+      })
     },
   }
 </script>

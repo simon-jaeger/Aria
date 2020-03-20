@@ -1,17 +1,17 @@
 <template>
-  <Modal title="Rename playlist" name="playlist-rename">
+  <Modal title="New playlist" name="playlists-new">
     <div class="input">
-      <label for="newName" class="input_label">New name</label>
+      <label for="name" class="input_label">Name</label>
       <input type="text"
-             id="newName"
+             id="name"
              class="input_field"
              maxlength="64"
-             v-model.trim="newName"
-             @keydown.enter="rename">
+             v-model.trim="name"
+             @keyup.enter="newPlaylist">
     </div>
     <template v-slot:actions>
       <button @click="$children[0].close()">Cancel</button>
-      <button @click="rename" :disabled="!nameValid">Rename</button>
+      <button @click="newPlaylist" :disabled="!nameValid">Create</button>
     </template>
   </Modal>
 </template>
@@ -20,34 +20,33 @@
   import Modal from "./Modal"
 
   export default {
-    name: "ModalPlaylistsRename",
+    name: "ModalPlaylistsNew",
     components: {Modal},
     data() {
       return {
-        playlist: null,
-        newName: "",
+        name: "",
+        track: null,
       }
     },
     computed: {
       nameValid() {
-        const isValidLength = /^.{1,64}$/.test(this.newName)
+        const isValidLength = /^.{1,64}$/.test(this.name)
         const isUnique = !store.playlists
           .map(x => x.title)
-          .includes(this.newName)
+          .includes(this.name)
         return isValidLength && isUnique
       }
     },
     methods: {
-      rename() {
+      newPlaylist() {
         if (!this.nameValid) return
-        store.renamePlaylist(this.playlist, this.newName)
+        store.newPlaylist(this.name, this.track)
         this.$children[0].close()
-      }
+      },
     },
     mounted() {
-      this.$root.$on("modal-playlist-rename", e => {
-        this.playlist = e.playlist
-        this.newName = e.playlist.title
+      this.$root.$on("modal-playlists-new", e => {
+        this.track = e ? e.track : null
       })
     },
   }

@@ -2,7 +2,7 @@
   <div class="main_inner">
     <h1 class="sr">Playlists</h1>
     <div class="items">
-      <button @click="$root.$emit('modal-playlist-new')" class="new">
+      <button @click="$root.$emit('modal-playlists-new')" class="new">
         + New Playlist
       </button>
       <PlaylistItem v-for="playlist in playlists"
