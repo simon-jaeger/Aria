@@ -1,4 +1,4 @@
-import slug from "slug"
+import slug from "./slug"
 
 class Store {
   series = []
@@ -18,14 +18,25 @@ class Store {
 
   getPlaylist(slug) {
     const playlist = this.playlists.find(x => x.slug === slug)
-    if (!playlist) router.replace("player/404")
+    if (!playlist) router.replace("/player/404")
     return playlist
+  }
+
+  // TODO: wip, also update database etc.
+  newPlaylist(name, firstTrack) {
+    this.playlists.unshift({
+      id: null,
+      title: name,
+      slug: slug(name),
+      tracks: firstTrack ? [{...firstTrack}] : [],
+    })
+    root.$emit("toast", {msg: "Playlist created"})
   }
 
   // TODO: wip, also update database etc.
   renamePlaylist(playlist, newName) {
     playlist.title = newName
-    playlist.slug = slug(newName, {lower: true})
+    playlist.slug = slug(newName)
     root.$emit("toast", {msg: "Playlist renamed"})
   }
 

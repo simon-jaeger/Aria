@@ -1,11 +1,14 @@
 <template>
   <aside class="player">
     <template v-if="track">
-      <RouterLink :to="link" class="player_track" :style="{backgroundImage: `url('${cover}')`}">
+      <RouterLink :to="link"
+                  class="player_track"
+                  :style="{backgroundImage: `url('${cover}')`}">
         <div class="player_info">
           <div class="player_title">{{ track.title }}</div>
           <div class="player_sub">
-            <div class="player_seriesOrPlaylist">{{ seriesOrPlaylist.title }}
+            <div class="player_seriesOrPlaylist">
+              {{ seriesOrPlaylist.title }}
             </div>
             <div>{{ currentTime | duration }} / {{ duration | duration }}</div>
           </div>

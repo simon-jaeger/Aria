@@ -9,7 +9,7 @@
         <slot/>
       </div>
       <footer class="modal_actions">
-        <slot name="actions" :close="close"></slot>
+        <slot name="actions"></slot>
       </footer>
     </div>
   </div>
@@ -27,10 +27,22 @@
     methods: {
       close() {
         this.open = false
+        setTimeout(() => {
+          this.$el.querySelectorAll("input").forEach(x => {
+            x.value = "" // clear entered values
+            x.dispatchEvent((new Event("input"))) // trigger v-model sync
+          })
+        }, 200)
       }
     },
     mounted() {
-      this.$root.$on("modal-" + this.name, () => this.open = true)
+      this.$root.$on("modal-" + this.name, () => {
+        this.open = true
+        // auto focus first input if exists
+        setTimeout(() => {
+          this.$el.querySelector("input").focus()
+        }, 200)
+      })
     },
     watch: {
       $route() {
@@ -71,7 +83,7 @@
     transition: all 0.3s;
     transform: translateY(-1rem);
   }
-  .modal.is-visible > .modal_inner {
+  .modal.is-open > .modal_inner {
     transform: translateY(0);
   }
 

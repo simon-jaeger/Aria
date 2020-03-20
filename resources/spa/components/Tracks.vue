@@ -24,7 +24,7 @@
         <button class="track_cell is-m4">more_vert</button>
         <template v-slot:menu>
           <div class="contextMenu">
-            <button @click="$root.$emit('modal-playlists-add',{track})">
+            <button @click="$root.$emit('modal-playlists-add', {track})">
               <i>playlist_add</i><span>Add to playlist</span>
             </button>
             <button v-if="removable" @click="$emit('remove', {track})">
