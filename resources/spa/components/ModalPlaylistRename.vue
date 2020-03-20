@@ -1,17 +1,14 @@
-<!-- TODO: wip, add functionality -->
 <template>
   <Modal title="Rename playlist" name="playlist-rename">
-    <template v-if="playlist">
-      <div class="input">
-        <label for="newName" class="input_label">New name</label>
-        <input type="text"
-               id="newName"
-               class="input_field"
-               maxlength="64"
-               v-model.trim="newName"
-               @keydown.enter="rename">
-      </div>
-    </template>
+    <div class="input">
+      <label for="newName" class="input_label">New name</label>
+      <input type="text"
+             id="newName"
+             class="input_field"
+             maxlength="64"
+             v-model.trim="newName"
+             @keydown.enter="rename">
+    </div>
     <template v-slot:actions>
       <button @click="$children[0].close()">Cancel</button>
       <button @click="rename" :disabled="!nameValid">Rename</button>

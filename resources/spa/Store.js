@@ -1,3 +1,5 @@
+import slug from "./slug"
+
 class Store {
   series = []
   /** @type {Array} */
@@ -22,14 +24,19 @@ class Store {
 
   // TODO: wip, also update database etc.
   newPlaylist(name) {
-    // TODO: modify store
+    this.playlists.unshift({
+      id: null,
+      title: name,
+      slug: slug(name),
+      tracks: [],
+    })
     root.$emit("toast", {msg: "Playlist created"})
   }
 
   // TODO: wip, also update database etc.
   renamePlaylist(playlist, newName) {
     playlist.title = newName
-    playlist.slug = newName.replace(/[\s/#?]/g, "-")
+    playlist.slug = slug(newName)
     root.$emit("toast", {msg: "Playlist renamed"})
   }
 

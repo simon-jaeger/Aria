@@ -27,6 +27,12 @@
     methods: {
       close() {
         this.open = false
+        setTimeout(() => {
+          this.$el.querySelectorAll("input").forEach(x => {
+            x.value = "" // clear entered values
+            x.dispatchEvent((new Event("input"))) // trigger v-model sync
+          })
+        }, 200)
       }
     },
     mounted() {
@@ -77,7 +83,7 @@
     transition: all 0.3s;
     transform: translateY(-1rem);
   }
-  .modal.is-visible > .modal_inner {
+  .modal.is-open > .modal_inner {
     transform: translateY(0);
   }
 

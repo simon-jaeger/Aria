@@ -1,6 +1,8 @@
 <template>
   <div style="position: relative;">
-    <RouterLink class="PlaylistItem" :to="'/player/playlists/' + playlist.slug">
+    <RouterLink class="PlaylistItem"
+                :class="{'is-empty': !playlist.tracks.length}"
+                :to="'/player/playlists/' + playlist.slug">
       <h2 class="title">{{ playlist.title }}</h2>
       <small class="sub">
         {{ playlist.tracks.length }} Tracks
@@ -24,6 +26,7 @@
 
 <script>
   import Context from "./Context"
+
   export default {
     name: "PlaylistItem",
     components: {Context},
@@ -42,6 +45,10 @@
     background-color: var(--black5);
     box-shadow: var(--shadow1);
     padding: 1rem 3rem 1rem 1rem;
+  }
+  .PlaylistItem.is-empty {
+    opacity: 0.5;
+    pointer-events: none;
   }
 
   .title {

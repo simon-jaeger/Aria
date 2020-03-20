@@ -1,17 +1,14 @@
-<!-- TODO: wip, add functionality -->
 <template>
   <Modal title="New playlist" name="playlist-new">
-    <template>
-      <div class="input">
-        <label for="name" class="input_label">Name</label>
-        <input type="text"
-               id="name"
-               class="input_field"
-               maxlength="64"
-               v-model.trim="name"
-               @keyup.enter="newPlaylist">
-      </div>
-    </template>
+    <div class="input">
+      <label for="name" class="input_label">Name</label>
+      <input type="text"
+             id="name"
+             class="input_field"
+             maxlength="64"
+             v-model.trim="name"
+             @keyup.enter="newPlaylist">
+    </div>
     <template v-slot:actions>
       <button @click="$children[0].close()">Cancel</button>
       <button @click="newPlaylist" :disabled="!nameValid">Create</button>
@@ -43,12 +40,8 @@
       newPlaylist() {
         if (!this.nameValid) return
         store.newPlaylist(this.name)
-
         this.$children[0].close()
-        setTimeout(() => {
-          this.name = ""
-        }, 500)
-      }
+      },
     },
   }
 </script>

@@ -5,9 +5,9 @@
       <!--
         TODO: check current playlist of track (sent with event?)
       -->
-      <div v-for="playlist in playlists" :key="playlist.id" class="check">
-        <input type="checkbox" :id="playlist.id">
-        <label :for="playlist.id" class="check_label">
+      <div v-for="playlist in playlists" :key="playlist.slug" class="check">
+        <input type="checkbox" :id="playlist.slug">
+        <label :for="playlist.slug" class="check_label">
           {{ playlist.title }}
         </label>
       </div>
@@ -31,8 +31,8 @@
     },
     methods: {
       toNewPlaylist() {
-        this.$root.$emit('modal-playlist-new')
         this.$children[0].close()
+        setTimeout(() => this.$root.$emit("modal-playlist-new"), 300)
       }
     },
   }
