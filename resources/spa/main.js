@@ -5,6 +5,7 @@ import router from "./router"
 import App from "./App.vue"
 import axios from "./axios"
 import "./filters"
+import './directives'
 
 window.store = store
 window.player = player

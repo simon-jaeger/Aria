@@ -31,6 +31,9 @@ sets sane defaults (border-box, border-collapse, ...)
 :focus {
   outline: 0;
 }
+::-moz-focus-inner {
+  border: 0;
+}
 
 ::placeholder {
   color: inherit;

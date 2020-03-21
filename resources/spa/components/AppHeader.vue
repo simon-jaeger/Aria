@@ -21,7 +21,7 @@
         <span class="account_text">Account</span>
       </button>
       <template v-slot:menu>
-        <div class="account_menu">
+        <div class="contextMenu">
           <RouterLink to="/player/settings">
             <i>settings</i>
             <span>Settings</span>
@@ -83,7 +83,7 @@
     line-height: 1;
   }
 
-  .account_menu {
+  .contextMenu {
     left: 1.75rem;
     right: auto
   }
@@ -108,7 +108,7 @@
       padding: 0;
     }
 
-    .account_menu {
+    .contextMenu {
       left: auto;
       right: 0;
       margin-top: -0.25rem;

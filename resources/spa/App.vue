@@ -165,6 +165,7 @@
 
   @media screen and (max-width: 1224px) {
     .input.is-search {
+      margin-left: 1.5rem;
       margin-right: 0;
       margin-bottom: 0;
     }
