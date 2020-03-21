@@ -2,7 +2,7 @@
   <div class="toast" :class="{'is-open': open}">
     <div class="toast_msg">{{ msg }}</div>
     <!-- TODO: undo aborts delayed backend sync with cleartimeout? -->
-    <button @click="close" class="toast_undo">Undo</button>
+    <button v-if="undo" @click="close" class="toast_undo">Undo</button>
   </div>
 </template>
 
@@ -13,21 +13,24 @@
       return {
         open: false,
         msg: "",
+        undo: null,
         timeout: null,
       }
     },
     methods: {
       close() {
         this.open = false
+        this.undo = null
         clearTimeout(this.timeout)
       }
     },
     mounted() {
       this.$root.$on("toast", (e) => {
         this.close()
-        this.msg = e.msg
         this.open = true
-        this.timeout = setTimeout(() => this.close(), 5000)
+        this.msg = e.msg
+        this.undo = e.undo
+        this.timeout = setTimeout(() => this.close(), 3000)
       })
     },
   }

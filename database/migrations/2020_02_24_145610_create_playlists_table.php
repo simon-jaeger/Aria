@@ -13,7 +13,7 @@ class CreatePlaylistsTable extends Migration {
   public function up() {
     Schema::create('playlists', function (Blueprint $table) {
       $table->bigIncrements('id');
-      $table->string('slug', 255)->unique();
+      $table->string('slug', 255);
       $table->string('title', 64);
     });
 

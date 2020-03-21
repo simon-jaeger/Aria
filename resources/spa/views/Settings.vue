@@ -1,3 +1,4 @@
+<!-- TODO: move this to laravel/mpa? -->
 <template>
   <div class="main_inner is-box">
     <h1>Settings</h1>
