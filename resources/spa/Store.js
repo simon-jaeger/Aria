@@ -22,6 +22,12 @@ class Store {
     return playlist
   }
 
+  getPlaylistsByTrack(track) {
+    return this.playlists.filter(x => {
+      return x.tracks.map(x => x.id).includes(track.id)
+    })
+  }
+
   // TODO: wip, also update database etc.
   newPlaylist(name, firstTrack) {
     this.playlists.unshift({
@@ -49,15 +55,21 @@ class Store {
   }
 
   // TODO: wip, also update database etc.
+  addTrack(playlist, track) {
+    playlist.tracks.push({...track})
+    root.$emit("toast", {msg: "Track added"})
+  }
+
+  // TODO: wip, also update database etc.
   removeTrack(playlist, track) {
-    playlist.tracks.splice(playlist.tracks.findIndex(x => x === track), 1)
+    playlist.tracks.splice(playlist.tracks.findIndex(x => x.id === track.id), 1)
     if (track === player.track) player.reset()
     root.$emit("toast", {msg: "Track removed"})
   }
 
   // TODO: wip, also update database etc.
   addToHistory(track) {
-    this.history.unshift(track)
+    this.history.unshift({...track})
   }
 
   // TODO: wip, also update database etc.

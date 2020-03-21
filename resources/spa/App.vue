@@ -165,7 +165,6 @@
 
   @media screen and (max-width: 1224px) {
     .input.is-search {
-      min-width: 12rem;
       margin-right: 0;
       margin-bottom: 0;
     }
@@ -173,12 +172,6 @@
     .input_field.is-search {
       padding-top: 0.5rem;
       padding-bottom: 0.5rem;
-    }
-  }
-
-  @media screen and (max-width: 480px) {
-    .input.is-search {
-      display: none;
     }
   }
 
@@ -192,6 +185,7 @@
   .check {
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
+    overflow: hidden;
   }
 
   /* hide native checkbox visually but not for screen readers */
@@ -209,6 +203,9 @@
   .check_label {
     position: relative;
     padding-left: 2rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
   .check_label::before {
     content: 'check_box_outline_blank';

@@ -117,6 +117,9 @@
     padding: 1.5rem;
     background-color: var(--black5);
   }
+  .modal_body:empty {
+    display: none;
+  }
 
   .modal_actions {
     display: flex;

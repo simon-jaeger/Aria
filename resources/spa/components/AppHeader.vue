@@ -15,8 +15,6 @@
              placeholder="Search...">
     </div>
 
-    <button class="mobilesearch">search</button>
-
     <Context>
       <button class="account">
         <i class="account_icon">person</i>

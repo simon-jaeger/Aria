@@ -12,9 +12,6 @@ import e500 from "./views/e500"
 // TODO: rm dev route
 import _dev from "./views/_dev"
 
-// TODO: maybe lazy load certain heavy routes, example below:
-// const LazyRoute = () => import(/* webpackChunkName: "LazyRoute" */ './views/LazyRoute')
-
 Vue.use(VueRouter)
 export default new VueRouter({
   mode: "history",

@@ -164,18 +164,18 @@
     }
     .track_cell.is-m4 {
       position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      top: -1.75rem;
     }
     .track_cell.is-m10 {
       display: none;
     }
     .track_cell.is-m20 {
       display: none;
+    }
+
+    .contextMenu {
+      right: -2.5rem;
+      top: 2rem;
     }
   }
 </style>
