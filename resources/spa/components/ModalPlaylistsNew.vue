@@ -5,7 +5,7 @@
       <input type="text"
              id="name"
              class="input_field"
-             maxlength="64"
+             maxlength="32"
              v-model.trim="name"
              @keyup.enter="newPlaylist">
     </div>
@@ -30,7 +30,7 @@
     },
     computed: {
       nameValid() {
-        const isValidLength = /^.{1,64}$/.test(this.name)
+        const isValidLength = /^.{1,32}$/.test(this.name)
         const isUnique = !store.playlists
           .map(x => x.title)
           .includes(this.name)
