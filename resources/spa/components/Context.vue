@@ -1,5 +1,5 @@
 <template>
-  <div @click="open = !open" @focusout="closeIfOutside($event)" class="context">
+  <div @click="open = !open" v-click-outside="close" class="context">
     <slot></slot>
     <div v-show="open" class="menuWrap">
       <slot name="menu"></slot>
@@ -16,10 +16,8 @@
       }
     },
     methods: {
-      closeIfOutside(e) {
-        if (!this.$el.contains(e.relatedTarget)) {
-          this.open = false
-        }
+      close() {
+        this.open = false
       },
     }
   }
@@ -56,11 +54,5 @@
     font-family: 'Material Icons', sans-serif;
     font-style: normal;
     overflow-wrap: normal;
-  }
-
-
-  /* TODO: use inline styles/classes for these context variations */
-  .context > .menuWrap.is-track {
-    margin-top: -0.5rem;
   }
 </style>

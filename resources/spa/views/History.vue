@@ -22,12 +22,11 @@
 </template>
 
 <script>
-  import Modal from "../components/Modal"
   import Tracks from "../components/Tracks"
 
   export default {
     name: "History",
-    components: {Tracks, Modal},
+    components: {Tracks},
     computed: {
       history: () => store.history,
     },

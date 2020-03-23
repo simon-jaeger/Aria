@@ -77,6 +77,13 @@ class Store {
     this.history = []
     root.$emit("toast", {msg: "History cleared"})
   }
+
+  get tracks() {
+    return this.series.reduce((a, v) => {
+      a.push(...v.tracks)
+      return a
+    }, [])
+  }
 }
 
 export default new Store()
