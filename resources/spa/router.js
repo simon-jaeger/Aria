@@ -5,6 +5,7 @@ import SeriesSingle from "./views/SeriesSingle"
 import Playlists from "./views/Playlists"
 import PlaylistsSingle from "./views/PlaylistsSingle"
 import History from "./views/History"
+import Search from "./views/Search"
 import Settings from "./views/Settings"
 import e404 from "./views/e404"
 import e500 from "./views/e500"
@@ -32,6 +33,7 @@ export default new VueRouter({
     {path: "/player/playlists", component: Playlists},
     {path: "/player/playlists/:slug", component: PlaylistsSingle},
     {path: "/player/history", component: History},
+    {path: "/player/search", component: Search},
     {path: "/player/settings", component: Settings},
     {path: "/player/404", component: e404},
     {path: "/player/500", component: e500},

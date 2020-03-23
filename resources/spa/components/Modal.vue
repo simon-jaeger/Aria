@@ -36,7 +36,7 @@
       }
     },
     mounted() {
-      this.$root.$on("modal-" + this.name, () => {
+      root.$on("modal-" + this.name, () => {
         this.open = true
         // auto focus first input if exists
         setTimeout(() => {
