@@ -28,7 +28,7 @@
             <i>settings</i>
             <span>Settings</span>
           </RouterLink>
-          <button>
+          <button @click="logout">
             <i>power_settings_new</i>
             <span>Log out</span>
           </button>
@@ -50,7 +50,10 @@
       search(q) {
         const action = this.$route.path === "/player/search" ? "replace" : "push"
         router[action]("/player/search?q=" + q).catch(e => console.warn(e))
-      }
+      },
+      logout() {
+        axios.post("/logout").then(() => window.location = "/login")
+      },
     },
     mounted() {
       root.$on("search-clear", () => this.$refs.search.value = "")
