@@ -70,6 +70,7 @@ class Store {
   // TODO: wip, also update database etc.
   addToHistory(track) {
     this.history.unshift({...track})
+    this.history = this.history.slice(0, 100) // save max 100 entries
   }
 
   // TODO: wip, also update database etc.
