@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class PlaylistController extends Controller {
   public function index() {
-    return Playlist::with('tracks')->orderBy('id', 'desc')->get();
+    return Playlist::with('tracks')->orderBy('title', 'asc')->get();
   }
 
   public function store() {
