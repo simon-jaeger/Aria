@@ -31,6 +31,8 @@ Route::prefix('api')
     Route::get('series', 'SeriesController@index');
 
     Route::get('playlists', 'PlaylistController@index');
+    Route::post('playlists', 'PlaylistController@store');
+    Route::delete('playlists/{playlist}', 'PlaylistController@destroy');
 
     Route::get('history', 'HistoryController@show');
   });

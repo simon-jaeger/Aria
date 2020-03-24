@@ -1,4 +1,4 @@
-import slug from "./slug"
+import toSlug from "./toSlug"
 
 class Store {
   series = []
@@ -29,20 +29,20 @@ class Store {
   }
 
   // TODO: wip, also update database etc.
-  newPlaylist(name, firstTrack) {
-    this.playlists.unshift({
-      id: null,
-      title: name,
-      slug: slug(name),
-      tracks: firstTrack ? [{...firstTrack}] : [],
-    })
-    root.$emit("toast", {msg: "Playlist created"})
+  newPlaylist(title, firstTrack) {
+    const slug = toSlug(title)
+    const tracks = firstTrack ? [{...firstTrack}] : []
+    axios.post("/api/playlists", {title, slug, tracks})
+      .then(({data: playlist}) => {
+        this.playlists.unshift(playlist)
+        root.$emit("toast", {msg: "Playlist created"})
+      })
   }
 
   // TODO: wip, also update database etc.
   renamePlaylist(playlist, newName) {
     playlist.title = newName
-    playlist.slug = slug(newName)
+    playlist.slug = toSlug(newName)
     root.$emit("toast", {msg: "Playlist renamed"})
   }
 
@@ -52,6 +52,8 @@ class Store {
     if (playlist === player.seriesOrPlaylist) player.reset()
     this.playlists.splice(this.playlists.indexOf(playlist), 1)
     root.$emit("toast", {msg: "Playlist deleted"})
+    // TODO: add undo functionality? axios as callback for toast, only called if not aborted?
+    axios.delete("/api/playlists/" + playlist.id)
   }
 
   // TODO: wip, also update database etc.

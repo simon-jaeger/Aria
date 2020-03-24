@@ -1,5 +1,5 @@
 // create an url safe slug
-function slug(string) {
+function toSlug(string) {
   return string.replace(/[\s/#?]/g, "-")
 }
-export default slug
+export default toSlug

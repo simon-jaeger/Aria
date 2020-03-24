@@ -11,6 +11,7 @@ class CreatePlaylistsTable extends Migration {
    * @return void
    */
   public function up() {
+    // TODO: link playlists to users (fix controller too)
     Schema::create('playlists', function (Blueprint $table) {
       $table->bigIncrements('id');
       $table->string('slug', 255);
@@ -33,8 +34,6 @@ class CreatePlaylistsTable extends Migration {
         ->on('tracks')
         ->onDelete('cascade');
     });
-
-    // TODO: link playlists to users (fix controller too)
   }
 
   /**

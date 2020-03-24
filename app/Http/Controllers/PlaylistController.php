@@ -7,6 +7,24 @@ use Illuminate\Http\Request;
 
 class PlaylistController extends Controller {
   public function index() {
-    return Playlist::with('tracks')->get();
+    return Playlist::with('tracks')->orderBy('id', 'desc')->get();
+  }
+
+  public function store() {
+    // TODO: add first track if provided
+    $playlist = Playlist::create([
+      'title' => request('title'),
+      'slug' => request('slug'),
+    ]);
+    return Playlist::with('tracks')->find($playlist->id);
+  }
+
+  public function update() {
+
+  }
+
+  public function destroy(Playlist $playlist) {
+    /** @noinspection PhpUnhandledExceptionInspection */
+    $playlist->delete();
   }
 }
