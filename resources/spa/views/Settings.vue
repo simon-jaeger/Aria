@@ -33,7 +33,10 @@
 
 <script>
   export default {
-    name: "Settings"
+    name: "Settings",
+    metaInfo: {
+      title: "Settings"
+    },
   }
 </script>
 

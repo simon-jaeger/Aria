@@ -17,6 +17,9 @@
 
   export default {
     name: "Playlists",
+    metaInfo: {
+      title: "Playlists"
+    },
     components: {PlaylistItem},
     computed: {
       playlists: () => store.playlists,

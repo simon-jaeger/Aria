@@ -35,6 +35,11 @@
 
   export default {
     name: "SeriesSingle",
+    metaInfo() {
+      return {
+        title: this.series.title
+      }
+    },
     components: {Tracks},
     data() {
       return {

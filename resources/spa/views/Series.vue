@@ -14,6 +14,9 @@
 
   export default {
     name: "Series",
+    metaInfo: {
+      title: "Series"
+    },
     components: {SeriesItem},
     computed: {
       series: () => store.series,

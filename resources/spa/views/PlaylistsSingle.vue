@@ -52,6 +52,11 @@
 
   export default {
     name: "PlaylistsSingle",
+    metaInfo() {
+      return {
+        title: this.playlist.title
+      }
+    },
     components: {Context, Tracks},
     data() {
       return {

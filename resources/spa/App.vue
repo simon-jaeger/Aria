@@ -26,6 +26,9 @@
 
   export default {
     name: "App",
+    metaInfo: {
+      titleTemplate: 'Aria | %s'
+    },
     components: {
       ModalPlaylistsNew,
       ModalPlaylistsRename,

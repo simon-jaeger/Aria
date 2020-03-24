@@ -26,6 +26,9 @@
 
   export default {
     name: "History",
+    metaInfo: {
+      title: "History"
+    },
     components: {Tracks},
     computed: {
       history: () => store.history,

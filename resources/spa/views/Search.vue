@@ -22,6 +22,9 @@
 
   export default {
     name: "Search",
+    metaInfo: {
+      title: "Search"
+    },
     components: {Tracks},
     data() {
       return {
