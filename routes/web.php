@@ -20,14 +20,17 @@ Route::view('/player/{any}', 'player')->where('any', '.*')->middleware('auth');
 
 // api (internal, authorized users only)
 // -----------------------------------------------------------------------------
-Route::prefix('api')->middleware('auth')->group(function () {
-  Route::get('user', function () {
-    return Auth::user();
+Route::prefix('api')
+  ->middleware('auth')
+  ->middleware('throttle:60,1')
+  ->group(function () {
+    Route::get('user', function () {
+      return Auth::user();
+    });
+
+    Route::get('series', 'SeriesController@index');
+
+    Route::get('playlists', 'PlaylistController@index');
+
+    Route::get('history', 'HistoryController@show');
   });
-
-  Route::get('series', 'SeriesController@index');
-
-  Route::get('playlists', 'PlaylistController@index');
-
-  Route::get('history', 'HistoryController@show');
-});
