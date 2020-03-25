@@ -20,8 +20,14 @@ class PlaylistController extends Controller {
   }
 
   public function update(Playlist $playlist) {
-    $playlist->title = request('title');
-    $playlist->slug = request('slug');
+    if (request()->has('title')) {
+      $playlist->title = request('title');
+      $playlist->slug = request('slug');
+    }
+    if (request()->has('track')) {
+      $order = $playlist->tracks()->count() + 1;
+      $playlist->tracks()->attach(request('track')['id'], ['order' => $order]);
+    }
     $playlist->save();
   }
 

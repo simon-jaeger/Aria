@@ -56,10 +56,10 @@ class Store {
     axios.delete("/api/playlists/" + playlist.id)
   }
 
-  // TODO: wip, also update database etc.
   addTrack(playlist, track) {
     playlist.tracks.push({...track})
-    root.$emit("toast", {msg: "Track added"})
+    axios.patch("/api/playlists/" + playlist.id, {track})
+      .then(() => root.$emit("toast", {msg: "Track added"}))
   }
 
   // TODO: wip, also update database etc.
