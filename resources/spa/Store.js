@@ -66,7 +66,8 @@ class Store {
   removeTrack(playlist, track) {
     playlist.tracks.splice(playlist.tracks.findIndex(x => x.id === track.id), 1)
     if (track === player.track) player.reset()
-    root.$emit("toast", {msg: "Track removed"})
+    axios.patch("/api/playlists/" + playlist.id, {track})
+      .then(() => root.$emit("toast", {msg: "Track removed"}))
   }
 
   // TODO: wip, also update database etc.

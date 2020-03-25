@@ -25,8 +25,15 @@ class PlaylistController extends Controller {
       $playlist->slug = request('slug');
     }
     if (request()->has('track')) {
-      $order = $playlist->tracks()->count() + 1;
-      $playlist->tracks()->attach(request('track')['id'], ['order' => $order]);
+      $id = request('track')['id'];
+      $isInPlaylist = $playlist->tracks()->where('track_id', $id)->count();
+      if ($isInPlaylist) {
+        $playlist->tracks()->detach($id);
+        // TODO: fix order somehow.. (1,3,99, ... (holes))
+      } else {
+        $order = $playlist->tracks()->count() + 1;
+        $playlist->tracks()->attach($id, ['order' => $order]);
+      }
     }
     $playlist->save();
   }
