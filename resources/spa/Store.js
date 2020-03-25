@@ -41,7 +41,7 @@ class Store {
   renamePlaylist(playlist, newName) {
     playlist.title = newName
     playlist.slug = toSlug(newName)
-    axios.put("/api/playlists/" + playlist.id, {
+    axios.patch("/api/playlists/" + playlist.id, {
       title: playlist.title,
       slug: playlist.slug
     }).then(() => root.$emit("toast", {msg: "Playlist renamed"}))
