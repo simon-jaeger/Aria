@@ -28,7 +28,6 @@ class Store {
     })
   }
 
-  // TODO: wip, also update database etc.
   newPlaylist(title, firstTrack) {
     const slug = toSlug(title)
     const tracks = firstTrack ? [{...firstTrack}] : []
@@ -39,14 +38,15 @@ class Store {
       })
   }
 
-  // TODO: wip, also update database etc.
   renamePlaylist(playlist, newName) {
     playlist.title = newName
     playlist.slug = toSlug(newName)
-    root.$emit("toast", {msg: "Playlist renamed"})
+    axios.put("/api/playlists/" + playlist.id, {
+      title: playlist.title,
+      slug: playlist.slug
+    }).then(() => root.$emit("toast", {msg: "Playlist renamed"}))
   }
 
-  // TODO: wip, also update database etc.
   deletePlaylist(slug) {
     const playlist = this.playlists.find(x => x.slug === slug)
     if (playlist === player.seriesOrPlaylist) player.reset()

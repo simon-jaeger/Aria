@@ -32,6 +32,7 @@ Route::prefix('api')
 
     Route::get('playlists', 'PlaylistController@index');
     Route::post('playlists', 'PlaylistController@store');
+    Route::put('playlists/{playlist}', 'PlaylistController@update');
     Route::delete('playlists/{playlist}', 'PlaylistController@destroy');
 
     Route::get('history', 'HistoryController@show');

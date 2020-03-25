@@ -19,8 +19,10 @@ class PlaylistController extends Controller {
     return Playlist::with('tracks')->find($playlist->id);
   }
 
-  public function update() {
-
+  public function update(Playlist $playlist) {
+    $playlist->title = request('title');
+    $playlist->slug = request('slug');
+    $playlist->save();
   }
 
   public function destroy(Playlist $playlist) {
