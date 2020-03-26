@@ -11,6 +11,7 @@ class PlaylistController extends Controller {
   }
 
   public function store() {
+    // TODO: send whole playlist object like in update()?
     // TODO: add first track if provided
     $playlist = Playlist::create([
       'title' => request('title'),
@@ -20,21 +21,21 @@ class PlaylistController extends Controller {
   }
 
   public function update(Playlist $playlist) {
-    if (request()->has('title')) {
-      $playlist->title = request('title');
-      $playlist->slug = request('slug');
-    }
-    if (request()->has('track')) {
-      $id = request('track')['id'];
-      $isInPlaylist = $playlist->tracks()->where('track_id', $id)->count();
-      if ($isInPlaylist) {
-        $playlist->tracks()->detach($id);
-        // TODO: fix order somehow.. (1,3,99, ... (holes))
-      } else {
-        $order = $playlist->tracks()->count() + 1;
-        $playlist->tracks()->attach($id, ['order' => $order]);
-      }
-    }
+    $newPlaylist = request('playlist');
+
+    // update playlist record
+    $playlist->title = $newPlaylist['title'];
+    $playlist->slug = $newPlaylist['slug'];
+
+    // update playlist_track pivot
+    $newTracksIDs = collect($newPlaylist['tracks'])
+      ->mapWithKeys(function ($x, $i) {
+        // redefine pivot order for every track
+        // to avoid holes and add new tracks to the end
+        return [$x['id'] => ['order' => $i + 1]];
+      });
+    $playlist->tracks()->sync($newTracksIDs);
+
     $playlist->save();
   }
 

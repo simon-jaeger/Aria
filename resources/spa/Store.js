@@ -41,10 +41,9 @@ class Store {
   renamePlaylist(playlist, newName) {
     playlist.title = newName
     playlist.slug = toSlug(newName)
-    axios.patch("/api/playlists/" + playlist.id, {
-      title: playlist.title,
-      slug: playlist.slug
-    }).then(() => root.$emit("toast", {msg: "Playlist renamed"}))
+    axios.put("/api/playlists/" + playlist.id, {playlist}).then(() => {
+      root.$emit("toast", {msg: "Playlist renamed"})
+    })
   }
 
   deletePlaylist(slug) {
@@ -58,16 +57,18 @@ class Store {
 
   addTrack(playlist, track) {
     playlist.tracks.push({...track})
-    axios.patch("/api/playlists/" + playlist.id, {track})
-      .then(() => root.$emit("toast", {msg: "Track added"}))
+    axios.put("/api/playlists/" + playlist.id, {playlist}).then(() => {
+      root.$emit("toast", {msg: "Track added"})
+    })
   }
 
   // TODO: wip, also update database etc.
   removeTrack(playlist, track) {
     playlist.tracks.splice(playlist.tracks.findIndex(x => x.id === track.id), 1)
     if (track === player.track) player.reset()
-    axios.patch("/api/playlists/" + playlist.id, {track})
-      .then(() => root.$emit("toast", {msg: "Track removed"}))
+    axios.put("/api/playlists/" + playlist.id, {playlist}).then(() => {
+      root.$emit("toast", {msg: "Track removed"})
+    })
   }
 
   // TODO: wip, also update database etc.
