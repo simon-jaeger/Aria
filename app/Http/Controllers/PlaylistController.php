@@ -20,7 +20,7 @@ class PlaylistController extends Controller {
     ]);
 
     // attach first track if provided
-    if ($playlistRequest['tracks']) {
+    if (count($playlistRequest['tracks'])) {
       $playlist->tracks()->attach(
         $playlistRequest['tracks'][0]['id'],
         ['order' => 1]
