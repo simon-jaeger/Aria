@@ -52,10 +52,17 @@ class Store {
   deletePlaylist(slug) {
     const playlist = this.playlists.find(x => x.slug === slug)
     if (playlist === player.seriesOrPlaylist) player.reset()
-    this.playlists.splice(this.playlists.indexOf(playlist), 1)
-    root.$emit("toast", {msg: "Playlist deleted"})
-    // TODO: add undo functionality? axios as callback for toast, only called if not aborted?
-    axios.delete("/api/playlists/" + playlist.id)
+    const indexPlaylist = this.playlists.indexOf(playlist)
+    this.playlists.splice(indexPlaylist, 1)
+
+    root.$emit("toast", {
+      msg: "Playlist deleted",
+      callback: () => axios.delete("/api/playlists/" + playlist.id),
+      abort: () => {
+        this.playlists.splice(indexPlaylist, 0, playlist)
+        root.$emit("toast", {msg: "playlist restored"})
+      },
+    })
   }
 
   addTrack(playlist, track) {
@@ -82,6 +89,7 @@ class Store {
   // TODO: wip, also update database etc.
   clearHistory() {
     this.history = []
+    // TODO: make undoable
     root.$emit("toast", {msg: "History cleared"})
   }
 

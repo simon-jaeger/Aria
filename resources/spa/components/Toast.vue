@@ -1,8 +1,7 @@
 <template>
   <div class="toast" :class="{'is-open': open}">
     <div class="toast_msg">{{ msg }}</div>
-    <!-- TODO: undo aborts delayed backend sync with cleartimeout? -->
-    <button v-if="undo" @click="close" class="toast_undo">Undo</button>
+    <button v-if="abort" @click="undo" class="toast_undo">Undo</button>
   </div>
 </template>
 
@@ -13,24 +12,40 @@
       return {
         open: false,
         msg: "",
-        undo: null,
+        callback: null,
+        abort: null,
         timeout: null,
       }
     },
     methods: {
-      close() {
+      reset() {
         this.open = false
-        this.undo = null
+        this.callback = null
+        this.abort = null
         clearTimeout(this.timeout)
-      }
+      },
+      undo() {
+        this.callback = null
+        this.abort()
+      },
     },
     mounted() {
+      // display toast on global event and run optional callback after timeout
+      // during the timeout, the undo button may nullify the callback
+      // and run an abort function instead
       this.$root.$on("toast", (e) => {
-        this.close()
+        // call old callback first before showing a new toast, then reset
+        if (this.callback) this.callback()
+        this.reset()
+
         this.open = true
         this.msg = e.msg
-        this.undo = e.undo
-        this.timeout = setTimeout(() => this.close(), 3000)
+        this.callback = e.callback
+        this.abort = e.abort
+        this.timeout = setTimeout(() => {
+          if (this.callback) this.callback()
+          this.reset()
+        }, 3000)
       })
     },
   }
