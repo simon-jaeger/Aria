@@ -11,10 +11,15 @@ class CreatePlaylistsTable extends Migration {
    * @return void
    */
   public function up() {
+    // TODO: link playlists to users (fix controller too)
+
+    // TODO: slug and title only unique for that user!
+    //       two users can have playlists with the same title/slug!
+
     Schema::create('playlists', function (Blueprint $table) {
       $table->bigIncrements('id');
-      $table->string('slug', 255);
-      $table->string('title', 32);
+      $table->string('slug', 255)->unique();
+      $table->string('title', 32)->unique();
     });
 
     Schema::create('playlist_track', function (Blueprint $table) {
@@ -33,8 +38,6 @@ class CreatePlaylistsTable extends Migration {
         ->on('tracks')
         ->onDelete('cascade');
     });
-
-    // TODO: link playlists to users (fix controller too)
   }
 
   /**

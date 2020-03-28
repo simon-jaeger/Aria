@@ -45,7 +45,7 @@
         axios.get("/api/series").then(({data}) => store.series = data),
         axios.get("/api/playlists").then(({data}) => store.playlists = data),
         axios.get("/api/history").then(({data}) => store.history = data),
-      ]).then(() => this.ready = true)
+      ]).finally(() => this.ready = true)
     }
   }
 </script>
