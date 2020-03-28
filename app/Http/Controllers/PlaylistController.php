@@ -11,12 +11,22 @@ class PlaylistController extends Controller {
   }
 
   public function store() {
-    // TODO: send whole playlist object like in update()?
-    // TODO: add first track if provided
+    $playlistRequest = request('playlist');
+
+    // create playlist record
     $playlist = Playlist::create([
-      'title' => request('title'),
-      'slug' => request('slug'),
+      'title' => $playlistRequest['title'],
+      'slug' => $playlistRequest['slug'],
     ]);
+
+    // attach first track if provided
+    if ($playlistRequest['tracks']) {
+      $playlist->tracks()->attach(
+        $playlistRequest['tracks'][0]['id'],
+        ['order' => 1]
+      );
+    }
+
     return Playlist::with('tracks')->find($playlist->id);
   }
 

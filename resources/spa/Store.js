@@ -29,9 +29,12 @@ class Store {
   }
 
   newPlaylist(title, firstTrack) {
-    const slug = toSlug(title)
-    const tracks = firstTrack ? [{...firstTrack}] : []
-    axios.post("/api/playlists", {title, slug, tracks})
+    const playlist = {
+      title,
+      slug: toSlug(title),
+      tracks: firstTrack ? [{...firstTrack}] : [],
+    }
+    axios.post("/api/playlists", {playlist})
       .then(({data: playlist}) => {
         this.playlists.unshift(playlist)
         root.$emit("toast", {msg: "Playlist created"})
@@ -62,7 +65,6 @@ class Store {
     })
   }
 
-  // TODO: wip, also update database etc.
   removeTrack(playlist, track) {
     playlist.tracks.splice(playlist.tracks.findIndex(x => x.id === track.id), 1)
     if (track === player.track) player.reset()
