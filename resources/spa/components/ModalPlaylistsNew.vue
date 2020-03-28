@@ -5,7 +5,6 @@
       <input type="text"
              id="name"
              class="input_field"
-             maxlength="32"
              v-model.trim="name"
              @keyup.enter="newPlaylist">
     </div>

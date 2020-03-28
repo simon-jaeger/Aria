@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Playlist;
 use Illuminate\Http\Request;
 
+// TODO: users should only be able to crud their own playlists
 class PlaylistController extends Controller {
   public function index() {
     return Playlist::with('tracks')->orderBy('title', 'asc')->get();
