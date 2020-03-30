@@ -11,19 +11,17 @@ class PlaylistController extends Controller {
     return Playlist::with('tracks')->orderBy('title', 'asc')->get();
   }
 
-  public function store() {
-    $playlistRequest = request('playlist');
-
+  public function store(Request $req) {
     // create playlist record
     $playlist = Playlist::create([
-      'title' => $playlistRequest['title'],
-      'slug' => $playlistRequest['slug'],
+      'title' => $req['title'],
+      'slug' => $req['slug'],
     ]);
 
     // attach first track if provided
-    if (count($playlistRequest['tracks'])) {
+    if (count($req['tracks'])) {
       $playlist->tracks()->attach(
-        $playlistRequest['tracks'][0]['id'],
+        $req['tracks'][0]['id'],
         ['order' => 1]
       );
     }
@@ -31,15 +29,13 @@ class PlaylistController extends Controller {
     return Playlist::with('tracks')->find($playlist->id);
   }
 
-  public function update(Playlist $playlist) {
-    $newPlaylist = request('playlist');
-
+  public function update(Request $req, Playlist $playlist) {
     // update playlist record
-    $playlist->title = $newPlaylist['title'];
-    $playlist->slug = $newPlaylist['slug'];
+    $playlist->title = $req['title'];
+    $playlist->slug = $req['slug'];
 
     // update playlist_track pivot
-    $newTracksIDs = collect($newPlaylist['tracks'])
+    $newTracksIDs = collect($req['tracks'])
       ->mapWithKeys(function ($x, $i) {
         // redefine pivot order for every track
         // to avoid holes and add new tracks to the end

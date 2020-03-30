@@ -34,7 +34,7 @@ class Store {
       slug: toSlug(title),
       tracks: firstTrack ? [{...firstTrack}] : [],
     }
-    axios.post("/api/playlists", {playlist})
+    axios.post("/api/playlists", playlist)
       .then(({data: playlist}) => {
         this.playlists.unshift(playlist)
         root.$emit("toast", {msg: "Playlist created"})
@@ -44,7 +44,7 @@ class Store {
   renamePlaylist(playlist, newName) {
     playlist.title = newName
     playlist.slug = toSlug(newName)
-    axios.put("/api/playlists/" + playlist.id, {playlist}).then(() => {
+    axios.put("/api/playlists/" + playlist.id, playlist).then(() => {
       root.$emit("toast", {msg: "Playlist renamed"})
     })
   }
@@ -67,7 +67,7 @@ class Store {
 
   addTrack(playlist, track) {
     playlist.tracks.push({...track})
-    axios.put("/api/playlists/" + playlist.id, {playlist}).then(() => {
+    axios.put("/api/playlists/" + playlist.id, playlist).then(() => {
       root.$emit("toast", {msg: "Track added"})
     })
   }
@@ -75,7 +75,7 @@ class Store {
   removeTrack(playlist, track) {
     playlist.tracks.splice(playlist.tracks.findIndex(x => x.id === track.id), 1)
     if (track === player.track) player.reset()
-    axios.put("/api/playlists/" + playlist.id, {playlist}).then(() => {
+    axios.put("/api/playlists/" + playlist.id, playlist).then(() => {
       root.$emit("toast", {msg: "Track removed"})
     })
   }
