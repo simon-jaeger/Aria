@@ -60,7 +60,7 @@ class Store {
       callback: () => axios.delete("/api/playlists/" + playlist.id),
       abort: () => {
         this.playlists.splice(indexPlaylist, 0, playlist)
-        root.$emit("toast", {msg: "playlist restored"})
+        root.$emit("toast", {msg: "Playlist restored"})
       },
     })
   }
@@ -80,17 +80,24 @@ class Store {
     })
   }
 
-  // TODO: wip, also update database etc.
   addToHistory(track) {
     this.history.unshift({...track})
     this.history = this.history.slice(0, 100) // save max 100 entries
+    axios.put("/api/history", this.history)
   }
 
-  // TODO: wip, also update database etc.
   clearHistory() {
+    const oldHistory = JSON.parse(JSON.stringify(this.history))
     this.history = []
-    // TODO: make undoable
-    root.$emit("toast", {msg: "History cleared"})
+
+    root.$emit("toast", {
+      msg: "History cleared",
+      callback: () => axios.put("/api/history", this.history),
+      abort: () => {
+        this.history = oldHistory
+        root.$emit("toast", {msg: "History restored"})
+      },
+    })
   }
 
   get tracks() {

@@ -12,6 +12,7 @@ axios.interceptors.response.use(null, error => {
     case 404:
       router.replace("/player/404")
       break
+    case 400:
     case 500:
     default:
       router.replace("/player/500")

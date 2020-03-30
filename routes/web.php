@@ -36,4 +36,5 @@ Route::prefix('api')
     Route::delete('playlists/{playlist}', 'PlaylistController@destroy');
 
     Route::get('history', 'HistoryController@show');
+    Route::put('history', 'HistoryController@update');
   });
