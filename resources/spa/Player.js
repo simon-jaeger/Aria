@@ -66,6 +66,7 @@ class Player {
   }
 
   reset() {
+    this.pause()
     this.track = null
     this.seriesOrPlaylist = null
     this.playing = false

@@ -39,7 +39,9 @@
       </div>
     </template>
     <!-- TODO: prettier no track msg with cta -->
-    <template v-else>no track</template>
+    <template v-else>
+      <div class="player_noTrack">No track selected</div>
+    </template>
   </aside>
 </template>
 
@@ -85,6 +87,16 @@
     top: 0;
     padding: 3rem 1rem 1rem;
     background-color: var(--black5);
+  }
+
+  .player_noTrack {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 13rem;
+    padding: 1rem;
+    border: 1px solid var(--white7);
+    color: var(--white6);
   }
 
   .player_track {
