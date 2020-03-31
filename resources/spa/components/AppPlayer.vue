@@ -38,9 +38,9 @@
         </button>
       </div>
     </template>
-    <!-- TODO: prettier no track msg with cta -->
+    
     <template v-else>
-      <div class="player_noTrack">No track selected</div>
+      <div class="player_noTrack">music_note</div>
     </template>
   </aside>
 </template>
@@ -96,7 +96,11 @@
     height: 13rem;
     padding: 1rem;
     border: 1px solid var(--white7);
-    color: var(--white6);
+    font-family: 'Material Icons', sans-serif;
+    overflow-wrap: normal;
+    font-size: 2rem;
+    color: var(--white7);
+    user-select: none;
   }
 
   .player_track {
