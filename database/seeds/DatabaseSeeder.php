@@ -69,11 +69,12 @@ class DatabaseSeeder extends Seeder {
     ]);
 
     // TODO: test playlists, remove later?
-    for ($i = 1; $i <= 6; $i++) {
+    for ($i = 1; $i <= 15; $i++) {
       $title = $faker->unique()->words(3, true);
       \App\Playlist::create([
         'slug' => \Illuminate\Support\Str::slug($title),
         'title' => $title,
+        'user_id' => mt_rand(1, 3),
       ]);
     }
 
@@ -89,8 +90,8 @@ class DatabaseSeeder extends Seeder {
           'file' => ($j % 2 === 0 ? 'fair-theme.mp3' : 'field.mp3') . "#{$i}{$j}",
           'series_id' => $i,
         ]);
-        if (mt_rand(0, 1)) { // 50% chance to add to a random playlist
-          \App\Playlist::find($faker->numberBetween(1, 6))
+        if (mt_rand(1, 1)) { // 100% chance to add to a random playlist
+          \App\Playlist::find($faker->numberBetween(1, 15))
             ->tracks()
             ->attach($track, ['order' => $faker->numberBetween(1, 9),]);
         }

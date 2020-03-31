@@ -6,7 +6,6 @@ use App\History;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-// TODO: users should only be able to crud their own history
 class HistoryController extends Controller {
   public function show() {
     return Auth::user()->history->tracks()->get();

@@ -4,11 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Playlist;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 // TODO: users should only be able to crud their own playlists
 class PlaylistController extends Controller {
   public function index() {
-    return Playlist::with('tracks')->orderBy('title', 'asc')->get();
+    return Auth::user()
+      ->playlists()
+      ->with('tracks')
+      ->orderBy('title', 'asc')
+      ->get();
   }
 
   public function store(Request $req) {

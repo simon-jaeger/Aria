@@ -13,14 +13,13 @@ class CreateHistoriesTable extends Migration {
   public function up() {
     Schema::create('histories', function (Blueprint $table) {
       $table->bigIncrements('id');
-      $table->unsignedBigInteger('user_id');
 
+      $table->unsignedBigInteger('user_id');
       $table->foreign('user_id')
         ->references('id')
         ->on('users')
         ->onDelete('cascade');
     });
-
 
     Schema::create('history_track', function (Blueprint $table) {
       $table->bigIncrements('id');
@@ -37,8 +36,6 @@ class CreateHistoriesTable extends Migration {
         ->on('tracks')
         ->onDelete('cascade');
     });
-
-    // TODO: link histories to users (fix controller too)
   }
 
   /**

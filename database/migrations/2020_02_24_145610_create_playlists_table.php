@@ -20,6 +20,12 @@ class CreatePlaylistsTable extends Migration {
       $table->bigIncrements('id');
       $table->string('slug', 255)->unique();
       $table->string('title', 32)->unique();
+
+      $table->unsignedBigInteger('user_id');
+      $table->foreign('user_id')
+        ->references('id')
+        ->on('users')
+        ->onDelete('cascade');
     });
 
     Schema::create('playlist_track', function (Blueprint $table) {
