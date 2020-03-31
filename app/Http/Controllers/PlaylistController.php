@@ -17,11 +17,12 @@ class PlaylistController extends Controller {
   }
 
   public function store(Request $req) {
-    // create playlist record
-    $playlist = Playlist::create([
+    // create playlist
+    $playlist = new Playlist([
       'title' => $req['title'],
       'slug' => $req['slug'],
     ]);
+    Auth::user()->playlists()->save($playlist);
 
     // attach first track if provided
     if (count($req['tracks'])) {
