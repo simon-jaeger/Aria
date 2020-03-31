@@ -38,7 +38,7 @@
         </button>
       </div>
     </template>
-    
+
     <template v-else>
       <div class="player_noTrack">music_note</div>
     </template>

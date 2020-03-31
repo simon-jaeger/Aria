@@ -11,13 +11,29 @@ class DatabaseSeeder extends Seeder {
   public function run() {
     $faker = Faker\Factory::create();
 
-    // TODO: test user, remove later
+    // TODO: test users, remove later
     \App\User::create([
       'email' => 'a@b',
       'password' => '$2y$10$ofiQGeXPluKG45u62i7.K.PuJArQUXgyY5Adu1EyJKM0zMcrO.MSO', // p
     ]);
-    // TODO: test history, remove later
-    \App\History::create([]);
+    \App\User::create([
+      'email' => 'aa@b',
+      'password' => '$2y$10$ofiQGeXPluKG45u62i7.K.PuJArQUXgyY5Adu1EyJKM0zMcrO.MSO', // p
+    ]);
+    \App\User::create([
+      'email' => 'aaa@b',
+      'password' => '$2y$10$ofiQGeXPluKG45u62i7.K.PuJArQUXgyY5Adu1EyJKM0zMcrO.MSO', // p
+    ]);
+    // TODO: test histories, remove later
+    \App\History::create([
+      'user_id' => 1,
+    ]);
+    \App\History::create([
+      'user_id' => 2,
+    ]);
+    \App\History::create([
+      'user_id' => 3,
+    ]);
 
 
     // TODO: test series, remove later?
@@ -78,8 +94,8 @@ class DatabaseSeeder extends Seeder {
             ->tracks()
             ->attach($track, ['order' => $faker->numberBetween(1, 9),]);
         }
-        if (mt_rand(1, 10) <= 2) { // 20% chance to add to dummy history
-          \App\History::find(1)
+        if (mt_rand(0, 1)) { // 50% chance to add to a dummy history
+          \App\History::find(mt_rand(1, 3))
             ->tracks()
             ->attach($track);
         }

@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use App\History;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-// TODO: find users history instead of hardcoding history with id 1
 // TODO: users should only be able to crud their own history
 class HistoryController extends Controller {
   public function show() {
-    return History::find(1)->tracks()->get();
+    return Auth::user()->history->tracks()->get();
   }
 
   public function update(Request $req) {
