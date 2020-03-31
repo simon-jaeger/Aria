@@ -18,14 +18,17 @@ class CreatePlaylistsTable extends Migration {
 
     Schema::create('playlists', function (Blueprint $table) {
       $table->bigIncrements('id');
-      $table->string('slug', 255)->unique();
-      $table->string('title', 32)->unique();
+      $table->string('slug', 255);
+      $table->string('title', 32);
 
       $table->unsignedBigInteger('user_id');
       $table->foreign('user_id')
         ->references('id')
         ->on('users')
         ->onDelete('cascade');
+
+      $table->unique(['user_id', 'title']);
+      $table->unique(['user_id', 'slug']);
     });
 
     Schema::create('playlist_track', function (Blueprint $table) {
