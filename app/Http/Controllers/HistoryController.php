@@ -13,7 +13,7 @@ class HistoryController extends Controller {
   }
 
   public function update(Request $req) {
-    $history = History::find(1);
+    $history = Auth::user()->history;
 
     // prevent illegal action of adding more than 100 entries
     if (collect($req)->count() > 100) {
