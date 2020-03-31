@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\History;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
@@ -53,15 +54,17 @@ class RegisterController extends Controller {
   }
 
   /**
-   * Create a new user instance after a valid registration.
+   * Create a new user instance and history after a valid registration.
    *
    * @param array $data
    * @return \App\User
    */
   protected function create(array $data) {
-    return User::create([
+    $user = User::create([
       'email' => $data['email'],
       'password' => Hash::make($data['password']),
     ]);
+    $user->history()->create();
+    return $user;
   }
 }
